@@ -1,11 +1,10 @@
 //	This is an updated version of code originally
+// 
 //  created by Frank M. Carrano and Timothy M. Henry.
 //  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
 
 /** @file QueueADT.h */
-#ifndef QUEUE_ADT_
-#define QUEUE_ADT_
-
+#pragma once
 template<class T>
 class QueueADT
 {
@@ -37,4 +36,3 @@ public:
    /** Destroys this queue and frees its memory. */
    virtual ~QueueADT() { }
 }; // end QueueADT
-#endif

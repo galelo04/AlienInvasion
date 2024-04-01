@@ -1,3 +1,11 @@
+#pragma once
+
+#include <iostream>
+#include "Node.h"
+#include "QueueADT.h"
+
+using namespace std;
+
 
 /*
 This is a program that implements the queue abstract data type using a linked list.
@@ -38,12 +46,7 @@ Single Node Case:
 
 */
 
-#ifndef LINKED_QUEUE_
-#define LINKED_QUEUE_
 
-
-#include "Node.h"
-#include "QueueADT.h"
 
 template <typename T>
 class LinkedQueue:public QueueADT<T>
@@ -56,7 +59,10 @@ public :
 	bool isEmpty() const ;
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);  
-	bool peek(T& frntEntry)  const;	
+	bool peek(T& frntEntry)  const;
+	bool peekrear(T& bckEntry);
+	bool enqueuefront(const T& newEntry);
+	bool dequeuerear(T& bckEntry);
 	~LinkedQueue();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -164,6 +170,62 @@ bool LinkedQueue<T>:: peek(T& frntEntry) const
 	return true;
 
 }
+template<typename T>
+bool LinkedQueue<T>::peekrear(T& bckEntry)
+{
+	if (isEmpty())
+		return false;
+
+	bckEntry = backPtr->getItem();
+	return true;
+}
+template<typename T>
+bool LinkedQueue<T>::enqueuefront(const T& newEntry)
+{
+	Node<T>* newNodePtr = new Node<T>(newEntry);
+	// Insert the new node
+	if (isEmpty())
+	{
+		//special case if this is the first node to insert
+		frontPtr = newNodePtr; // The queue is empty
+		backPtr = newNodePtr;
+	}
+	else
+	{
+		newNodePtr->setNext(frontPtr);
+		frontPtr = newNodePtr; // The queue was not empty
+	}
+	return true;
+}
+template<typename T>
+bool LinkedQueue<T>::dequeuerear(T& bckEntry)
+{
+	if (isEmpty())
+		return false;
+
+	Node<T>* nodeToDeletePtr = backPtr;
+	bckEntry = backPtr->getItem();
+
+	Node<T>* ptr = frontPtr;
+	if (nodeToDeletePtr == frontPtr)
+	{// Special case: last node in the queue
+		frontPtr =backPtr= nullptr;
+	}
+	else
+	{
+		while (ptr->getNext && ptr->getNext() != backPtr)
+		{
+			ptr = ptr->getNext();
+		}
+		backPtr = ptr;
+		backPtr->setNext(nullptr);
+	}
+
+	// Free memory reserved for the dequeued node
+	delete nodeToDeletePtr;
+
+	return true;
+}
 ///////////////////////////////////////////////////////////////////////////////////
 
 template <typename T>
@@ -182,4 +244,3 @@ LinkedQueue<T>::~LinkedQueue()
 	cout<<"\nEnding LinkedQueue destructor..."<<endl;
 }
 
-#endif
