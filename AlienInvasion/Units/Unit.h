@@ -10,8 +10,6 @@ private:
 	int AttackCapacity;
 
 public:
-
-	virtual bool Add (Unit * newEntry) = 0;
-	virtual bool Remove (Unit * removedEntry) = 0;
-	virtual void PrintList () = 0;
+	Unit(){}
+	virtual void Attack()=0;
 };

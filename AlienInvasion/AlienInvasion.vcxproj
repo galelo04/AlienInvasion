@@ -19,6 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Armies\auxilary.h" />
+    <ClInclude Include="Units\AlienUnits\AlienDrones.h" />
+    <ClInclude Include="Units\AlienUnits\AlienMonsters.h" />
+    <ClInclude Include="Armies\AlienArmy\AlienArmy.h" />
     <ClInclude Include="DataStructures\Pri-Queue\priNode.h" />
     <ClInclude Include="DataStructures\Pri-Queue\priQueue.h" />
     <ClInclude Include="DataStructures\Queue\LinkedQueue.h" />
@@ -26,10 +30,13 @@
     <ClInclude Include="DataStructures\Queue\QueueADT.h" />
     <ClInclude Include="DataStructures\Stack\ArrayStack.h" />
     <ClInclude Include="DataStructures\Stack\StackADT.h" />
-    <ClInclude Include="Units\AlienSoldiers.h" />
+    <ClInclude Include="Units\AlienUnits\AlienSoldier.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Units\AlienSoldiers.cpp" />
+    <ClCompile Include="Units\AlienUnits\AlienDrones.cpp" />
+    <ClCompile Include="Units\AlienUnits\AlienMonsters.cpp" />
+    <ClCompile Include="Armies\AlienArmy\AlienArmy.cpp" />
+    <ClCompile Include="Units\AlienUnits\AlienSoldier.cpp" />
     <ClCompile Include="Units\Unit.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
