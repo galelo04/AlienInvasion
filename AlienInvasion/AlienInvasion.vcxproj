@@ -26,14 +26,11 @@
     <ClInclude Include="DataStructures\Queue\QueueADT.h" />
     <ClInclude Include="DataStructures\Stack\ArrayStack.h" />
     <ClInclude Include="DataStructures\Stack\StackADT.h" />
-    <ClInclude Include="Units\AlienUnits\AlienSoldiers.h" />
+    <ClInclude Include="Units\AlienSoldiers.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Units\AlienUnits\AlienSoldiers.cpp" />
+    <ClCompile Include="Units\AlienSoldiers.cpp" />
     <ClCompile Include="Units\Unit.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Units\EarthUnits\hna.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
