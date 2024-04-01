@@ -11,7 +11,7 @@ private:
 
 public:
 
-	virtual bool Add (const Unit& newEntry) = 0;
-	virtual bool Remove (const Unit& removedEntry) = 0;
+	virtual bool Add (Unit * newEntry) = 0;
+	virtual bool Remove (Unit * removedEntry) = 0;
 	virtual void PrintList () = 0;
 };

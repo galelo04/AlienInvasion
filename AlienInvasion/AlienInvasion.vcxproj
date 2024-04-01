@@ -28,7 +28,7 @@
     <ClInclude Include="DataStructures\Stack\StackADT.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Unit.h" />
+    <ClCompile Include="Units\Unit.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
