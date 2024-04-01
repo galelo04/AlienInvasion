@@ -27,6 +27,9 @@
     <ClInclude Include="DataStructures\Stack\ArrayStack.h" />
     <ClInclude Include="DataStructures\Stack\StackADT.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Unit.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
