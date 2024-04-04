@@ -54,6 +54,7 @@ class LinkedQueue:public QueueADT<T>
 private :
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
+	int count;
 public :
 	LinkedQueue();	
 	bool isEmpty() const ;
@@ -63,6 +64,8 @@ public :
 	bool peekrear(T& bckEntry);
 	bool enqueuefront(const T& newEntry);
 	bool dequeuerear(T& bckEntry);
+	void printlist() const;
+	int getCount() const;
 	~LinkedQueue();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -78,7 +81,7 @@ LinkedQueue<T>::LinkedQueue()
 {
 	backPtr=nullptr;
 	frontPtr=nullptr;
-
+	count = 0;
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -113,7 +116,7 @@ bool LinkedQueue<T>::enqueue( const T& newEntry)
 		frontPtr = newNodePtr; // The queue is empty
 	else
 		backPtr->setNext(newNodePtr); // The queue was not empty
-
+	count++;
 	backPtr = newNodePtr; // New node is the last node now
 	return true ;
 } // end enqueue
@@ -144,7 +147,7 @@ bool LinkedQueue<T>:: dequeue(T& frntEntry)
 		
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
-
+	count--;
 	return true;
 }
 
@@ -195,6 +198,7 @@ bool LinkedQueue<T>::enqueuefront(const T& newEntry)
 		newNodePtr->setNext(frontPtr);
 		frontPtr = newNodePtr; // The queue was not empty
 	}
+	count++;
 	return true;
 }
 template<typename T>
@@ -223,24 +227,44 @@ bool LinkedQueue<T>::dequeuerear(T& bckEntry)
 
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
-
+	count--;
 	return true;
 }
+template<typename T>
+void LinkedQueue<T>::printlist() const
+{
+	Node<T>* ptr = frontPtr;
+	cout << "[";
+	while (ptr)
+	{
+		cout << ptr->getItem();
+		if (ptr->getNext())cout << ", ";
+		ptr = ptr->getNext();
+	}
+	cout << "]" << endl;
+
+}
 ///////////////////////////////////////////////////////////////////////////////////
+
+template<typename T>
+int LinkedQueue<T>::getCount() const
+{
+	return count;
+}
 
 template <typename T>
 LinkedQueue<T>::~LinkedQueue()
 {
 	//Note that the cout statements here is just for learning purpose
 	//They should be normally removed from the destructor
-	cout<<"\nStarting LinkedQueue destructor...";
-	cout<<"\nFreeing all nodes in the queue...";
+	//cout<<"\nStarting LinkedQueue destructor...";
+	//cout<<"\nFreeing all nodes in the queue...";
 
 	//Free all nodes in the queue
 	T temp;
 	while(dequeue(temp));
 	
-	cout<<"\n Is LinkedQueue Empty now?? ==> "<<boolalpha<<isEmpty();
-	cout<<"\nEnding LinkedQueue destructor..."<<endl;
+	//cout<<"\n Is LinkedQueue Empty now?? ==> "<<boolalpha<<isEmpty();
+	//cout<<"\nEnding LinkedQueue destructor..."<<endl;
 }
 

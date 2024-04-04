@@ -1,15 +1,37 @@
 #pragma once
+#include <iostream>
+
+enum class UnitType {
+	Soldier,
+	Tank,
+	Gunnery,
+	AlienSoldier,
+	Monster,
+	Drone
+};
+
 class Unit 
 {
 
 private:
 	int ID;
+	UnitType Type;
 	int JoinTime;
 	int Health;
 	int Power;
 	int AttackCapacity;
-
+protected:
+	static int last_Earth_Id;
+	static int last_Alien_Id;
 public:
-	Unit(){}
+
+	Unit(UnitType type,int id,  int jointime, int health, int power, int attackcapacity);
 	virtual void Attack()=0;
+	
+	friend std::ostream& operator<<(std::ostream& stream, Unit* unit)
+	{
+		stream << unit->ID;
+		return stream;
+	}
 };
+

@@ -36,37 +36,49 @@
     <ClInclude Include="DataStructures\Pri-Queue\priQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Units\AlienUnits\AlienDrones.h">
+    <ClInclude Include="Units\AlienUnits\AlienDrone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Units\AlienUnits\AlienMonsters.h">
+    <ClInclude Include="Units\AlienUnits\AlienMonster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Armies\AlienArmy\AlienArmy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Armies\auxilary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Units\AlienUnits\AlienSoldier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Armies\auxilary.h">
+    <ClInclude Include="Armies\Army.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Units\AlienUnits\AlienDrones.cpp">
+    <ClCompile Include="Units\AlienUnits\AlienDrone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Units\AlienUnits\AlienMonsters.cpp">
+    <ClCompile Include="Units\AlienUnits\AlienMonster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Armies\AlienArmy\AlienArmy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Units\Unit.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Units\Unit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Units\AlienUnits\AlienSoldier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Units\Unit.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Armies\Army.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
