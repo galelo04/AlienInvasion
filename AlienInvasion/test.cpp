@@ -12,25 +12,16 @@ int main()
 	AlienDrone* d4 = new AlienDrone(1, 1, 1, 1);
 	AlienSoldier* s1 = new AlienSoldier(1, 1, 1, 1);
 	AlienMonster* m1 = new AlienMonster(1, 1, 1, 1);
-	ARmy.addUnit(d1,UnitType::Drone);
-	ARmy.addUnit(d2, UnitType::Drone);
-	ARmy.addUnit(d3, UnitType::Drone);
-	ARmy.addUnit(d4, UnitType::Drone);
-	ARmy.addUnit(s1, UnitType::AlienSoldier);
-	ARmy.addUnit(m1, UnitType::Monster);
+	ARmy.addUnit(d1,UnitType::Drone , Direction::Front);
+	ARmy.addUnit(d2, UnitType::Drone,Direction::Back);
+	ARmy.addUnit(d3, UnitType::Drone, Direction::Front);
+	ARmy.addUnit(d4, UnitType::Drone, Direction::Back);
+	ARmy.addUnit(s1, UnitType::AlienSoldier, Direction::Front);
+	ARmy.addUnit(m1, UnitType::Monster, Direction::Front);
 	ARmy.print();
-	removedUnits removed;
-	removed = ARmy.removeUnit(UnitType::Drone);
-	if(removed.unit1)
-		killedlist.enqueue(removed.unit1);
-	if (removed.unit2)
-		killedlist.enqueue(removed.unit2);
-	removed = ARmy.removeUnit(UnitType::Monster);
-	if (removed.unit1)
-		killedlist.enqueue(removed.unit1);
-	if (removed.unit2)
-		killedlist.enqueue(removed.unit2);
-		ARmy.print();
-		cout << "==================================================\nkilledlist\n";
-		killedlist.printlist();
+	killedlist.enqueue(ARmy.removeUnit(UnitType::Monster, Direction::Back));
+	killedlist.enqueue(ARmy.removeUnit(UnitType::Drone, Direction::Front));
+	ARmy.print();
+	cout << "==================================================\nkilledlist\n";
+	killedlist.printlist();
 }

@@ -15,8 +15,8 @@ private:
 	int MonstersCount ;
 public:
 	AlienArmy();
-	virtual void addUnit(Unit* unit ,UnitType type);
-	virtual removedUnits removeUnit(UnitType type);
+	virtual void addUnit(Unit* unit, UnitType type, Direction dir);
+	virtual Unit* removeUnit(UnitType type , Direction dir );
 	virtual void attack();
 	virtual void print();
 };

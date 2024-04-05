@@ -8,20 +8,28 @@ Unit::Unit(UnitType type, int id, int jointime, int health, int power, int attac
 {
 }
 
+int Unit::getJoinTime() const
+{
+    return JoinTime;
+}
 
+int Unit::getHealth() const
+{
+    return Health;
+}
 
-//UnitType Unit::getType() const
-//{
-//    return Type;
-//}
-//
-//int Unit::getID() const
-//{
-//    return ID;
-//}
-//
-//void Unit::setID(int id)
-//{
-//    ID = id;
-//}
-//
+int Unit::getPower() const
+{
+    return Power;
+}
+
+int Unit::getAttackCapacity() const
+{
+    return AttackCapacity;
+}
+
+void Unit::decrementHealth(int damage)
+{
+    Health -= damage;
+}
+

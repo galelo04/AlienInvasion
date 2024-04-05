@@ -27,6 +27,11 @@ public:
 
 	Unit(UnitType type,int id,  int jointime, int health, int power, int attackcapacity);
 	virtual void Attack()=0;
+	virtual int getJoinTime() const;
+	virtual int getHealth() const;
+	virtual int getPower() const;
+	virtual int getAttackCapacity() const;
+	virtual void decrementHealth(int damage);
 	
 	friend std::ostream& operator<<(std::ostream& stream, Unit* unit)
 	{
