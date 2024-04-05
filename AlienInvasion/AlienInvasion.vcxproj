@@ -32,6 +32,10 @@
     <ClInclude Include="DataStructures\Queue\QueueADT.h" />
     <ClInclude Include="DataStructures\Stack\ArrayStack.h" />
     <ClInclude Include="DataStructures\Stack\StackADT.h" />
+    <ClInclude Include="Units\AlienUnits\EarthSoldier.h" />
+    <ClInclude Include="Units\EarthUnits\EarthGunnery.h" />
+    <ClInclude Include="Units\EarthUnits\EarthSoldier.h" />
+    <ClInclude Include="Units\EarthUnits\EarthTank.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Armies\Army.cpp" />
@@ -40,6 +44,10 @@
     <ClCompile Include="Units\AlienUnits\AlienDrone.cpp" />
     <ClCompile Include="Units\AlienUnits\AlienMonster.cpp" />
     <ClCompile Include="Armies\AlienArmy\AlienArmy.cpp" />
+    <ClCompile Include="Units\AlienUnits\EarthSoldier.cpp" />
+    <ClCompile Include="Units\EarthUnits\EarthGunnery.cpp" />
+    <ClCompile Include="Units\EarthUnits\EarthSoldier.cpp" />
+    <ClCompile Include="Units\EarthUnits\EarthTank.cpp" />
     <ClCompile Include="Units\Unit.cpp" />
     <ClCompile Include="Units\Unit.h" />
   </ItemGroup>
