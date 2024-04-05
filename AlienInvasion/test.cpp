@@ -19,8 +19,17 @@ int main()
 	ARmy.addUnit(s1, UnitType::AlienSoldier);
 	ARmy.addUnit(m1, UnitType::Monster);
 	ARmy.print();
-	killedlist.enqueue(ARmy.removeUnit(UnitType::Drone));
-	killedlist.enqueue(ARmy.removeUnit(UnitType::Monster));
+	removedUnits removed;
+	removed = ARmy.removeUnit(UnitType::Drone);
+	if(removed.unit1)
+		killedlist.enqueue(removed.unit1);
+	if (removed.unit2)
+		killedlist.enqueue(removed.unit2);
+	removed = ARmy.removeUnit(UnitType::Monster);
+	if (removed.unit1)
+		killedlist.enqueue(removed.unit1);
+	if (removed.unit2)
+		killedlist.enqueue(removed.unit2);
 		ARmy.print();
 		cout << "==================================================\nkilledlist\n";
 		killedlist.printlist();

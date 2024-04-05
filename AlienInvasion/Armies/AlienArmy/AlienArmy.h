@@ -16,7 +16,7 @@ private:
 public:
 	AlienArmy();
 	virtual void addUnit(Unit* unit ,UnitType type);
-	virtual Unit* removeUnit(UnitType type);
+	virtual removedUnits removeUnit(UnitType type);
 	virtual void attack();
 	virtual void print();
 };

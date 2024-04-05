@@ -2,7 +2,7 @@
 #include <iostream>
 
 enum class UnitType {
-	Soldier,
+	EarthSoldier,
 	Tank,
 	Gunnery,
 	AlienSoldier,
@@ -30,7 +30,8 @@ public:
 	
 	friend std::ostream& operator<<(std::ostream& stream, Unit* unit)
 	{
-		stream << unit->ID;
+		if(unit)
+			stream << unit->ID;
 		return stream;
 	}
 };

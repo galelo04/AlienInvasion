@@ -52,32 +52,35 @@ void AlienArmy::print()
 	AlienDrones.printlist();
 }
 
-Unit* AlienArmy::removeUnit(UnitType type)
+removedUnits AlienArmy::removeUnit(UnitType type)
 {
-	Unit* removedUnit;
+	removedUnits removed;
 	switch (type)
 	{
 	case (UnitType::AlienSoldier):
 	{
-		if(AlienSoldiers.dequeue(removedUnit));
-			return removedUnit;
-			return nullptr;
+		AlienSoldiers.dequeue(removed.unit1);
+		break;
 	}
 	case (UnitType::Monster):
 	{
 		int randomindex = rand() % MonstersCount;
-		removedUnit = AlienMonsters[randomindex];
+		removed.unit1 = AlienMonsters[randomindex];
 		AlienMonsters[randomindex] = AlienMonsters[MonstersCount - 1];
 		MonstersCount--;
-		return removedUnit;
+		break;
 	}
 	case (UnitType::Drone):
 	{
-		if(AlienDrones.dequeue(removedUnit));
-		return removedUnit;
-		return nullptr;
+		if(AlienDrones.dequeue(removed.unit1) && AlienDrones.dequeuerear(removed.unit2))
+			break;
+		else
+			removed.unit1 = nullptr;
+		break;
 	}
 	default:
-		return nullptr;
+		break;
 	}
+	return removed;
 }
+

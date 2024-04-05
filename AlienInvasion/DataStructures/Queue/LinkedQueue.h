@@ -217,7 +217,7 @@ bool LinkedQueue<T>::dequeuerear(T& bckEntry)
 	}
 	else
 	{
-		while (ptr->getNext && ptr->getNext() != backPtr)
+		while (ptr->getNext() && ptr->getNext() != backPtr)
 		{
 			ptr = ptr->getNext();
 		}
