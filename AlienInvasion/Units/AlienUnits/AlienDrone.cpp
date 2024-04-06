@@ -2,8 +2,8 @@
 
 
 
-AlienDrone::AlienDrone(int jointime, int health, int power, int attackcapacity)
-	:Unit(UnitType::Drone, last_Alien_Id++, jointime, health, power, attackcapacity)
+AlienDrone::AlienDrone(int id,int jointime, int health, int power, int attackcapacity)
+	:Unit(UnitType::Drone, id, jointime, health, power, attackcapacity)
 {
 
 }

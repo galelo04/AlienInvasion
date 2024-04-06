@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Armies\Army.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="randGen.h" />
     <ClInclude Include="Units\AlienUnits\AlienSoldier.h" />
     <ClInclude Include="Armies\auxilary.h" />
     <ClInclude Include="Units\AlienUnits\AlienDrone.h" />
@@ -39,12 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Armies\Army.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="randGen.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="Units\AlienUnits\AlienSoldier.cpp" />
     <ClCompile Include="Units\AlienUnits\AlienDrone.cpp" />
     <ClCompile Include="Units\AlienUnits\AlienMonster.cpp" />
     <ClCompile Include="Armies\AlienArmy\AlienArmy.cpp" />
-    <ClCompile Include="Units\AlienUnits\EarthSoldier.cpp" />
     <ClCompile Include="Units\EarthUnits\EarthGunnery.cpp" />
     <ClCompile Include="Units\EarthUnits\EarthSoldier.cpp" />
     <ClCompile Include="Units\EarthUnits\EarthTank.cpp" />

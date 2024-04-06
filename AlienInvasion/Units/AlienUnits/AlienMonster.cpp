@@ -2,8 +2,8 @@
 
 
 
-AlienMonster::AlienMonster(int jointime, int health, int power, int attackcapacity)
-	:Unit(UnitType::Monster, last_Alien_Id++, jointime, health, power, attackcapacity)
+AlienMonster::AlienMonster(int id,int jointime, int health, int power, int attackcapacity)
+	:Unit(UnitType::Monster, id, jointime, health, power, attackcapacity)
 {
 
 }

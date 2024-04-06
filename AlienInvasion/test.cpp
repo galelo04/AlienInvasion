@@ -6,12 +6,12 @@ int main()
 {
 	AlienArmy ARmy;
 	LinkedQueue<Unit*> killedlist;
-	AlienDrone* d1 = new AlienDrone(1,1,1,1);
-	AlienDrone* d2 = new AlienDrone(1, 1, 1, 1);
-	AlienDrone* d3 = new AlienDrone(1, 1, 1, 1);
-	AlienDrone* d4 = new AlienDrone(1, 1, 1, 1);
-	AlienSoldier* s1 = new AlienSoldier(1, 1, 1, 1);
-	AlienMonster* m1 = new AlienMonster(1, 1, 1, 1);
+	AlienDrone* d1 = new AlienDrone(1,1,1,1,1);
+	AlienDrone* d2 = new AlienDrone(2,1, 1, 1, 1);
+	AlienDrone* d3 = new AlienDrone(3,1, 1, 1, 1);
+	AlienDrone* d4 = new AlienDrone(4,1, 1, 1, 1);
+	AlienSoldier* s1 = new AlienSoldier(5,1, 1, 1, 1);
+	AlienMonster* m1 = new AlienMonster(6,1, 1, 1, 1);
 	ARmy.addUnit(d1,UnitType::Drone , Direction::Front);
 	ARmy.addUnit(d2, UnitType::Drone,Direction::Back);
 	ARmy.addUnit(d3, UnitType::Drone, Direction::Front);
