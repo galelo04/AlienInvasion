@@ -1,7 +1,12 @@
 
 #include "Armies/AlienArmy/AlienArmy.h"
 //
-
+std::ostream& operator<<(std::ostream& stream, Unit* unit)
+{
+	if (unit)
+		stream << unit->getID();
+	return stream;
+}
 int main()
 {
 	AlienArmy ARmy;

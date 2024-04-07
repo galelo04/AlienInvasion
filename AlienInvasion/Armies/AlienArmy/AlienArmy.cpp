@@ -53,7 +53,7 @@ void AlienArmy::print()
 	cout << MonstersCount << " AM [";
 	for (int i = 0; i < MonstersCount; i++)
 	{
-		cout << AlienMonsters[i];
+		cout << AlienMonsters[i]->getID();
 		if (i != MonstersCount - 1)
 			cout << ", ";
 	}
