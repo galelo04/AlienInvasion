@@ -4,6 +4,6 @@
 class AlienSoldier : public Unit
 {
 public:
-	AlienSoldier(int jointime , int health , int power , int attackcapacity);
+	AlienSoldier(int id,int jointime , int health , int power , int attackcapacity);
 	virtual void Attack();
 };

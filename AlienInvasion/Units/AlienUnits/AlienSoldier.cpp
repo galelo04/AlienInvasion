@@ -1,8 +1,8 @@
 #include "AlienSoldier.h"
 
 
-AlienSoldier::AlienSoldier( int jointime, int health, int power, int attackcapacity) 
-	:Unit(UnitType::AlienSoldier, last_Alien_Id++,jointime,health,power,attackcapacity)
+AlienSoldier::AlienSoldier( int id,int jointime, int health, int power, int attackcapacity) 
+	:Unit(UnitType::AlienSoldier, id,jointime,health,power,attackcapacity)
 {
 }
 
