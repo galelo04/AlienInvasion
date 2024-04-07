@@ -5,7 +5,7 @@
 class EarthTank : public Unit
 {
 public:
-	EarthTank(int ID,int jointime, int health, int power, int attackcapacity);
+	EarthTank(int jointime, int health, int power, int attackcapacity);
 	virtual void Attack();
 };
 

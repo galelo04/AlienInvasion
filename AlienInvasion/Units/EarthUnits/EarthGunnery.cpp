@@ -1,6 +1,7 @@
 #include "EarthGunnery.h"
 
-EarthGunnery::EarthGunnery(int id,int jointime, int health, int power, int attackcapacity) :Unit(UnitType::Gunnery, id, jointime, health, power, attackcapacity)
+EarthGunnery::EarthGunnery(int jointime, int health, int power, int attackcapacity)
+	:Unit(UnitType::Gunnery, last_Earth_Id++, jointime, health, power, attackcapacity)
 {
 }
 

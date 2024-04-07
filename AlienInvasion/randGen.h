@@ -10,7 +10,7 @@ private:
 	int* params;
 public:
 	randGen(Game* gameptr);
-	Unit* genUnit(Game* gameptr,int ID, int EH, int P, int C,bool is_E);
+	Unit* genUnit(Game* gameptr,int EH, int P, int C,bool is_E);
 	void createUnit(Game* gameptr);
 };
 

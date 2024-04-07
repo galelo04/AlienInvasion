@@ -23,7 +23,6 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="randGen.h" />
     <ClInclude Include="Units\AlienUnits\AlienSoldier.h" />
-    <ClInclude Include="Armies\auxilary.h" />
     <ClInclude Include="Units\AlienUnits\AlienDrone.h" />
     <ClInclude Include="Units\AlienUnits\AlienMonster.h" />
     <ClInclude Include="Armies\AlienArmy\AlienArmy.h" />
