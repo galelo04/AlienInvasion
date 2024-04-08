@@ -1,7 +1,6 @@
 #ifndef RAND_GEN
 #define RAND_GEN
 
-#include "Units/Unit.h"
 #include "Game.h"
 
 class randGen
@@ -9,9 +8,10 @@ class randGen
 private:
 	int* params;
 public:
-	randGen(Game* gameptr);
-	Unit* genUnit(Game* gameptr,int EH, int P, int C,bool is_E);
-	void createUnit(Game* gameptr);
+	randGen();
+	void getparameters(int* parameters);
+	Unit* createUnit(int EH, int P, int C,bool is_E,AlienArmy * aliens,int timestep);
+	void generateUnits( AlienArmy* aliens,int timestep);
 };
 
 #endif

@@ -1,15 +1,15 @@
-
+#include "Game.h"
 #include "Armies/AlienArmy/AlienArmy.h"
 //
-std::ostream& operator<<(std::ostream& stream, Unit* unit)
-{
-	if (unit)
-		stream << unit->getID();
-	return stream;
-}
+
 int main()
 {
-	AlienArmy ARmy;
+	Game game;
+	game.instantiateGame();
+	game.battle();
+	while (true)
+		game.timeStep();
+	/*AlienArmy ARmy;
 	LinkedQueue<Unit*> killedlist;
 	AlienDrone* d1 = new AlienDrone(1,1,1,1);
 	AlienDrone* d2 = new AlienDrone(1, 1, 1, 1);
@@ -28,5 +28,5 @@ int main()
 	killedlist.enqueue(ARmy.removeUnit(UnitType::Drone, Direction::Front));
 	ARmy.print();
 	cout << "==================================================\nkilledlist\n";
-	killedlist.printlist();
+	killedlist.printlist();*/
 }

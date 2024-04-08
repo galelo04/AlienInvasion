@@ -1,22 +1,25 @@
 #include "randGen.h"
 #include "iostream"
-
 #include "Units/EarthUnits/EarthSoldier.h"
 #include "Units/EarthUnits/EarthTank.h"
 #include "Units/EarthUnits/EarthGunnery.h"
-
 #include "Armies/AlienArmy/AlienArmy.h"
 #include "Units/AlienUnits/AlienSoldier.h"
 #include "Units/AlienUnits/AlienMonster.h"
 #include "Units/AlienUnits/AlienDrone.h"
 
-randGen::randGen(Game* gameptr)
+
+
+randGen::randGen()
 {
-    params = gameptr->getParams();
 }
 
+void randGen::getparameters(int* parameters)
+{
+    params = parameters;
+}
 
-void randGen::createUnit(Game* gameptr)
+void randGen::generateUnits( AlienArmy* aliens,int timestep)
 {
     Unit* newUnit;
 
@@ -32,7 +35,7 @@ void randGen::createUnit(Game* gameptr)
             int E_H = params[10] + (rand() % (params[11] - params[10] + 1));
             int E_C = params[12] + (rand() % (params[13] - params[12] + 1));
 
-            newUnit = genUnit(gameptr, E_P, E_H, E_C, true);
+           // newUnit = createUnit(E_P, E_H, E_C, true,aliens,timestep);
 
         }
     }
@@ -48,14 +51,15 @@ void randGen::createUnit(Game* gameptr)
             int A_H = params[16] + (rand() % (params[17] - params[16] + 1));
             int A_C = params[18] + (rand() % (params[19] - params[18] + 1));
 
-            newUnit = genUnit(gameptr,A_P, A_H, A_C, false);
+            newUnit = createUnit(A_P, A_H, A_C, false,aliens,timestep);
    
 
         }
     }
 }
 
-Unit* randGen::genUnit(Game* gameptr,int H,int P,int C,bool is_E)
+
+Unit* randGen::createUnit(int H,int P,int C,bool is_E, AlienArmy * aliens,int timestep)
 {
     Unit* newUnit;
 
@@ -66,30 +70,33 @@ Unit* randGen::genUnit(Game* gameptr,int H,int P,int C,bool is_E)
     {
         if (B <= params[1])
         {
-             newUnit = new EarthSoldier(gameptr->getTimeStep(), H, P, C);
+             newUnit = new EarthSoldier(timestep, H, P, C);
         }
         else if (B <= params[2] + params[1])
         {
-            newUnit = new EarthTank(gameptr->getTimeStep(), H, P, C);
+            newUnit = new EarthTank(timestep, H, P, C);
         }
         else
         {
-             newUnit = new EarthGunnery(gameptr->getTimeStep(), H, P, C);
+             newUnit = new EarthGunnery(timestep, H, P, C);
         }
     }
     else
     {
         if (B <= params[4])
         {
-             newUnit = new AlienSoldier(gameptr->getTimeStep(), H, P, C);
+             newUnit = new AlienSoldier(timestep, H, P, C);
+             aliens->addUnit(newUnit, UnitType::AlienSoldier, Direction::Back);
         }
         else if (B <= params[4] + params[6])
         {
-             newUnit = new AlienMonster(gameptr->getTimeStep(), H, P, C);
+             newUnit = new AlienMonster(timestep, H, P, C);
+             aliens->addUnit(newUnit, UnitType::Monster, Direction::Back);
         }
         else
         {
-             newUnit = new AlienDrone(gameptr->getTimeStep(), H, P, C);
+             newUnit = new AlienDrone(timestep, H, P, C);
+             aliens->addUnit(newUnit, UnitType::Drone, Direction::Back);
         }
 
     }
