@@ -4,12 +4,12 @@
 
 AlienArmy::AlienArmy()
 {
-
-
+	addDroneDirection = Direction::Back;
+	removeDroneDirection = Direction::Front;
 }
 
 
-void AlienArmy::addUnit(Unit* unit , UnitType type ,Direction dir)
+void AlienArmy::addUnit(Unit* unit , UnitType type )
 {
 	switch (type)
 	{
@@ -25,14 +25,20 @@ void AlienArmy::addUnit(Unit* unit , UnitType type ,Direction dir)
 	}
 	case(UnitType::Drone):
 	{
-		switch (dir)
+		switch (addDroneDirection)
 		{
 		case Direction::Front:
+		{
 			AlienDrones.enqueuefront(unit);
+			addDroneDirection = Direction::Back;
 			break;
+		}
 		case Direction::Back:
+		{
 			AlienDrones.enqueue(unit);
+			addDroneDirection = Direction::Front;
 			break;
+		}
 		default:
 			break;
 		}
@@ -40,6 +46,52 @@ void AlienArmy::addUnit(Unit* unit , UnitType type ,Direction dir)
 	default:
 		break;
 	}
+}
+
+Unit* AlienArmy::removeUnit(UnitType type)
+{
+	Unit* removedUnit = nullptr;
+	switch (type)
+	{
+	case (UnitType::AlienSoldier):
+	{
+		AlienSoldiers.dequeue(removedUnit);
+		break;
+	}
+	case (UnitType::Monster):
+	{
+		int randomindex = rand() % MonstersCount;
+		removedUnit = AlienMonsters[randomindex];
+		AlienMonsters[randomindex] = AlienMonsters[MonstersCount - 1];
+		MonstersCount--;
+		break;
+	}
+	case (UnitType::Drone):
+	{
+		switch (removeDroneDirection)
+		{
+		case Direction::Front:
+		{
+			if (AlienDrones.getCount() >= 2)
+				AlienDrones.dequeue(removedUnit);
+			removeDroneDirection = Direction::Back;
+			break;
+		}
+		case Direction::Back:
+		{
+			if (AlienDrones.getCount() >= 1)
+				AlienDrones.dequeuerear(removedUnit);
+			removeDroneDirection = Direction::Front;
+			break;
+		}
+		default:
+			break;
+		}
+	}
+	default:
+		break;
+	}
+	return removedUnit;
 }
 
 void AlienArmy::attack()
@@ -63,43 +115,5 @@ void AlienArmy::print()
 	AlienDrones.printlist();
 }
 
-Unit* AlienArmy::removeUnit(UnitType type , Direction dir)
-{
-	Unit* removedUnit = nullptr;
-	switch (type)
-	{
-	case (UnitType::AlienSoldier):
-	{
-		AlienSoldiers.dequeue(removedUnit);
-		break;
-	}
-	case (UnitType::Monster):
-	{
-		int randomindex = rand() % MonstersCount;
-		removedUnit = AlienMonsters[randomindex];
-		AlienMonsters[randomindex] = AlienMonsters[MonstersCount - 1];
-		MonstersCount--;
-		break;
-	}
-	case (UnitType::Drone):
-	{
-		if (AlienDrones.getCount() < 2)
-			break;
-		switch (dir)
-		{
-		case Direction::Front:
-			AlienDrones.dequeue(removedUnit);
-			break;
-		case Direction::Back:
-			AlienDrones.dequeuerear(removedUnit);
-			break;
-		default:
-			break;
-		}
-	}
-	default:
-		break;
-	}
-	return removedUnit;
-}
+
 

@@ -45,9 +45,6 @@
     <ClInclude Include="Armies\AlienArmy\AlienArmy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Armies\auxilary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Units\AlienUnits\AlienSoldier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -92,7 +89,7 @@
     <ClCompile Include="Units\AlienUnits\AlienSoldier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Armies\Army.cpp">

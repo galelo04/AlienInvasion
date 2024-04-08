@@ -13,10 +13,12 @@ private:
 	LinkedQueue<Unit*> AlienDrones;
 	Unit* AlienMonsters[1000];
 	int MonstersCount ;
+	Direction addDroneDirection;
+	Direction removeDroneDirection;
 public:
 	AlienArmy();
-	virtual void addUnit(Unit* unit, UnitType type, Direction dir);
-	virtual Unit* removeUnit(UnitType type , Direction dir );
+	virtual void addUnit(Unit* unit, UnitType type);
+	virtual Unit* removeUnit(UnitType type );
 	virtual void attack();
 	virtual void print();
 };

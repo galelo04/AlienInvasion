@@ -86,17 +86,17 @@ Unit* randGen::createUnit(int H,int P,int C,bool is_E, AlienArmy * aliens,int ti
         if (B <= params[4])
         {
              newUnit = new AlienSoldier(timestep, H, P, C);
-             aliens->addUnit(newUnit, UnitType::AlienSoldier, Direction::Back);
+             aliens->addUnit(newUnit, UnitType::AlienSoldier);
         }
         else if (B <= params[4] + params[6])
         {
              newUnit = new AlienMonster(timestep, H, P, C);
-             aliens->addUnit(newUnit, UnitType::Monster, Direction::Back);
+             aliens->addUnit(newUnit, UnitType::Monster);
         }
         else
         {
              newUnit = new AlienDrone(timestep, H, P, C);
-             aliens->addUnit(newUnit, UnitType::Drone, Direction::Back);
+             aliens->addUnit(newUnit, UnitType::Drone);
         }
 
     }
