@@ -1,11 +1,12 @@
 #pragma once
 #include "../Unit.h".
-#include "../../DataStructures/Stack/ArrayStack.h".
 
 class EarthGunnery : public Unit
 {
+	int Pri;
 public:
-	EarthGunnery(int jointime, int health, int power, int attackcapacity);
+	EarthGunnery(int jointime, int health, int power, int attackcapacity, int pri);
 	virtual void Attack();
+	int getPri();
 };
 
