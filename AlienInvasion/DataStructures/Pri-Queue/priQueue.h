@@ -70,14 +70,15 @@ public:
         return count;
     }
 
-    template<typename T>
+
     void printlist() const
     {
         priNode<T>* ptr = head;
+        int pri;
         cout << "[";
         while (ptr)
         {
-            cout << ptr->getItem();
+            cout << ptr->getItem(pri);
             if (ptr->getNext())cout << ", ";
             ptr = ptr->getNext();
         }

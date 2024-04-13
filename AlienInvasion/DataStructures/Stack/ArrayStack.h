@@ -7,7 +7,7 @@
 
 #ifndef ARRAY_STACK_
 #define ARRAY_STACK_
-
+#include <iostream>
 #include "StackADT.h"
 #include "../Queue/Node.h"
 
@@ -65,16 +65,13 @@ public:
 		return top;
 	}  // end getCount
 
-	template<typename T>
 	void printlist() const
 	{
-		Node<T>* ptr = top;
 		cout << "[";
-		while (ptr)
+		for (int i = 0; i <= top; i++)
 		{
-			cout << ptr->getItem();
-			if (ptr->getNext())cout << ", ";
-			ptr = ptr->getNext();
+			cout << items[i];
+			if (i + 1 == top)cout << ", ";
 		}
 		cout << "]" << endl;
 

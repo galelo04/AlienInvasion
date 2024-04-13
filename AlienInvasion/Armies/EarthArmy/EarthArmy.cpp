@@ -68,7 +68,7 @@ void EarthArmy::print()
 	cout << EarthSoldiers.getCount() << " ES ";
 	EarthSoldiers.printlist();
 	cout << EarthTanks.getCount() << " ET ";
-	EarthSoldiers.printlist();
+	EarthTanks.printlist();
 	cout << EarthGunneries.getCount() << " EG ";
-	//EarthGunneries.printlist();
+	EarthGunneries.printlist();
 }
