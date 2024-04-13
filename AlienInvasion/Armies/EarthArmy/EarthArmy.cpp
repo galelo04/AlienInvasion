@@ -20,7 +20,9 @@ void EarthArmy::addUnit(Unit* unit, UnitType type, Direction dir)
 	}
 	case(UnitType::Gunnery):
 	{
-		EarthGunneries.enqueue(unit, unit->getHealth() + unit->getPower());
+		EarthGunnery* gunnery = dynamic_cast <EarthGunnery*> (unit);
+		gunnery->setPri(unit->getHealth() + unit->getPower());
+		EarthGunneries.enqueue(gunnery, gunnery->getPri());
 		break;
 	}
 	default:
