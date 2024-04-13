@@ -5,8 +5,9 @@ class EarthGunnery : public Unit
 {
 	int Pri;
 public:
-	EarthGunnery(int jointime, int health, int power, int attackcapacity, int pri);
+	EarthGunnery(int jointime, int health, int power, int attackcapacity);
 	virtual void Attack();
 	int getPri();
+	void setPri(int pri);
 };
 

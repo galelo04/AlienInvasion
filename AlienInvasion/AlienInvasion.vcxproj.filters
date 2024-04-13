@@ -69,6 +69,9 @@
     <ClInclude Include="randGen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Armies\EarthArmy\EarthArmy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Units\AlienUnits\AlienDrone.cpp">
@@ -108,6 +111,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="randGen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Armies\EarthArmy\EarthArmy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
