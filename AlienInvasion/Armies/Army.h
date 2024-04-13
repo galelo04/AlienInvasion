@@ -9,8 +9,8 @@ enum class Direction
 class Army
 {
 public:
-	virtual void addUnit(Unit* unit , UnitType type , Direction dir ) = 0;
-	virtual Unit* removeUnit(UnitType type , Direction dir ) =0;
+	virtual void addUnit(Unit* unit , UnitType type ) = 0;
+	virtual Unit* removeUnit(UnitType type ) =0;
 	virtual void attack() = 0;
 	virtual void print() = 0;
 };
