@@ -3,16 +3,25 @@
 #include "fstream"
 using namespace std;
 
-Game::Game()
+Game::Game() 
 {
+	generator = new randGen;
 	TimeStep = 0;
 }
 
-void Game::loadParams()
+void Game::instantiateGame()
+{
+	cout << "please enter the file name " << endl;
+	string filename;
+	cin >> filename;
+	loadParams(filename);
+}
+
+void Game::loadParams(string filename)
 {
 	
 	ifstream inFile;
-	inFile.open("InputFiles\\file.txt");
+	inFile.open("InputFiles\\"+filename+".txt");
 
 	if (inFile.is_open())
 	{
@@ -31,6 +40,9 @@ void Game::loadParams()
 		Params[17] = Params[17] * -1;
 		Params[19] = Params[19] * -1;
 	}
+	else
+		cout << "make sure of the name of the file and dont put .txt\n";
+	generator->getparameters(Params);
 }
 
 int* Game::getParams() 
@@ -38,9 +50,23 @@ int* Game::getParams()
 	return Params;
 }
 
-void Game::SetTimeStep()
+void Game::battle()
 {
-	TimeStep++;
+	generator->generateUnits(&aliens, TimeStep);
+}
+
+void Game::printStatus()
+{
+	cout << "Current TimeStep " << TimeStep << endl;
+	aliens.print();
+	cout << "==============  Killed/Destructed Units =============\n";
+	cout << killedlist.getCount() << " Units ";
+	killedlist.printlist();
+}
+
+void Game::addToKilledList(Unit* unit)
+{
+	killedlist.enqueue(unit);
 }
 
 
@@ -48,3 +74,13 @@ int Game::getTimeStep()
 {
 	return TimeStep;
 }
+
+void Game::timeStep()
+{
+	cout << "Press Enter to move to next timestep ...";
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	generator->generateUnits(&aliens, TimeStep);
+	printStatus();
+	TimeStep++;
+}
+

@@ -33,4 +33,10 @@ public:
 	virtual int getPower() const;
 	virtual int getAttackCapacity() const;
 	virtual void decrementHealth(int damage);
+	friend std::ostream& operator<<(std::ostream& stream, Unit* unit)
+	{
+		if (unit)
+			stream << unit->ID;
+		return stream;
+	}
 };

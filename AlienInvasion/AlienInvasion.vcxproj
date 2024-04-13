@@ -44,7 +44,7 @@
     <ClCompile Include="Armies\EarthArmy\EarthArmy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="randGen.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Units\AlienUnits\AlienSoldier.cpp" />
     <ClCompile Include="Units\AlienUnits\AlienDrone.cpp" />
     <ClCompile Include="Units\AlienUnits\AlienMonster.cpp" />
