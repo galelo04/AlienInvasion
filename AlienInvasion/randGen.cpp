@@ -79,8 +79,6 @@ Unit* randGen::createUnit(int H,int P,int C,bool is_E, AlienArmy * aliens,int ti
         else
         {
             newUnit = new EarthGunnery(timestep, H, P, C);
-            EarthGunnery* gunnery = dynamic_cast <EarthGunnery*> (newUnit);
-            gunnery->setPri(newUnit->getHealth() + newUnit->getPower());
         }
     }
     else
