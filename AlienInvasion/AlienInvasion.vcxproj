@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Armies\Army.h" />
+    <ClInclude Include="Armies\EarthArmy\EarthArmy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="randGen.h" />
     <ClInclude Include="Units\AlienUnits\AlienSoldier.h" />
@@ -40,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Armies\Army.cpp" />
+    <ClCompile Include="Armies\EarthArmy\EarthArmy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="randGen.cpp" />
     <ClCompile Include="test.cpp" />
