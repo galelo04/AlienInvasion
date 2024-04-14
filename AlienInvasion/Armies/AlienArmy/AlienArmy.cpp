@@ -11,6 +11,7 @@ AlienArmy::AlienArmy()
 
 void AlienArmy::addUnit(Unit* unit)
 {
+	if (!unit) return;
 	UnitType type = unit->getType();
 	switch (type)
 	{
@@ -21,7 +22,7 @@ void AlienArmy::addUnit(Unit* unit)
 	}
 	case(UnitType::Monster):
 	{
-		AlienMonsters[MonstersCount++] = unit;
+		AlienMonsters.add(unit);
 		break;
 	}
 	case(UnitType::Drone):
@@ -61,10 +62,7 @@ Unit* AlienArmy::removeUnit(UnitType type)
 	}
 	case (UnitType::Monster):
 	{
-		int randomindex = rand() % MonstersCount;
-		removedUnit = AlienMonsters[randomindex];
-		AlienMonsters[randomindex] = AlienMonsters[MonstersCount - 1];
-		MonstersCount--;
+		AlienMonsters.remove(removedUnit);
 		break;
 	}
 	case (UnitType::Drone):
@@ -104,14 +102,8 @@ void AlienArmy::print()
 	cout << "==============  Alien Army Alive Units =============\n";
 	cout << AlienSoldiers.getCount() << " AS ";
 	AlienSoldiers.printlist();
-	cout << MonstersCount << " AM [";
-	for (int i = 0; i < MonstersCount; i++)
-	{
-		cout << AlienMonsters[i]->getID();
-		if (i != MonstersCount - 1)
-			cout << ", ";
-	}
-	cout << "]" << endl;
+	cout << AlienMonsters.getcount() << " AM ";
+	AlienMonsters.printlist();
 	cout << AlienDrones.getCount() << " AD ";
 	AlienDrones.printlist();
 }

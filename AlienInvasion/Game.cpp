@@ -94,6 +94,67 @@ void Game::timeStep()
 	cout << "Press Enter to move to next timestep ...";
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	generator->generateUnits(TimeStep);
-	TimeStep++;
+	int X = 1 + (rand() % 100);
+	if (X > 0 && X < 10)
+	{
+		/*EArmyTempList.addUnit(EArmy.removeUnit(UnitType::EarthSoldier));
+		EArmy.addUnit(EArmyTempList.removeUnit(UnitType::EarthSoldier));*/
+		earthArmy->addUnit(earthArmy->removeUnit(UnitType::EarthSoldier));
+	}
+	else if (X > 10 && X < 20)
+	{
+		addToKilledList(earthArmy->removeUnit(UnitType::Tank));
+	}
+	else if (X > 20 && X < 30)
+	{
+		/*Unit* removedGunnery = EArmy.removeUnit(UnitType::Gunnery);
+		removedGunnery->decrementHealth(removedGunnery->getHealth() / 2);
+		EArmyTempList.addUnit(removedGunnery);
+		EArmy.addUnit(EArmyTempList.removeUnit(UnitType::Gunnery));*/
+
+		Unit* removedGunnery = earthArmy->removeUnit(UnitType::Gunnery);
+		if (removedGunnery)
+		{
+			removedGunnery->decrementHealth(removedGunnery->getHealth() / 2);
+			earthArmy->addUnit(removedGunnery);
+		}
+	}
+	else if (X > 30 && X < 40)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			Unit* removedAS = alienArmy->removeUnit(UnitType::AlienSoldier);
+			if (removedAS)
+			{
+				removedAS->decrementHealth(removedAS->getHealth() / 2);
+				aliensTempList.addUnit(removedAS);
+			}
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			alienArmy->addUnit(aliensTempList.removeUnit(UnitType::AlienSoldier));
+		}
+	}
+	else if (X > 40 && X < 50)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			Unit* removedAM= alienArmy->removeUnit(UnitType::Monster);
+			aliensTempList.addUnit(removedAM);
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			alienArmy->addUnit(aliensTempList.removeUnit(UnitType::Monster));
+		}
+	}
+	else if (X > 50 && X < 60)
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			addToKilledList(alienArmy->removeUnit(UnitType::Drone));
+		}
+	}
+	printStatus();
+	generator->generateUnits(TimeStep++);
 }
 

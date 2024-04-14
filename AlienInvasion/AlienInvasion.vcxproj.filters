@@ -72,6 +72,9 @@
     <ClInclude Include="Armies\EarthArmy\EarthArmy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DataStructures\arrayMonsterADT\arrayMonsterADT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Units\AlienUnits\AlienDrone.cpp">
