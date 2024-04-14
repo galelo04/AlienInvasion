@@ -5,6 +5,7 @@ using namespace std;
 
 Game::Game() 
 {
+	srand((unsigned)time(NULL));
 	generator = new randGen;
 	TimeStep = 0;
 }

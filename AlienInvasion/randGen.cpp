@@ -13,6 +13,7 @@
 
 randGen::randGen()
 {
+    srand((unsigned)time(NULL));
 }
 
 void randGen::getparameters(int* parameters)
@@ -24,7 +25,7 @@ void randGen::generateUnits(EarthArmy* EArmy, AlienArmy* aliens,int timestep)
 {
     Unit* newUnit;
 
-    srand((unsigned)time(NULL));
+
     int A = 1+(rand() % 100);
 
     if (A <= params[7])
@@ -64,7 +65,7 @@ Unit* randGen::createUnit(int H,int P,int C,bool is_E, EarthArmy * EArmy, AlienA
 {
     Unit* newUnit;
 
-    srand((unsigned)time(NULL));
+    
     int B = 1 + (rand() % 100);
 
     if (is_E)
