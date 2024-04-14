@@ -62,7 +62,7 @@ public:
 
 	int getCount() const
 	{
-		return top;
+		return top+1;
 	}  // end getCount
 
 	void printlist() const
