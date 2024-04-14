@@ -5,9 +5,12 @@ using namespace std;
 
 Game::Game() 
 {
+
+	srand((unsigned)time(NULL));
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
 	generator = new randGen(this);
+
 	TimeStep = 0;
 }
 
@@ -94,6 +97,63 @@ void Game::timeStep()
 	cout << "Press Enter to move to next timestep ...";
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	generator->generateUnits(TimeStep);
-	TimeStep++;
+	int X = 1 + (rand() % 100);
+	if (X > 0 && X < 10)
+	{
+		/*EArmyTempList.addUnit(EArmy.removeUnit(UnitType::EarthSoldier));
+		EArmy.addUnit(EArmyTempList.removeUnit(UnitType::EarthSoldier));*/
+		EArmy.addUnit(EArmy.removeUnit(UnitType::EarthSoldier));
+	}
+	else if (X > 10 && X < 20)
+	{
+		addToKilledList(EArmy.removeUnit(UnitType::Tank));
+	}
+	else if (X > 20 && X < 30)
+	{
+		/*Unit* removedGunnery = EArmy.removeUnit(UnitType::Gunnery);
+		removedGunnery->decrementHealth(removedGunnery->getHealth() / 2);
+		EArmyTempList.addUnit(removedGunnery);
+		EArmy.addUnit(EArmyTempList.removeUnit(UnitType::Gunnery));*/
+
+		Unit* removedGunnery = EArmy.removeUnit(UnitType::Gunnery);
+		removedGunnery->decrementHealth(removedGunnery->getHealth() / 2);
+		EArmy.addUnit(removedGunnery);
+
+	}
+	else if (X > 30 && X < 40)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			Unit* removedAS = aliens.removeUnit(UnitType::AlienSoldier);
+			if (removedAS == nullptr) break;
+			removedAS->decrementHealth(removedAS->getHealth() / 2);
+			aliensTempList.addUnit(removedAS);
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			aliens.addUnit(aliensTempList.removeUnit(UnitType::AlienSoldier));
+		}
+	}
+	else if (X > 40 && X < 50)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			Unit* removedAM= aliens.removeUnit(UnitType::Monster);
+			aliensTempList.addUnit(removedAM);
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			aliens.addUnit(aliensTempList.removeUnit(UnitType::Monster));
+		}
+	}
+	else if (X > 50 && X < 60)
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			addToKilledList(aliens.removeUnit(UnitType::Drone));
+		}
+	}
+	printStatus();
+	generator->generateUnits(TimeStep++);
 }
 

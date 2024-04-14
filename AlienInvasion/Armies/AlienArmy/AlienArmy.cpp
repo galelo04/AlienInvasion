@@ -115,6 +115,3 @@ void AlienArmy::print()
 	cout << AlienDrones.getCount() << " AD ";
 	AlienDrones.printlist();
 }
-
-
-

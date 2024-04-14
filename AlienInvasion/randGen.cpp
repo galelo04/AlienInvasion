@@ -62,7 +62,6 @@ void randGen::generateUnits(int timestep)
 Unit* randGen::createUnit(int H,int P,int C,bool is_E,int timestep)
 {
     Unit* newUnit;
-
     int B = 1 + (rand() % 100);
 
     if (is_E)
