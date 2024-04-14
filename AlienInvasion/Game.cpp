@@ -25,12 +25,12 @@ void Game::loadParams(string filename)
 
 	if (inFile.is_open())
 	{
-		inFile >> Params[0];
-		inFile >> Params[1] >> Params[2] >> Params[3];
-		inFile >> Params[4] >> Params[5] >> Params[6];
-		inFile >> Params[7];
-		inFile >> Params[8] >> Params[9] >> Params[10] >> Params[11] >> Params[12] >> Params[13];
-		inFile >> Params[14] >> Params[15] >> Params[16] >> Params[17] >> Params[18] >> Params[19];
+		inFile >> Params[0];                            // [0]=>N
+		inFile >> Params[1] >> Params[2] >> Params[3];  // [1]=>ES%, [2]=>ET%, [3]=>EG%
+		inFile >> Params[4] >> Params[5] >> Params[6];  // [4]=>AS%, [5]=>AM%, [6]=>AD%
+		inFile >> Params[7];                            // [7]=>Prob
+		inFile >> Params[8] >> Params[9] >> Params[10] >> Params[11] >> Params[12] >> Params[13];    //[8,9]=>ES_R, [10,11]=>ET_R, [12,13]=>EG_R
+		inFile >> Params[14] >> Params[15] >> Params[16] >> Params[17] >> Params[18] >> Params[19];  //[14,15]=>AS_R, [16,17]=>AM_R, [18,19]=>AD_R
 
 		Params[9] = Params[9] * -1;
 		Params[11] = Params[11] * -1;
