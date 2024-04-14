@@ -4,7 +4,7 @@ EarthArmy::EarthArmy()
 {
 }
 
-void EarthArmy::addUnit(Unit* unit, UnitType type, Direction dir)
+void EarthArmy::addUnit(Unit* unit, UnitType type)
 {
 	switch (type)
 	{
@@ -30,7 +30,7 @@ void EarthArmy::addUnit(Unit* unit, UnitType type, Direction dir)
 	}
 }
 
-Unit* EarthArmy::removeUnit(UnitType type, Direction dir)
+Unit* EarthArmy::removeUnit(UnitType type)
 {
 	Unit* removedUnit = nullptr;
 	int pri;
