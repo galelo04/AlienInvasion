@@ -8,8 +8,10 @@ class Game
 private:
 	int Params[20];
 	int TimeStep;
-	AlienArmy aliens;
 	EarthArmy EArmy;
+	EarthArmy EArmyTempList;
+	AlienArmy aliens;
+	AlienArmy aliensTempList;
 	randGen * generator;
 	LinkedQueue <Unit* > killedlist;
 public:

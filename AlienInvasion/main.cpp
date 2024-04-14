@@ -7,8 +7,11 @@ int main()
 	Game game;
 	game.instantiateGame();
 	game.battle();
-	while (true)
+	for (int i = 0; i < 50; i++) 
+	{
 		game.timeStep();
+	}
+	game.printStatus();
 	/*AlienArmy ARmy;
 	LinkedQueue<Unit*> killedlist;
 	AlienDrone* d1 = new AlienDrone(1,1,1,1);
