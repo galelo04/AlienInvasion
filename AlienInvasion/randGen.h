@@ -10,8 +10,8 @@ private:
 public:
 	randGen();
 	void getparameters(int* parameters);
-	Unit* createUnit(int EH, int P, int C,bool is_E,AlienArmy * aliens,int timestep);
-	void generateUnits( AlienArmy* aliens,int timestep);
+	Unit* createUnit(int EH, int P, int C,bool is_E,EarthArmy * EArmy,AlienArmy * aliens,int timestep);
+	void generateUnits(EarthArmy* EArmy, AlienArmy* aliens,int timestep);
 };
 
 #endif

@@ -15,8 +15,8 @@ private:
 	priQueue<Unit*>EarthGunneries;
 public:
 	EarthArmy();
-	virtual void addUnit(Unit* unit, UnitType type, Direction dir);
-	virtual Unit* removeUnit(UnitType type, Direction dir);
+	virtual void addUnit(Unit* unit, UnitType type);
+	virtual Unit* removeUnit(UnitType type);
 	virtual void attack();
 	virtual void print();
 };

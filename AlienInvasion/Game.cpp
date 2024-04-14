@@ -52,12 +52,13 @@ int* Game::getParams()
 
 void Game::battle()
 {
-	generator->generateUnits(&aliens, TimeStep);
+	generator->generateUnits(&EArmy ,&aliens, TimeStep);
 }
 
 void Game::printStatus()
 {
 	cout << "Current TimeStep " << TimeStep << endl;
+	EArmy.print();
 	aliens.print();
 	cout << "==============  Killed/Destructed Units =============\n";
 	cout << killedlist.getCount() << " Units ";
@@ -79,7 +80,7 @@ void Game::timeStep()
 {
 	cout << "Press Enter to move to next timestep ...";
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	generator->generateUnits(&aliens, TimeStep);
+	generator->generateUnits(&EArmy ,&aliens, TimeStep);
 	printStatus();
 	TimeStep++;
 }
