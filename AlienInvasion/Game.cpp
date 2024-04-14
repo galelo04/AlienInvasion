@@ -5,8 +5,20 @@ using namespace std;
 
 Game::Game() 
 {
-	generator = new randGen;
+	earthArmy = new EarthArmy;
+	alienArmy = new AlienArmy;
+	generator = new randGen(this);
 	TimeStep = 0;
+}
+
+AlienArmy* Game::getAlienArmy() 
+{
+	return  alienArmy;
+}
+
+EarthArmy* Game::getEarthArmy()
+{
+	return earthArmy;
 }
 
 void Game::instantiateGame()
@@ -52,14 +64,14 @@ int* Game::getParams()
 
 void Game::battle()
 {
-	generator->generateUnits(&EArmy ,&aliens, TimeStep);
+	generator->generateUnits(TimeStep);
 }
 
 void Game::printStatus()
 {
-	cout << "Current TimeStep " << TimeStep << endl;
-	EArmy.print();
-	aliens.print();
+	cout << "\nCurrent TimeStep " << TimeStep << endl;
+	earthArmy->print();
+	alienArmy->print();
 	cout << "==============  Killed/Destructed Units =============\n";
 	cout << killedlist.getCount() << " Units ";
 	killedlist.printlist();
@@ -78,10 +90,10 @@ int Game::getTimeStep()
 
 void Game::timeStep()
 {
+	printStatus();
 	cout << "Press Enter to move to next timestep ...";
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	generator->generateUnits(&EArmy ,&aliens, TimeStep);
-	printStatus();
+	generator->generateUnits(TimeStep);
 	TimeStep++;
 }
 

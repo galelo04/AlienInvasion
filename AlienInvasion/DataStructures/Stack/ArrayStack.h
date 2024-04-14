@@ -71,7 +71,7 @@ public:
 		for (int i = 0; i <= top; i++)
 		{
 			cout << items[i];
-			if (i + 1 == top)cout << ", ";
+			if (i + 1 <= top)cout << ", ";
 		}
 		cout << "]" << endl;
 
