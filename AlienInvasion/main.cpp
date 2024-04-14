@@ -9,4 +9,5 @@ int main()
 	//game.battle();
 	while (true)
 		game.timeStep();
+
 }

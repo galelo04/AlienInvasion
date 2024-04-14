@@ -9,6 +9,8 @@ class Game
 private:
 	int Params[20];
 	int TimeStep;
+	EarthArmy EArmyTempList;
+	AlienArmy aliensTempList;
 	AlienArmy * alienArmy;
 	EarthArmy * earthArmy;
 	randGen * generator;

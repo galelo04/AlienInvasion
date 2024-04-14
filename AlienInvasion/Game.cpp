@@ -5,9 +5,12 @@ using namespace std;
 
 Game::Game() 
 {
+
+	srand((unsigned)time(NULL));
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
 	generator = new randGen(this);
+
 	TimeStep = 0;
 }
 
