@@ -9,8 +9,9 @@ AlienArmy::AlienArmy()
 }
 
 
-void AlienArmy::addUnit(Unit* unit , UnitType type )
+void AlienArmy::addUnit(Unit* unit)
 {
+	UnitType type = unit->getType();
 	switch (type)
 	{
 	case(UnitType::AlienSoldier):

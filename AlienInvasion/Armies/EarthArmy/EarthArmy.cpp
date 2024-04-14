@@ -4,8 +4,9 @@ EarthArmy::EarthArmy()
 {
 }
 
-void EarthArmy::addUnit(Unit* unit, UnitType type)
+void EarthArmy::addUnit(Unit* unit)
 {
+	UnitType type = unit->getType();
 	switch (type)
 	{
 	case(UnitType::EarthSoldier):
@@ -21,9 +22,12 @@ void EarthArmy::addUnit(Unit* unit, UnitType type)
 	case(UnitType::Gunnery):
 	{
 		EarthGunnery* gunnery = dynamic_cast <EarthGunnery*> (unit);
-		gunnery->setPri(unit->getHealth() + unit->getPower());
-		EarthGunneries.enqueue(gunnery, gunnery->getPri());
-		break;
+		if (gunnery)
+		{
+			gunnery->setPri(unit->getHealth() + unit->getPower());
+			EarthGunneries.enqueue(gunnery, gunnery->getPri());
+		}
+			break;
 	}
 	default:
 		break;

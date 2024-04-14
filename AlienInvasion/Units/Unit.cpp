@@ -8,6 +8,11 @@ Unit::Unit(UnitType type, int id, int jointime, int health, int power, int attac
 {
 }
 
+UnitType Unit::getType() const
+{
+    return Type;
+}
+
 int Unit::getID() const
 {
     return ID;

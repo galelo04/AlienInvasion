@@ -17,7 +17,7 @@ private:
 	Direction removeDroneDirection;
 public:
 	AlienArmy();
-	virtual void addUnit(Unit* unit, UnitType type);
+	virtual void addUnit(Unit* unit);
 	virtual Unit* removeUnit(UnitType type );
 	virtual void attack();
 	virtual void print();

@@ -7,9 +7,7 @@ int main()
 	Game game;
 	game.instantiateGame();
 	//game.battle();
-	while(true)
+	while (true)
 		game.timeStep();
-	
-	game.printStatus();
-	
+
 }
