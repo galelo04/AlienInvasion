@@ -10,7 +10,6 @@ Game::Game()
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
 	generator = new randGen(this);
-
 	TimeStep = 0;
 }
 
@@ -82,6 +81,7 @@ void Game::printStatus()
 
 void Game::addToKilledList(Unit* unit)
 {
+	if(unit)
 	killedlist.enqueue(unit);
 }
 
@@ -157,7 +157,6 @@ void Game::timeStep()
 			addToKilledList(alienArmy->removeUnit(UnitType::Drone));
 		}
 	}
-	printStatus();
 	generator->generateUnits(TimeStep++);
 }
 

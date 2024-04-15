@@ -6,6 +6,7 @@ EarthArmy::EarthArmy()
 
 void EarthArmy::addUnit(Unit* unit)
 {
+	if (!unit) return;
 	UnitType type = unit->getType();
 	switch (type)
 	{
