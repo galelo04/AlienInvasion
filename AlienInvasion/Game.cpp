@@ -124,30 +124,38 @@ void Game::timeStep()
 	}
 	else if (X > 30 && X < 40)
 	{
+		LinkedQueue<Unit*>AlienSoldiersTempList;
+		
 		for (int i = 0; i < 5; i++)
 		{
 			Unit* removedAS = alienArmy->removeUnit(UnitType::AlienSoldier);
 			if (removedAS)
 			{
 				removedAS->decrementHealth(removedAS->getHealth() / 2);
-				aliensTempList.addUnit(removedAS);
+				AlienSoldiersTempList.enqueue(removedAS);
 			}
 		}
 		for (int i = 0; i < 5; i++)
 		{
-			alienArmy->addUnit(aliensTempList.removeUnit(UnitType::AlienSoldier));
+			Unit* removedASTP;
+			AlienSoldiersTempList.dequeue(removedASTP);
+			alienArmy->addUnit(removedASTP);
 		}
 	}
 	else if (X > 40 && X < 50)
 	{
+		arrayMonsterADT<Unit*> AlienMonstersTempList;
+
 		for (int i = 0; i < 5; i++)
 		{
 			Unit* removedAM= alienArmy->removeUnit(UnitType::Monster);
-			aliensTempList.addUnit(removedAM);
+			AlienMonstersTempList.add(removedAM);
 		}
 		for (int i = 0; i < 5; i++)
 		{
-			alienArmy->addUnit(aliensTempList.removeUnit(UnitType::Monster));
+			Unit* removedAMTP;
+			AlienMonstersTempList.remove(removedAMTP);
+			alienArmy->addUnit(removedAMTP);
 		}
 	}
 	else if (X > 50 && X < 60)
