@@ -20,11 +20,11 @@ public:
 	void instantiateGame();
 	void loadParams(string filename);
 	int* getParams();
-	int getTimeStep();
-	void timeStep();
+	int timeStep();
 	void battle();
 	void printStatus();
 	void addToKilledList(Unit* unit);
+	~Game();
 };
 
 #endif 

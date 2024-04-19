@@ -8,7 +8,6 @@ using namespace std;
 
 Game::Game() 
 {
-
 	srand((unsigned)time(NULL));
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
@@ -90,7 +89,7 @@ void Game::battle()
 
 void Game::printStatus()
 {
-	system("cls");
+	//system("cls");
 	HANDLE console_color;
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console_color, 6);
@@ -114,21 +113,20 @@ void Game::addToKilledList(Unit* unit)
 	killedlist.enqueue(unit);
 }
 
-
-int Game::getTimeStep() 
+Game::~Game()
 {
-	return TimeStep;
+	delete generator;
+	delete alienArmy;
+	delete earthArmy;
 }
 
-void Game::timeStep()
+int Game::timeStep()
 {
 	generator->generateUnits(TimeStep);
 
 	int X = 1 + (rand() % 100);
 	if (X > 0 && X < 10)
 	{
-		/*EArmyTempList.addUnit(EArmy.removeUnit(UnitType::EarthSoldier));
-		EArmy.addUnit(EArmyTempList.removeUnit(UnitType::EarthSoldier));*/
 		earthArmy->addUnit(earthArmy->removeUnit(UnitType::EarthSoldier));
 	}
 	else if (X > 10 && X < 20)
@@ -137,11 +135,6 @@ void Game::timeStep()
 	}
 	else if (X > 20 && X < 30)
 	{
-		/*Unit* removedGunnery = EArmy.removeUnit(UnitType::Gunnery);
-		removedGunnery->decrementHealth(removedGunnery->getHealth() / 2);
-		EArmyTempList.addUnit(removedGunnery);
-		EArmy.addUnit(EArmyTempList.removeUnit(UnitType::Gunnery));*/
-
 		Unit* removedGunnery = earthArmy->removeUnit(UnitType::Gunnery);
 		if (removedGunnery)
 		{
@@ -152,7 +145,6 @@ void Game::timeStep()
 	else if (X > 30 && X < 40)
 	{
 		LinkedQueue<Unit*>AlienSoldiersTempList;
-		
 		for (int i = 0; i < 5; i++)
 		{
 			Unit* removedAS = alienArmy->removeUnit(UnitType::AlienSoldier);
@@ -164,7 +156,7 @@ void Game::timeStep()
 		}
 		for (int i = 0; i < 5; i++)
 		{
-			Unit* removedASTP;
+			Unit* removedASTP = nullptr;
 			AlienSoldiersTempList.dequeue(removedASTP);
 			alienArmy->addUnit(removedASTP);
 		}
@@ -180,7 +172,7 @@ void Game::timeStep()
 		}
 		for (int i = 0; i < 5; i++)
 		{
-			Unit* removedAMTP;
+			Unit* removedAMTP = nullptr;
 			AlienMonstersTempList.remove(removedAMTP);
 			alienArmy->addUnit(removedAMTP);
 		}
@@ -196,9 +188,9 @@ void Game::timeStep()
 	HANDLE console_color;
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console_color, 9);
-	cout << "Press Enter to move to next timestep ...";
 	system("pause");
 	//system("cls");
 	generator->generateUnits(TimeStep++);
+	return TimeStep;
 }
 

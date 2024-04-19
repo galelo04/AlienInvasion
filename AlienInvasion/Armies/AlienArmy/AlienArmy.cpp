@@ -112,3 +112,14 @@ void AlienArmy::print()
 	cout << AlienDrones.getCount() << " AD ";
 	AlienDrones.printlist();
 }
+
+AlienArmy::~AlienArmy()
+{
+	Unit* unittobedeleted;
+	while (AlienSoldiers.dequeue(unittobedeleted))
+		delete unittobedeleted;
+	while (AlienMonsters.remove(unittobedeleted))
+		delete unittobedeleted;
+	while (AlienDrones.dequeue(unittobedeleted))
+		delete unittobedeleted;
+}

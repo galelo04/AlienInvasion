@@ -19,5 +19,6 @@ public:
 	virtual Unit* removeUnit(UnitType type);
 	virtual void attack();
 	virtual void print();
+	~EarthArmy();
 };
 

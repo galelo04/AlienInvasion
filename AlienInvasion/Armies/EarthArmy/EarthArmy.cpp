@@ -83,3 +83,20 @@ void EarthArmy::print()
 	cout << EarthGunneries.getCount() << " EG ";
 	EarthGunneries.printlist();
 }
+
+EarthArmy::~EarthArmy()
+{
+	Unit* unittobedeleted;
+	int pri;
+	while (EarthSoldiers.dequeue(unittobedeleted))
+		delete unittobedeleted;
+	while (EarthGunneries.dequeue(unittobedeleted,pri))
+		delete unittobedeleted;
+	while (EarthTanks.pop(unittobedeleted))
+		delete unittobedeleted;
+}
+
+
+
+
+

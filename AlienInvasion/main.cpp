@@ -2,13 +2,8 @@
 //
 
 int main()
-
-
 {
 	Game game;
 	game.instantiateGame();
-	//game.battle();
-	while (game.getTimeStep()!=51)
-		game.timeStep();
-
+	while (game.timeStep() != 51);
 }
