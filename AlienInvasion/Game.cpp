@@ -1,7 +1,10 @@
 #include "Game.h"
 #include "randGen.h"
 #include "fstream"
+#include <Windows.h>
 using namespace std;
+
+
 
 Game::Game() 
 {
@@ -10,7 +13,7 @@ Game::Game()
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
 	generator = new randGen(this);
-	TimeStep = 0;
+	TimeStep = 1;
 }
 
 AlienArmy* Game::getAlienArmy() 
@@ -25,8 +28,14 @@ EarthArmy* Game::getEarthArmy()
 
 void Game::instantiateGame()
 {
+	
+	HANDLE console_color;
+	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(console_color, 8);
+
 	cout << "please enter the file name " << endl;
 	string filename;
+	SetConsoleTextAttribute(console_color, 7);
 	cin >> filename;
 	loadParams(filename);
 }
@@ -53,10 +62,20 @@ void Game::loadParams(string filename)
 		Params[15] = Params[15] * -1;
 		Params[17] = Params[17] * -1;
 		Params[19] = Params[19] * -1;
+		inFile.close();
+
+		generator->getparameters(Params);
 	}
 	else
+	{
+		HANDLE console_color;
+		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(console_color, 12);
+		system("cls");
 		cout << "make sure of the name of the file and dont put .txt\n";
-	generator->getparameters(Params);
+		instantiateGame();
+	}
+	
 }
 
 int* Game::getParams() 
@@ -71,10 +90,20 @@ void Game::battle()
 
 void Game::printStatus()
 {
+	system("cls");
+	HANDLE console_color;
+	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(console_color, 6);
 	cout << "\nCurrent TimeStep " << TimeStep << endl;
+
+	SetConsoleTextAttribute(console_color, 15);
 	earthArmy->print();
 	alienArmy->print();
+
+	
+	SetConsoleTextAttribute(console_color, 12);
 	cout << "==============  Killed/Destructed Units =============\n";
+	SetConsoleTextAttribute(console_color, 15);
 	cout << killedlist.getCount() << " Units ";
 	killedlist.printlist();
 }
@@ -93,10 +122,8 @@ int Game::getTimeStep()
 
 void Game::timeStep()
 {
-	printStatus();
-	cout << "Press Enter to move to next timestep ...";
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	generator->generateUnits(TimeStep);
+
 	int X = 1 + (rand() % 100);
 	if (X > 0 && X < 10)
 	{
@@ -165,6 +192,13 @@ void Game::timeStep()
 			addToKilledList(alienArmy->removeUnit(UnitType::Drone));
 		}
 	}
+	printStatus();
+	HANDLE console_color;
+	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(console_color, 9);
+	cout << "Press Enter to move to next timestep ...";
+	system("pause");
+	//system("cls");
 	generator->generateUnits(TimeStep++);
 }
 

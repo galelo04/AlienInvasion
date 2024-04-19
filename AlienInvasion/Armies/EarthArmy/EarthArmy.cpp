@@ -1,4 +1,5 @@
 #include "EarthArmy.h"
+#include <Windows.h>
 
 EarthArmy::EarthArmy()
 {
@@ -69,7 +70,12 @@ void EarthArmy::attack()
 
 void EarthArmy::print()
 {
+	HANDLE console_color;
+	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	SetConsoleTextAttribute(console_color, 10);
 	cout << "==============  Earth Army Alive Units =============\n";
+	SetConsoleTextAttribute(console_color, 15);
 	cout << EarthSoldiers.getCount() << " ES ";
 	EarthSoldiers.printlist();
 	cout << EarthTanks.getCount() << " ET ";

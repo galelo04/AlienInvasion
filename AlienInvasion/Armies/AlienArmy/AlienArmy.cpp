@@ -1,5 +1,5 @@
 #include "AlienArmy.h"
-
+#include <Windows.h>
 
 
 AlienArmy::AlienArmy()
@@ -99,7 +99,12 @@ void AlienArmy::attack()
 
 void AlienArmy::print()
 {
+	HANDLE console_color;
+	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(console_color, 11);
+
 	cout << "==============  Alien Army Alive Units =============\n";
+	SetConsoleTextAttribute(console_color, 15);
 	cout << AlienSoldiers.getCount() << " AS ";
 	AlienSoldiers.printlist();
 	cout << AlienMonsters.getcount() << " AM ";
