@@ -22,7 +22,7 @@
     <ClInclude Include="Armies\Army.h" />
     <ClInclude Include="Armies\EarthArmy\EarthArmy.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="DataStructures\arrayMonsterADT\arrayMonsterADT.h" />
+    <ClInclude Include="DataStructures\arrayADT\arrayADT.h" />
     <ClInclude Include="randGen.h" />
     <ClInclude Include="Units\AlienUnits\AlienSoldier.h" />
     <ClInclude Include="Units\AlienUnits\AlienDrone.h" />

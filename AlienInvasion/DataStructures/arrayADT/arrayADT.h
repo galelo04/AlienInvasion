@@ -4,14 +4,14 @@
 using namespace std;
 
 template<typename T>
-class arrayMonsterADT
+class arrayADT
 {
 	enum { MAX_SIZE = 1000 };
 private:
-	T monsters[MAX_SIZE];
+	T items[MAX_SIZE];
 	int count;
 public:
-	arrayMonsterADT()
+	arrayADT()
 	{
 		srand((unsigned)time(NULL));
 		count = 0;
@@ -25,7 +25,7 @@ public:
 	{
 		if (count == MAX_SIZE - 1)
 			return false;
-		monsters[count++] = newEntry;
+		items[count++] = newEntry;
 		return true;
 	}
 
@@ -33,8 +33,8 @@ public:
 	{
 		if (isEmpty()) return false;
 		int randomindex = rand() % count;
-		removedEntry = monsters[randomindex];
-		monsters[randomindex] = monsters[count - 1];
+		removedEntry = items[randomindex];
+		items[randomindex] = items[count - 1];
 		count--;
 		return true;
 	}
@@ -47,7 +47,7 @@ public:
 		cout << "[";
 		for (int i = 0; i < count; i++)
 		{
-			cout << monsters[i];
+			cout << items[i];
 			if (i != count - 1)
 				cout << ", ";
 		}

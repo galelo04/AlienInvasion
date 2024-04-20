@@ -95,8 +95,3 @@ EarthArmy::~EarthArmy()
 	while (EarthTanks.pop(unittobedeleted))
 		delete unittobedeleted;
 }
-
-
-
-
-

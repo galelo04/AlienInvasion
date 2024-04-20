@@ -72,7 +72,7 @@
     <ClInclude Include="Armies\EarthArmy\EarthArmy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\arrayMonsterADT\arrayMonsterADT.h">
+    <ClInclude Include="DataStructures\arrayADT\arrayADT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

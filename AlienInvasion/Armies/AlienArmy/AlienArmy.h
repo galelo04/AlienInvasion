@@ -5,15 +5,14 @@
 #include "../../Units/AlienUnits/AlienMonster.h"
 #include "../../Units/AlienUnits/AlienDrone.h"
 #include "../../Units/AlienUnits/AlienSoldier.h"
-#include"../../DataStructures/arrayMonsterADT/arrayMonsterADT.h"
+#include"../../DataStructures/arrayADT/arrayADT.h"
 
 class AlienArmy : public Army
 {
 private:
 	LinkedQueue<Unit*>AlienSoldiers;
 	LinkedQueue<Unit*> AlienDrones;
-	arrayMonsterADT<Unit*> AlienMonsters;
-	int MonstersCount ;
+	arrayADT<Unit*> AlienMonsters;
 	Direction addDroneDirection;
 	Direction removeDroneDirection;
 public:

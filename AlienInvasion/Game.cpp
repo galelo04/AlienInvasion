@@ -163,7 +163,7 @@ int Game::timeStep()
 	}
 	else if (X > 40 && X < 50)
 	{
-		arrayMonsterADT<Unit*> AlienMonstersTempList;
+		arrayADT<Unit*> AlienMonstersTempList;
 
 		for (int i = 0; i < 5; i++)
 		{
