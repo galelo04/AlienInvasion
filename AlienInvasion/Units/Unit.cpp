@@ -1,4 +1,5 @@
 #include "Unit.h"
+#include "../Game.h"
 
 int Unit::last_Earth_Id = 1;
 int Unit::last_Alien_Id = 2000;

@@ -8,6 +8,6 @@ AlienMonster::AlienMonster(int jointime, int health, int power, int attackcapaci
 
 }
 
-void AlienMonster::Attack()
+void AlienMonster::Attack(Game* gameptr)
 {
 }

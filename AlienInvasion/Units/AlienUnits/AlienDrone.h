@@ -5,6 +5,6 @@ class AlienDrone :
 {
 public:
     AlienDrone(int jointime, int health, int power, int attackcapacity);
-    virtual void Attack();
+    virtual void Attack(Game* gameptr);
 };
 

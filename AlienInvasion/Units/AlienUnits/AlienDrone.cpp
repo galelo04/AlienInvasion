@@ -8,6 +8,6 @@ AlienDrone::AlienDrone(int jointime, int health, int power, int attackcapacity)
 
 }
 
-void AlienDrone::Attack()
+void AlienDrone::Attack(Game* gameptr)
 {
 }

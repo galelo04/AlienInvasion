@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 
+class Game;
 enum class UnitType {
 	EarthSoldier,
 	Tank,
@@ -26,7 +27,7 @@ protected:
 public:
 
 	Unit(UnitType type,int id,  int jointime, int health, int power, int attackcapacity);
-	virtual void Attack()=0;
+	virtual void Attack(Game * gameptr)=0;
 	virtual UnitType getType() const;
 	virtual int getID() const;
 	virtual int getJoinTime() const;

@@ -5,6 +5,8 @@ EarthTank::EarthTank(int jointime, int health, int power, int attackcapacity)
 {
 }
 
-void EarthTank::Attack()
+void EarthTank::Attack(Game* gameptr)
 {
 }
+
+

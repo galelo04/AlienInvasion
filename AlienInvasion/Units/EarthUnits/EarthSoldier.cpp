@@ -5,7 +5,7 @@ EarthSoldier::EarthSoldier(int jointime, int health, int power, int attackcapaci
 {
 }
 
-void EarthSoldier::Attack()
+void EarthSoldier::Attack(Game* gameptr)
 {
 }
 

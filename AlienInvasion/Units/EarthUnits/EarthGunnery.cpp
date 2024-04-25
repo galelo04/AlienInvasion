@@ -5,7 +5,7 @@ EarthGunnery::EarthGunnery(int jointime, int health, int power, int attackcapaci
 	setPri(power + health);
 }
 
-void EarthGunnery::Attack()
+void EarthGunnery::Attack(Game* gameptr)
 {
 }
 
