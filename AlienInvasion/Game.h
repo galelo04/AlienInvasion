@@ -15,8 +15,8 @@ private:
 	LinkedQueue <Unit* > killedlist;
 public:
 	Game();
-	AlienArmy* getAlienArmy() ;
-	EarthArmy* getEarthArmy() ;
+	AlienArmy*& getAlienArmy() ;
+	EarthArmy*& getEarthArmy() ;
 	void instantiateGame();
 	void loadParams(string filename);
 	int* getParams();

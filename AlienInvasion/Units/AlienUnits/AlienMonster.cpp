@@ -1,4 +1,5 @@
 #include "AlienMonster.h"
+#include "../../Game.h"
 
 
 
@@ -10,4 +11,5 @@ AlienMonster::AlienMonster(int jointime, int health, int power, int attackcapaci
 
 void AlienMonster::Attack(Game* gameptr)
 {
+
 }

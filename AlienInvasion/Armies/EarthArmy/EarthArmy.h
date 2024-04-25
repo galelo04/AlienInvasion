@@ -13,6 +13,9 @@ private:
 	LinkedQueue<Unit*>EarthSoldiers;
 	ArrayStack<Unit*>EarthTanks;
 	priQueue<Unit*>EarthGunneries;
+	ArrayStack<Unit*>HealingList;
+	priQueue<Unit*>UnitMaintainingList1;
+	LinkedQueue<Unit*>UnitMaintainingList2;
 public:
 	EarthArmy();
 	virtual void addUnit(Unit* unit);

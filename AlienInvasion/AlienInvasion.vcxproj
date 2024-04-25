@@ -23,6 +23,7 @@
     <ClInclude Include="Armies\EarthArmy\EarthArmy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="DataStructures\arrayADT\arrayADT.h" />
+    <ClInclude Include="Units\EarthUnits\HealingUnit.h" />
     <ClInclude Include="randGen.h" />
     <ClInclude Include="Units\AlienUnits\AlienSoldier.h" />
     <ClInclude Include="Units\AlienUnits\AlienDrone.h" />
@@ -44,6 +45,7 @@
     <ClCompile Include="Armies\Army.cpp" />
     <ClCompile Include="Armies\EarthArmy\EarthArmy.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Units\EarthUnits\HealingUnit.cpp" />
     <ClCompile Include="randGen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Units\AlienUnits\AlienSoldier.cpp" />

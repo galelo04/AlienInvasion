@@ -75,6 +75,9 @@
     <ClInclude Include="DataStructures\arrayADT\arrayADT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Units\EarthUnits\HealingUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Units\AlienUnits\AlienDrone.cpp">
@@ -117,6 +120,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Armies\EarthArmy\EarthArmy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Units\EarthUnits\HealingUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

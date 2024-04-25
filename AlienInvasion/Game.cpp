@@ -15,12 +15,12 @@ Game::Game()
 	TimeStep = 1;
 }
 
-AlienArmy* Game::getAlienArmy() 
+AlienArmy*& Game::getAlienArmy() 
 {
 	return  alienArmy;
 }
 
-EarthArmy* Game::getEarthArmy()
+EarthArmy*& Game::getEarthArmy()
 {
 	return earthArmy;
 }

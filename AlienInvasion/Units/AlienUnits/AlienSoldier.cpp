@@ -6,6 +6,6 @@ AlienSoldier::AlienSoldier(int jointime, int health, int power, int attackcapaci
 {
 }
 
-void AlienSoldier::AttackGame* gameptr)
+void AlienSoldier::Attack(Game* gameptr)
 {
 }

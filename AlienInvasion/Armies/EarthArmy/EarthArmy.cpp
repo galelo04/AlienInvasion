@@ -66,6 +66,7 @@ Unit* EarthArmy::removeUnit(UnitType type)
 
 void EarthArmy::attack()
 {
+
 }
 
 void EarthArmy::print()

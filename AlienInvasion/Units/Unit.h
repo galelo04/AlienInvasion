@@ -6,6 +6,7 @@ enum class UnitType {
 	EarthSoldier,
 	Tank,
 	Gunnery,
+	HealingUnit,
 	AlienSoldier,
 	Monster,
 	Drone
