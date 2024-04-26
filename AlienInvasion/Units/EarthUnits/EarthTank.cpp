@@ -49,6 +49,21 @@ void EarthTank::Attack(Game* gameptr)
 
 	}
 
+	if (AStemplist.getCount() > 0)
+	{
+		cout << "ET " << getID() << " shots Soldiers ";
+		AStemplist.printlist();
+	}
+	if (AMtemplist.getCount() > 0)
+	{
+		cout << "ET " << getID() << " shots Monsters ";
+		AStemplist.printlist();
+	}
+	while (AStemplist.dequeue(attackedUnit))
+		gameptr->getAlienArmy()->addUnit(attackedUnit);
+	while (AMtemplist.dequeue(attackedUnit))
+		gameptr->getAlienArmy()->addUnit(attackedUnit);
+
 }
 
 
