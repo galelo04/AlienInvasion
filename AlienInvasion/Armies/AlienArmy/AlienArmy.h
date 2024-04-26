@@ -9,7 +9,6 @@
 
 class AlienArmy : public Army
 {
-	int ASCount;
 private:
 	LinkedQueue<Unit*>AlienSoldiers;
 	LinkedQueue<Unit*> AlienDrones;

@@ -12,13 +12,16 @@ void EarthTank::Attack(Game* gameptr)
 	LinkedQueue<Unit*>AStemplist;
 	Unit* attackedUnit = nullptr;
 	int attackCapacity = getAttackCapacity();
-	int attacedUnits = 0;
+	int i = 0;
 
 	if (gameptr->getEarthArmy()->getESCount() < 0.3 * gameptr->getAlienArmy()->getASCount())
 	{
-
-		for (attacedUnits; attacedUnits < attackCapacity / 2; attacedUnits++)
+		
+		for (i; i < attackCapacity / 2; i++)
 		{
+			if (gameptr->getEarthArmy()->getESCount() >= 0.8 * gameptr->getAlienArmy()->getASCount())
+				break;
+
 			attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::AlienSoldier);
 			if (attackedUnit)
 			{
@@ -29,12 +32,12 @@ void EarthTank::Attack(Game* gameptr)
 				else
 					AStemplist.enqueue(attackedUnit);
 			}
-			if ((gameptr->getEarthArmy()->getESCount() >= 0.8 * gameptr->getAlienArmy()->getASCount()) || !attackedUnit)
+			else
 				break;
 		}
 	}
 
-	for (attacedUnits; attacedUnits < attackCapacity; attacedUnits++)
+	for (i; i < attackCapacity; i++)
 	{
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Monster);
 		if (attackedUnit)
@@ -46,7 +49,6 @@ void EarthTank::Attack(Game* gameptr)
 			else
 				AMtemplist.enqueue(attackedUnit);
 		}
-
 	}
 
 	if (AStemplist.getCount() > 0)

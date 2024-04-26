@@ -9,7 +9,6 @@
 
 class EarthArmy : public Army
 {
-	int ESCount;
 private:
 	LinkedQueue<Unit*>EarthSoldiers;
 	ArrayStack<Unit*>EarthTanks;

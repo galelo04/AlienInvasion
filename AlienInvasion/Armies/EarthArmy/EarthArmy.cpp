@@ -1,8 +1,7 @@
 #include "EarthArmy.h"
 #include <Windows.h>
 
-EarthArmy::EarthArmy() :ESCount(0)
-{
+EarthArmy::EarthArmy()
 }
 
 void EarthArmy::addUnit(Unit* unit)
@@ -15,7 +14,6 @@ void EarthArmy::addUnit(Unit* unit)
 	case(UnitType::EarthSoldier):
 	{
 		EarthSoldiers.enqueue(unit);
-		ESCount++;
 		break;
 	}
 	case(UnitType::Tank):
@@ -53,7 +51,6 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	case (UnitType::EarthSoldier):
 	{
 		EarthSoldiers.dequeue(removedUnit);
-		ESCount--;
 		break;
 	}
 	case (UnitType::Tank):
@@ -110,7 +107,7 @@ void EarthArmy::print()
 
 int EarthArmy::getESCount()
 {
-	return ESCount;
+	return EarthSoldiers.getCount();
 }
 
 EarthArmy::~EarthArmy()
