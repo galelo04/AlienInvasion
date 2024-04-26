@@ -22,5 +22,6 @@ public:
 	virtual void attack(Game* gameptr);
 	virtual void print();
 	int getASCount();
+	int getADCount();
 	~AlienArmy();
 };

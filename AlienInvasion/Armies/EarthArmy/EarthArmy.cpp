@@ -1,8 +1,9 @@
 #include "EarthArmy.h"
 #include <Windows.h>
+#include "../../Game.h"
 
 EarthArmy::EarthArmy()
-}
+{}
 
 void EarthArmy::addUnit(Unit* unit)
 {
@@ -81,12 +82,18 @@ void EarthArmy::attack(Game* gameptr)
 	EarthSoldiers.peek(unitAttacking);
 	if(unitAttacking)
 		unitAttacking->Attack(gameptr);
-	/*EarthTanks.peek(unitAttacking);
+	EarthTanks.peek(unitAttacking);
 	if (unitAttacking)
 		unitAttacking->Attack(gameptr);
-	EarthGunneries.peek(unitAttacking,pri);
+	/*EarthGunneries.peek(unitAttacking, pri);
 	if (unitAttacking)
 		unitAttacking->Attack(gameptr);*/
+	HealingList.pop(unitAttacking);
+	if (unitAttacking) 
+	{
+		unitAttacking->Attack(gameptr);
+		gameptr->addToKilledList(unitAttacking);
+	}
 }
 
 void EarthArmy::print()

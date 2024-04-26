@@ -1,6 +1,5 @@
 #pragma once
 #include "../Unit.h".
-#include "../../DataStructures/Queue/LinkedQueue.h".
 
 class EarthSoldier : public Unit
 {

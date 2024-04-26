@@ -132,6 +132,11 @@ int AlienArmy::getASCount()
 	return AlienSoldiers.getCount();
 }
 
+int AlienArmy::getADCount()
+{
+	return AlienDrones.getCount();
+}
+
 AlienArmy::~AlienArmy()
 {
 	Unit* unittobedeleted;
