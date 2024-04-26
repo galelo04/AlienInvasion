@@ -48,11 +48,11 @@ void AlienMonster::Attack(Game* gameptr)
 	}
 	if (ETtemplist.getCount() > 0)
 	{
-		cout << " and shots Tanks ";
+		cout << "AM " << getID() << " shots Tanks ";
 		ETtemplist.printlist();
 	}
 	while (ETtemplist.pop(attackedUnit))
 		gameptr->getEarthArmy()->addUnit(attackedUnit);
 	while (EStemplist.dequeue(attackedUnit))
-		gameptr->getAlienArmy()->addUnit(attackedUnit);
+		gameptr->getEarthArmy()->addUnit(attackedUnit);
 }

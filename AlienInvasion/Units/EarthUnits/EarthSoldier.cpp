@@ -30,6 +30,6 @@ void EarthSoldier::Attack(Game* gameptr)
 		AStemplist.printlist();
 	}
 	while (AStemplist.dequeue(attackedUnit))
-	gameptr->getAlienArmy()->addUnit(attackedUnit);
+		gameptr->getAlienArmy()->addUnit(attackedUnit);
 }
 
