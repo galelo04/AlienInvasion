@@ -39,7 +39,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& stream, Unit* unit)
 	{
 		if (unit)
-			stream << unit->ID<<"("<<unit->getHealth()<<")";
+			stream << unit->ID;
 		return stream;
 	}
 };

@@ -48,19 +48,19 @@ void Game::loadParams(string filename)
 	if (inFile.is_open())
 	{
 		inFile >> Params[0];                            // [0]=>N
-		inFile >> Params[1] >> Params[2] >> Params[3];  // [1]=>ES%, [2]=>ET%, [3]=>EG%
-		inFile >> Params[4] >> Params[5] >> Params[6];  // [4]=>AS%, [5]=>AM%, [6]=>AD%
-		inFile >> Params[7];                            // [7]=>Prob
-		inFile >> Params[8] >> Params[9] >> Params[10] >> Params[11] >> Params[12] >> Params[13];    //[8,9]=>ES_R, [10,11]=>ET_R, [12,13]=>EG_R
-		inFile >> Params[14] >> Params[15] >> Params[16] >> Params[17] >> Params[18] >> Params[19];  //[14,15]=>AS_R, [16,17]=>AM_R, [18,19]=>AD_R
+		inFile >> Params[1] >> Params[2] >> Params[3] >> Params[4];  // [1]=>ES%, [2]=>ET%, [3]=>EG% , [4]=>HU%
+		inFile >> Params[5] >> Params[6] >> Params[7];  // [5]=>AS%, [6]=>AM%, [7]=>AD%
+		inFile >> Params[8];                            // [8]=>Prob
+		inFile >> Params[9] >> Params[10] >> Params[11] >> Params[12] >> Params[13] >> Params[14];    //[9,10]=>ES_R, [11,12]=>ET_R, [13,14]=>EG_R
+		inFile >> Params[15] >> Params[16] >> Params[17] >> Params[18] >> Params[19] >> Params[20];  //[15,16]=>AS_R, [17,18]=>AM_R, [19,20]=>AD_R
 
-		Params[9] = Params[9] * -1;
-		Params[11] = Params[11] * -1;
-		Params[13] = Params[13] * -1;
+		Params[10] = Params[10] * -1;
+		Params[12] = Params[12] * -1;
+		Params[14] = Params[14] * -1;
 
-		Params[15] = Params[15] * -1;
-		Params[17] = Params[17] * -1;
-		Params[19] = Params[19] * -1;
+		Params[16] = Params[16] * -1;
+		Params[18] = Params[18] * -1;
+		Params[20] = Params[20] * -1;
 		inFile.close();
 
 		generator->getparameters(Params);
@@ -100,6 +100,14 @@ void Game::printStatus()
 	alienArmy->print();
 
 	
+	
+}
+
+void Game::printKilledlist()
+{
+	HANDLE console_color;
+	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(console_color, 6);
 	SetConsoleTextAttribute(console_color, 12);
 	cout << "==============  Killed/Destructed Units =============\n";
 	SetConsoleTextAttribute(console_color, 15);
@@ -123,68 +131,11 @@ Game::~Game()
 int Game::timeStep()
 {
 	generator->generateUnits(TimeStep);
-
-	int X = 1 + (rand() % 100);
-	if (X > 0 && X < 10)
-	{
-		earthArmy->addUnit(earthArmy->removeUnit(UnitType::EarthSoldier));
-	}
-	else if (X > 10 && X < 20)
-	{
-		addToKilledList(earthArmy->removeUnit(UnitType::Tank));
-	}
-	else if (X > 20 && X < 30)
-	{
-		Unit* removedGunnery = earthArmy->removeUnit(UnitType::Gunnery);
-		if (removedGunnery)
-		{
-			removedGunnery->decrementHealth(removedGunnery->getHealth() / 2);
-			earthArmy->addUnit(removedGunnery);
-		}
-	}
-	else if (X > 30 && X < 40)
-	{
-		LinkedQueue<Unit*>AlienSoldiersTempList;
-		for (int i = 0; i < 5; i++)
-		{
-			Unit* removedAS = alienArmy->removeUnit(UnitType::AlienSoldier);
-			if (removedAS)
-			{
-				removedAS->decrementHealth(removedAS->getHealth() / 2);
-				AlienSoldiersTempList.enqueue(removedAS);
-			}
-		}
-		for (int i = 0; i < 5; i++)
-		{
-			Unit* removedASTP = nullptr;
-			AlienSoldiersTempList.dequeue(removedASTP);
-			alienArmy->addUnit(removedASTP);
-		}
-	}
-	else if (X > 40 && X < 50)
-	{
-		arrayADT<Unit*> AlienMonstersTempList;
-
-		for (int i = 0; i < 5; i++)
-		{
-			Unit* removedAM= alienArmy->removeUnit(UnitType::Monster);
-			AlienMonstersTempList.add(removedAM);
-		}
-		for (int i = 0; i < 5; i++)
-		{
-			Unit* removedAMTP = nullptr;
-			AlienMonstersTempList.remove(removedAMTP);
-			alienArmy->addUnit(removedAMTP);
-		}
-	}
-	else if (X > 50 && X < 60)
-	{
-		for (int i = 0; i < 6; i++)
-		{
-			addToKilledList(alienArmy->removeUnit(UnitType::Drone));
-		}
-	}
 	printStatus();
+	cout << "==============  Units fighting at current step ===============\n";
+	earthArmy->attack(this);
+	alienArmy->attack(this);
+	printKilledlist();
 	HANDLE console_color;
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console_color, 9);

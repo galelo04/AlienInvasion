@@ -71,15 +71,13 @@ Unit* AlienArmy::removeUnit(UnitType type)
 		{
 		case Direction::Front:
 		{
-			if (AlienDrones.getCount() >= 2)
-				AlienDrones.dequeue(removedUnit);
+			AlienDrones.dequeue(removedUnit);
 			removeDroneDirection = Direction::Back;
 			break;
 		}
 		case Direction::Back:
 		{
-			if (AlienDrones.getCount() >= 1)
-				AlienDrones.dequeuerear(removedUnit);
+			AlienDrones.dequeuerear(removedUnit);
 			removeDroneDirection = Direction::Front;
 			break;
 		}
@@ -93,8 +91,24 @@ Unit* AlienArmy::removeUnit(UnitType type)
 	return removedUnit;
 }
 
-void AlienArmy::attack()
+void AlienArmy::attack(Game* gameptr)
 {
+	Unit* unitAttacking = nullptr;
+	/*AlienSoldiers.peek(unitAttacking);
+	if (unitAttacking)
+		unitAttacking->Attack(gameptr);
+	if (AlienDrones.getCount() >= 2)
+	{
+		AlienDrones.peek(unitAttacking);
+		if (unitAttacking)
+			unitAttacking->Attack(gameptr);
+		AlienDrones.peekrear(unitAttacking);
+		if (unitAttacking)
+			unitAttacking->Attack(gameptr);
+	}*/
+	AlienMonsters.peekRandomly(unitAttacking);
+	if (unitAttacking)
+		unitAttacking->Attack(gameptr);
 }
 
 void AlienArmy::print()

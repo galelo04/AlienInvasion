@@ -7,7 +7,7 @@ class randGen;
 class Game
 {
 private:
-	int Params[20];
+	int Params[21];
 	int TimeStep;
 	AlienArmy * alienArmy;
 	EarthArmy * earthArmy;
@@ -23,6 +23,7 @@ public:
 	int timeStep();
 	void battle();
 	void printStatus();
+	void printKilledlist();
 	void addToKilledList(Unit* unit);
 	~Game();
 };

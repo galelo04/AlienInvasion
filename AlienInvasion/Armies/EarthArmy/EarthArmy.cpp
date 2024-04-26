@@ -31,6 +31,11 @@ void EarthArmy::addUnit(Unit* unit)
 		}
 			break;
 	}
+	case(UnitType::HealingUnit):
+	{
+		HealingList.push(unit);
+		break;
+	}
 	default:
 		break;
 	}
@@ -58,15 +63,30 @@ Unit* EarthArmy::removeUnit(UnitType type)
 		EarthGunneries.dequeue(removedUnit, pri);
 		break;
 	}
+	case(UnitType::HealingUnit):
+	{
+		HealingList.pop(removedUnit);
+		break;
+	}
 	default:
 		break;
 	}
 	return removedUnit;
 }
 
-void EarthArmy::attack()
+void EarthArmy::attack(Game* gameptr)
 {
-
+	Unit* unitAttacking = nullptr;
+	int pri = 0;
+	EarthSoldiers.peek(unitAttacking);
+	if(unitAttacking)
+		unitAttacking->Attack(gameptr);
+	/*EarthTanks.peek(unitAttacking);
+	if (unitAttacking)
+		unitAttacking->Attack(gameptr);
+	EarthGunneries.peek(unitAttacking,pri);
+	if (unitAttacking)
+		unitAttacking->Attack(gameptr);*/
 }
 
 void EarthArmy::print()

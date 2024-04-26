@@ -38,6 +38,13 @@ public:
 		count--;
 		return true;
 	}
+	bool peekRandomly(T& removedEntry)
+	{
+		if (isEmpty()) return false;
+		int randomindex = rand() % count;
+		removedEntry = items[randomindex];
+		return true;
+	}
 	int getcount() const
 	{
 		return count;

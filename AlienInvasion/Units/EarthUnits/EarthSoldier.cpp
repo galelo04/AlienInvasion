@@ -8,20 +8,28 @@ EarthSoldier::EarthSoldier(int jointime, int health, int power, int attackcapaci
 
 void EarthSoldier::Attack(Game* gameptr)
 {
-	LinkedQueue<Unit*>templist;
-	Unit* attackedUnit;
+	LinkedQueue<Unit*>AStemplist;
+	Unit* attackedUnit = nullptr;
 	int attackCapacity = getAttackCapacity();
 	for (int i = 0; i < attackCapacity; i++)
 	{
-		attackedUnit=gameptr->getAlienArmy()->removeUnit(UnitType::AlienSoldier);
-		int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
-		attackedUnit->decrementHealth(damage);
-		if (attackedUnit->getHealth() <= 0)
-			gameptr->addToKilledList(attackedUnit);
-		else if(attackedUnit)
-			templist.enqueue(attackedUnit);
+		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::AlienSoldier);
+		if (attackedUnit)
+		{
+			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+			attackedUnit->decrementHealth(damage);
+			if (attackedUnit->getHealth() <= 0)
+				gameptr->addToKilledList(attackedUnit);
+			else
+				AStemplist.enqueue(attackedUnit);
+		}
 	}
-	while (templist.dequeue(attackedUnit))
-		gameptr->getAlienArmy()->addUnit(attackedUnit);
+	if (AStemplist.getCount() > 0)
+	{
+		cout << "ES " << getID() << " shots ";
+		AStemplist.printlist();
+	}
+	while (AStemplist.dequeue(attackedUnit))
+	gameptr->getAlienArmy()->addUnit(attackedUnit);
 }
 

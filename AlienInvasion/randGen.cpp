@@ -8,6 +8,7 @@
 #include "Units/AlienUnits/AlienSoldier.h"
 #include "Units/AlienUnits/AlienMonster.h"
 #include "Units/AlienUnits/AlienDrone.h"
+#include "Units/EarthUnits/HealingUnit.h"
 
 
 
@@ -27,14 +28,14 @@ void randGen::generateUnits(int timestep)
     Unit* newUnit;
     int A = 1+(rand() % 100);
 
-    if (A <= params[7])
+    if (A <= params[8])
     {
         for (int i = 0; i < params[0]; i++)
         {
             int B = 1 + (rand() % 100);
-            int E_P = params[8] + (rand() % (params[9] - params[8] + 1));
-            int E_H = params[10] + (rand() % (params[11] - params[10] + 1));
-            int E_C = params[12] + (rand() % (params[13] - params[12] + 1));
+            int E_P = params[9] + (rand() % (params[10] - params[9] + 1));
+            int E_H = params[11] + (rand() % (params[12] - params[11] + 1));
+            int E_C = params[13] + (rand() % (params[14] - params[13] + 1));
 
            newUnit = createUnit(E_P, E_H, E_C, true,timestep);
            gameptr->getEarthArmy()->addUnit(newUnit);
@@ -43,14 +44,14 @@ void randGen::generateUnits(int timestep)
     ////////////////////////////////////
     A = 1 + (rand() % 100);
 
-    if (A <= params[7])
+    if (A <= params[8])
     {
         for (int i = 0; i < params[0]; i++)
         {
             int B = 1 + (rand() % 100);
-            int A_P = params[14] + (rand() % (params[15] - params[14] + 1));
-            int A_H = params[16] + (rand() % (params[17] - params[16] + 1));
-            int A_C = params[18] + (rand() % (params[19] - params[18] + 1));
+            int A_P = params[15] + (rand() % (params[16] - params[15] + 1));
+            int A_H = params[17] + (rand() % (params[18] - params[17] + 1));
+            int A_C = params[19] + (rand() % (params[20] - params[19] + 1));
 
             newUnit = createUnit(A_P, A_H, A_C, false,timestep);
             gameptr->getAlienArmy()->addUnit(newUnit);
@@ -74,9 +75,13 @@ Unit* randGen::createUnit(int H,int P,int C,bool is_E,int timestep)
         {
             newUnit = new EarthTank(timestep, H, P, C);
         }
-        else
+        else if(B <= params[3]+ params[2]+ params[1])         // what is the condition
         {
             newUnit = new EarthGunnery(timestep, H, P, C);
+        }
+        else
+        {
+            newUnit = new HealingUnit(timestep, H, P, C);
         }
     }
     else
