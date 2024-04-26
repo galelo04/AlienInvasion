@@ -9,6 +9,7 @@
 
 class AlienArmy : public Army
 {
+	int ASCount;
 private:
 	LinkedQueue<Unit*>AlienSoldiers;
 	LinkedQueue<Unit*> AlienDrones;
@@ -21,5 +22,6 @@ public:
 	virtual Unit* removeUnit(UnitType type );
 	virtual void attack(Game* gameptr);
 	virtual void print();
+	int getASCount();
 	~AlienArmy();
 };

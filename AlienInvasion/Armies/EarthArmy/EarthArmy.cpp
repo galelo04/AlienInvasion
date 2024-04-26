@@ -1,19 +1,21 @@
 #include "EarthArmy.h"
 #include <Windows.h>
 
-EarthArmy::EarthArmy()
+EarthArmy::EarthArmy() :ESCount(0)
 {
 }
 
 void EarthArmy::addUnit(Unit* unit)
 {
 	if (!unit) return;
+	
 	UnitType type = unit->getType();
 	switch (type)
 	{
 	case(UnitType::EarthSoldier):
 	{
 		EarthSoldiers.enqueue(unit);
+		ESCount++;
 		break;
 	}
 	case(UnitType::Tank):
@@ -45,12 +47,13 @@ Unit* EarthArmy::removeUnit(UnitType type)
 {
 	Unit* removedUnit = nullptr;
 	int pri;
-
+	
 	switch (type)
 	{
 	case (UnitType::EarthSoldier):
 	{
 		EarthSoldiers.dequeue(removedUnit);
+		ESCount--;
 		break;
 	}
 	case (UnitType::Tank):
@@ -103,6 +106,11 @@ void EarthArmy::print()
 	EarthTanks.printlist();
 	cout << EarthGunneries.getCount() << " EG ";
 	EarthGunneries.printlist();
+}
+
+int EarthArmy::getESCount()
+{
+	return ESCount;
 }
 
 EarthArmy::~EarthArmy()

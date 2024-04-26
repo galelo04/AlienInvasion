@@ -9,6 +9,7 @@
 
 class EarthArmy : public Army
 {
+	int ESCount;
 private:
 	LinkedQueue<Unit*>EarthSoldiers;
 	ArrayStack<Unit*>EarthTanks;
@@ -22,6 +23,7 @@ public:
 	virtual Unit* removeUnit(UnitType type);
 	virtual void attack(Game* gameptr);
 	virtual void print();
+	int getESCount();
 	~EarthArmy();
 };
 

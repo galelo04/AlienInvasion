@@ -2,7 +2,7 @@
 #include <Windows.h>
 
 
-AlienArmy::AlienArmy()
+AlienArmy::AlienArmy():ASCount(0)
 {
 	addDroneDirection = Direction::Back;
 	removeDroneDirection = Direction::Front;
@@ -18,6 +18,7 @@ void AlienArmy::addUnit(Unit* unit)
 	case(UnitType::AlienSoldier):
 	{
 		AlienSoldiers.enqueue(unit);
+		ASCount++;
 		break;
 	}
 	case(UnitType::Monster):
@@ -58,6 +59,7 @@ Unit* AlienArmy::removeUnit(UnitType type)
 	case (UnitType::AlienSoldier):
 	{
 		AlienSoldiers.dequeue(removedUnit);
+		ASCount--;
 		break;
 	}
 	case (UnitType::Monster):
@@ -125,6 +127,11 @@ void AlienArmy::print()
 	AlienMonsters.printlist();
 	cout << AlienDrones.getCount() << " AD ";
 	AlienDrones.printlist();
+}
+
+int AlienArmy::getASCount()
+{
+	return ASCount;
 }
 
 AlienArmy::~AlienArmy()
