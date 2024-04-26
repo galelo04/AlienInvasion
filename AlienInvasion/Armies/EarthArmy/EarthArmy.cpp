@@ -80,19 +80,34 @@ void EarthArmy::attack(Game* gameptr)
 	Unit* unitAttacking = nullptr;
 	int pri = 0;
 	EarthSoldiers.peek(unitAttacking);
-	if(unitAttacking)
+	if (unitAttacking) {
 		unitAttacking->Attack(gameptr);
+		unitAttacking->incrementnumAttacks();
+		if(unitAttacking->getnumAttacks() == 1)
+		unitAttacking->setTa(gameptr->getCrntTimeStep());
+	}
 	EarthTanks.peek(unitAttacking);
-	if (unitAttacking)
-		unitAttacking->Attack(gameptr);
+	if (unitAttacking) {
+	unitAttacking->Attack(gameptr);
+	unitAttacking->incrementnumAttacks();
+	if (unitAttacking->getnumAttacks() == 1)
+		unitAttacking->setTa(gameptr->getCrntTimeStep());
+	}
 	/*EarthGunneries.peek(unitAttacking, pri);
-	if (unitAttacking)
-		unitAttacking->Attack(gameptr);*/
+	if (unitAttacking){
+		unitAttacking->Attack(gameptr);
+		unitAttacking->incrementnumAttacks();
+		if(unitAttacking->getnumAttacks() == 1)
+		unitAttacking->setTa(gameptr->getCrntTimeStep());
+		}*/
 	HealingList.pop(unitAttacking);
 	if (unitAttacking) 
 	{
 		unitAttacking->Attack(gameptr);
 		gameptr->addToKilledList(unitAttacking);
+		unitAttacking->incrementnumAttacks();
+		if (unitAttacking->getnumAttacks() == 1)
+			unitAttacking->setTa(gameptr->getCrntTimeStep());
 	}
 }
 
@@ -115,6 +130,16 @@ void EarthArmy::print()
 int EarthArmy::getESCount()
 {
 	return EarthSoldiers.getCount();
+}
+
+int EarthArmy::getETCount()
+{
+	return EarthTanks.getCount();
+}
+
+int EarthArmy::getEGCount()
+{
+	return EarthGunneries.getCount();
 }
 
 EarthArmy::~EarthArmy()

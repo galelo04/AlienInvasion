@@ -10,14 +10,12 @@ AlienDrone::AlienDrone(int jointime, int health, int power, int attackcapacity)
 
 void AlienDrone::Attack(Game* gameptr)
 {
-	if (gameptr->getAlienArmy()->getADCount() < 2)
-		return;
 	ArrayStack<Unit*>ETtemplist;
 	priQueue<Unit*>EGtemplist;
 	Unit* attackedUnit = nullptr;
 	int attackCapacity = getAttackCapacity();
 	int i = 0;
-	int pri;
+	int pri = 0;
 
 	for (i; i < attackCapacity / 2; i++)
 	{

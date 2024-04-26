@@ -23,6 +23,8 @@ public:
 	virtual void attack(Game* gameptr);
 	virtual void print();
 	int getESCount();
+	int getETCount();
+	int getEGCount();
 	~EarthArmy();
 };
 
