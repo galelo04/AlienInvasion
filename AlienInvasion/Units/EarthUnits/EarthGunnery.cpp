@@ -15,7 +15,7 @@ void EarthGunnery::Attack(Game* gameptr)
 
 	Unit* attackedUnit = nullptr;
 
-	for (int i = 0; i < attackcapacity ; i++)
+	for (int i = 0; i < attackcapacity / 2; i++)
 	{
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Monster);
 		if (attackedUnit)
@@ -26,32 +26,36 @@ void EarthGunnery::Attack(Game* gameptr)
 				gameptr->addToKilledList(attackedUnit);
 			else
 				AMtemplist.add(attackedUnit);
-			i++;
-		}
-	
-		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);
-		if (attackedUnit)
-		{
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
-			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
-			else
-				ADtemplist.enqueue(attackedUnit);
-			i++;
-		}
-
-		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);
-		if (attackedUnit)
-		{
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
-			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
-			else
-				ADtemplist.enqueue(attackedUnit);
 		}
 	}
+
+		for (int i = 0; i < attackcapacity - (attackcapacity / 2); i++)
+		{
+
+			attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);
+			if (attackedUnit)
+			{
+				int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+				attackedUnit->decrementHealth(damage);
+				if (attackedUnit->getHealth() <= 0)
+					gameptr->addToKilledList(attackedUnit);
+				else
+					ADtemplist.enqueue(attackedUnit);
+				i++;
+			}
+
+			attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);
+			if (attackedUnit)
+			{
+				int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+				attackedUnit->decrementHealth(damage);
+				if (attackedUnit->getHealth() <= 0)
+					gameptr->addToKilledList(attackedUnit);
+				else
+					ADtemplist.enqueue(attackedUnit);
+			}
+		}
+	
 
 	if (AMtemplist.getcount() > 0)
 	{
