@@ -23,5 +23,6 @@ public:
 	virtual void print();
 	int getASCount();
 	int getADCount();
+	int getAMCount();
 	~AlienArmy();
 };

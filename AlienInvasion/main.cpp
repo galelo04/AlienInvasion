@@ -5,5 +5,6 @@ int main()
 {
 	Game game;
 	game.instantiateGame();
-	while (game.timeStep() != 51);
+	while (game.timeStep() != 40);
+	game.EndGame();
 }

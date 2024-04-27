@@ -6,7 +6,7 @@ using namespace std;
 
 
 
-Game::Game() 
+Game::Game() :killedAD(0),killedAM(0),killedAS(0),killedEG(0),killedES(0),killedET(0)
 {
 	srand((unsigned)time(NULL));
 	earthArmy = new EarthArmy;
@@ -117,8 +117,108 @@ void Game::printKilledlist()
 
 void Game::addToKilledList(Unit* unit)
 {
-	if(unit)
-	killedlist.enqueue(unit);
+	if (unit)
+	{
+		unit->setTd(getCrntTimeStep());
+		killedlist.enqueue(unit);
+
+		switch (unit->getType())
+		{
+		case UnitType::EarthSoldier:
+		{
+			killedES++;
+			break;
+		}
+		case UnitType::Gunnery:
+		{
+			killedEG++;
+			break;
+		}
+		case UnitType::Tank:
+		{
+			killedET++;
+			break;
+		}
+		case UnitType::AlienSoldier:
+		{
+			killedAS++;
+			break;
+		}
+		case UnitType::Drone:
+		{
+			killedAD++;
+			break;
+		}
+		case UnitType::Monster:
+		{
+			killedAM++;
+			break;
+		}
+		default:
+		{
+			break;
+		}
+		}
+	}
+}
+
+void Game::loadOutputs(string filename)
+{
+	ofstream outFile;
+	outFile.open("InputFiles\\" + filename + ".txt");
+	if (outFile.is_open())
+	{
+		Unit* unit;
+		while (killedlist.dequeue(unit))
+		{
+			outFile << "Td\t" << "ID\t" << "Tj\t" << "Df\t" << "Dd\t" << "Db\t" << endl;
+			outFile << unit->getTd() << "\t" << unit->getID() << "\t" << unit->getJoinTime() << "\t" << unit->getDf() << "\t" << unit->getDd() << "\t" << unit->getDb() << "\t";
+		}
+		outFile << "Battle result: \t";
+		int EArmyCount = earthArmy->getEGCount() + earthArmy->getESCount() + earthArmy->getETCount();
+		int AArmyCount = alienArmy->getADCount() + alienArmy->getAMCount() + alienArmy->getASCount();
+		if (EArmyCount > AArmyCount)
+			outFile << "Win" << endl;
+		else if (EArmyCount < AArmyCount)
+			outFile << "Loss" << endl;
+		else
+			outFile << "Drawn" << endl;
+
+		outFile << "For Earth Army:" << endl;
+		outFile << "\t - ( ES_Total : " << earthArmy->getESCount() + killedES;
+		outFile << " , EG_Total : " << earthArmy->getEGCount() + killedEG ;
+		outFile << " , ET_Total : " << earthArmy->getETCount() + killedET <<" )"<< endl;
+		
+
+	}
+	else
+	{
+		HANDLE console_color;
+		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(console_color, 12);
+		system("cls");
+		cout << "make sure of the name of the file and dont put .txt\n";
+		EndGame();
+	}
+	outFile.close();
+}
+
+int Game::getCrntTimeStep()
+{
+	return TimeStep;
+}
+
+void Game::EndGame()
+{
+	HANDLE console_color;
+	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(console_color, 8);
+
+	cout << "please enter the Output file name " << endl;
+	string filename;
+	SetConsoleTextAttribute(console_color, 7);
+	cin >> filename;
+	loadParams(filename);
 }
 
 Game::~Game()

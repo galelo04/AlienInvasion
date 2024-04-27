@@ -1,5 +1,6 @@
 #include "AlienArmy.h"
 #include <Windows.h>
+#include "../../Game.h"
 
 
 AlienArmy::AlienArmy()
@@ -94,21 +95,38 @@ Unit* AlienArmy::removeUnit(UnitType type)
 void AlienArmy::attack(Game* gameptr)
 {
 	Unit* unitAttacking = nullptr;
-	/*AlienSoldiers.peek(unitAttacking);
+	AlienSoldiers.peek(unitAttacking);
 	if (unitAttacking)
+	{
 		unitAttacking->Attack(gameptr);
+		unitAttacking->incrementnumAttacks();
+		if (unitAttacking->getnumAttacks() == 1)
+			unitAttacking->setTa(gameptr->getCrntTimeStep());
+	}
 	if (AlienDrones.getCount() >= 2)
 	{
 		AlienDrones.peek(unitAttacking);
-		if (unitAttacking)
+		if (unitAttacking) {
 			unitAttacking->Attack(gameptr);
+			unitAttacking->incrementnumAttacks();
+			if (unitAttacking->getnumAttacks() == 1)
+				unitAttacking->setTa(gameptr->getCrntTimeStep());
+		}
 		AlienDrones.peekrear(unitAttacking);
-		if (unitAttacking)
+		if (unitAttacking) {
 			unitAttacking->Attack(gameptr);
-	}*/
+			unitAttacking->incrementnumAttacks();
+			if (unitAttacking->getnumAttacks() == 1)
+				unitAttacking->setTa(gameptr->getCrntTimeStep());
+		}
+	}
 	AlienMonsters.peekRandomly(unitAttacking);
-	if (unitAttacking)
+	if (unitAttacking) {
 		unitAttacking->Attack(gameptr);
+		unitAttacking->incrementnumAttacks();
+		if (unitAttacking->getnumAttacks() == 1)
+			unitAttacking->setTa(gameptr->getCrntTimeStep());
+	}
 }
 
 void AlienArmy::print()
@@ -135,6 +153,11 @@ int AlienArmy::getASCount()
 int AlienArmy::getADCount()
 {
 	return AlienDrones.getCount();
+}
+
+int AlienArmy::getAMCount()
+{
+	return AlienMonsters.getcount();
 }
 
 AlienArmy::~AlienArmy()
