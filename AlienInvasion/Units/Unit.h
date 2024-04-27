@@ -25,6 +25,7 @@ private:
 	int Power;
 	int AttackCapacity;
 	int numAttacks;
+	int intialHealth;
 protected:
 	static int last_Earth_Id;
 	static int last_Alien_Id;
@@ -48,6 +49,7 @@ public:
 	virtual int getPower() const;
 	virtual int getAttackCapacity() const;
 	virtual void decrementHealth(int damage);
+	virtual int getIntialHealth() const;
 	friend std::ostream& operator<<(std::ostream& stream, Unit* unit)
 	{
 		if (unit)

@@ -25,6 +25,10 @@ void AlienMonster::Attack(Game* gameptr)
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
+			else if(attackedUnit->getHealth()<.2*attackedUnit->getIntialHealth())
+			{
+				gameptr->getEarthArmy()->addToUML(attackedUnit);
+			}
 			else
 				ETtemplist.push(attackedUnit);
 			i++;
@@ -36,6 +40,10 @@ void AlienMonster::Attack(Game* gameptr)
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
+			else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
+			{
+				gameptr->getEarthArmy()->addToUML(attackedUnit);
+			}
 			else
 				EStemplist.enqueue(attackedUnit);
 			i++;

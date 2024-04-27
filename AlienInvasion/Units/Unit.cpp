@@ -5,7 +5,7 @@ int Unit::last_Earth_Id = 1;
 int Unit::last_Alien_Id = 2000;
 
 Unit::Unit(UnitType type, int id, int jointime, int health, int power, int attackcapacity)
-    :ID(id) ,Type(type) , JoinTime(jointime) , Health(health) , Power(power) , AttackCapacity(attackcapacity), numAttacks(0)
+    :ID(id) ,Type(type) , JoinTime(jointime) , Health(health) , Power(power) , AttackCapacity(attackcapacity), numAttacks(0),intialHealth(health)
 {
 }
 
@@ -87,5 +87,10 @@ int Unit::getAttackCapacity() const
 void Unit::decrementHealth(int damage)
 {
     Health -= damage;
+}
+
+int Unit::getIntialHealth() const
+{
+    return intialHealth;
 }
 

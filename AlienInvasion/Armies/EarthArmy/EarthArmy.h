@@ -22,6 +22,7 @@ public:
 	virtual Unit* removeUnit(UnitType type);
 	virtual void attack(Game* gameptr);
 	virtual void print();
+	virtual void addToUML(Unit* unit);
 	int getESCount();
 	int getETCount();
 	int getEGCount();

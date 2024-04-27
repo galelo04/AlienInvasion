@@ -127,6 +127,24 @@ void EarthArmy::print()
 	EarthGunneries.printlist();
 }
 
+void EarthArmy::addToUML(Unit* unit)
+{
+	switch (unit->getType())
+	{
+	case UnitType::EarthSoldier:
+	{
+		UMLsoldiers.enqueue(unit,-unit->getHealth());
+		break;
+	}
+	case UnitType::Tank:
+	{
+		UMLtanks.enqueue(unit);
+	}
+	default:
+		break;
+	}
+}
+
 int EarthArmy::getESCount()
 {
 	return EarthSoldiers.getCount();
