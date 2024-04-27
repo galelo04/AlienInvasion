@@ -16,40 +16,40 @@ void AlienDrone::Attack(Game* gameptr)
 	int attackCapacity = getAttackCapacity();
 	int i = 0;
 	int pri = 0;
-
-	for (i; i < attackCapacity / 2; i++)
+	while (i < attackCapacity && (gameptr->getEarthArmy()->getEGCount() > 0 || gameptr->getEarthArmy()->getETCount() > 0))
 	{
-		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Gunnery);
+		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::Tank);
 		if (attackedUnit)
 		{
 			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
-			else
+			else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
 			{
-				pri = attackedUnit->getHealth() + attackedUnit->getPower();
-				EGtemplist.enqueue(attackedUnit, pri);
+				gameptr->getEarthArmy()->addToUML(attackedUnit);
 			}
+			else
+				ETtemplist.push(attackedUnit);
+			i++;
 		}
-		else
-			break;
-	}
-
-
-	for (i; i < attackCapacity; i++)
-	{
-		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Tank);
+		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::Gunnery);
 		if (attackedUnit)
 		{
 			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
+			else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
+			{
+				gameptr->getEarthArmy()->addToUML(attackedUnit);
+			}
 			else
-				ETtemplist.pop(attackedUnit);
+				EGtemplist.enqueue(attackedUnit, pri);
+			i++;
 		}
 	}
+	
 
 	if (EGtemplist.getCount() > 0)
 	{
@@ -67,3 +67,42 @@ void AlienDrone::Attack(Game* gameptr)
 		gameptr->getAlienArmy()->addUnit(attackedUnit);
 
 }
+
+//
+//for (i; i < attackCapacity / 2; i++)
+//{
+//	attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Gunnery);
+//	if (attackedUnit)
+//	{
+//		int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+//		attackedUnit->decrementHealth(damage);
+//		if (attackedUnit->getHealth() <= 0)
+//			gameptr->addToKilledList(attackedUnit);
+// else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
+//{
+//	gameptr->getEarthArmy()->addToUML(attackedUnit);
+//}
+//		else
+//		{
+//			pri = attackedUnit->getHealth() + attackedUnit->getPower();
+//			EGtemplist.enqueue(attackedUnit, pri);
+//		}
+//	}
+//	else
+//		break;
+//}
+//
+//
+//for (i; i < attackCapacity; i++)
+//{
+//	attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Tank);
+//	if (attackedUnit)
+//	{
+//		int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+//		attackedUnit->decrementHealth(damage);
+//		if (attackedUnit->getHealth() <= 0)
+//			gameptr->addToKilledList(attackedUnit);
+//		else
+//			ETtemplist.pop(attackedUnit);
+//	}
+//}
