@@ -29,7 +29,10 @@ void AlienDrone::Attack(Game* gameptr)
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
 			else
+			{
+				pri = attackedUnit->getHealth() + attackedUnit->getPower();
 				EGtemplist.enqueue(attackedUnit, pri);
+			}
 		}
 		else
 			break;
