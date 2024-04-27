@@ -15,7 +15,7 @@ void EarthGunnery::Attack(Game* gameptr)
 
 	Unit* attackedUnit = nullptr;
 
-	for (int i = 0; i < attackcapacity / 2; i++)
+	for (int i = 0; i < attackcapacity ; i++)
 	{
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Monster);
 		if (attackedUnit)
@@ -26,11 +26,9 @@ void EarthGunnery::Attack(Game* gameptr)
 				gameptr->addToKilledList(attackedUnit);
 			else
 				AMtemplist.add(attackedUnit);
+			i++;
 		}
-	}
-
-	for (int i = 0; i < attackcapacity-(attackcapacity / 2); i++)
-	{
+	
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);
 		if (attackedUnit)
 		{
@@ -42,6 +40,7 @@ void EarthGunnery::Attack(Game* gameptr)
 				ADtemplist.enqueue(attackedUnit);
 			i++;
 		}
+
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);
 		if (attackedUnit)
 		{
@@ -65,9 +64,9 @@ void EarthGunnery::Attack(Game* gameptr)
 		ADtemplist.printlist();
 	}
 	while (AMtemplist.remove(attackedUnit))
-		gameptr->getEarthArmy()->addUnit(attackedUnit);
+		gameptr->getAlienArmy()->addUnit(attackedUnit);
 	while (ADtemplist.dequeue(attackedUnit))
-		gameptr->getEarthArmy()->addUnit(attackedUnit);
+		gameptr->getAlienArmy()->addUnit(attackedUnit);
 }
 
 int EarthGunnery::getPri()
