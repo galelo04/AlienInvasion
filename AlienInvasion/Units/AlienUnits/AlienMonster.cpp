@@ -15,7 +15,8 @@ void AlienMonster::Attack(Game* gameptr)
 	ArrayStack<Unit*>ETtemplist;
 	int attackcapacity = getAttackCapacity();
 	Unit* attackedUnit = nullptr;
-	for (int i = 0; i < attackcapacity/2; i++)
+	int i = 0;
+	while (i < attackcapacity && (gameptr->getEarthArmy()->getESCount() >0 || gameptr->getEarthArmy()->getETCount() > 0))
 	{
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::Tank);
 		if (attackedUnit)
@@ -26,10 +27,8 @@ void AlienMonster::Attack(Game* gameptr)
 				gameptr->addToKilledList(attackedUnit);
 			else
 				ETtemplist.push(attackedUnit);
+			i++;
 		}
-	}
-	for (int i = 0; i < attackcapacity / 2; i++)
-	{
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::EarthSoldier);
 		if (attackedUnit)
 		{
@@ -39,6 +38,7 @@ void AlienMonster::Attack(Game* gameptr)
 				gameptr->addToKilledList(attackedUnit);
 			else
 				EStemplist.enqueue(attackedUnit);
+			i++;
 		}
 	}
 	if (EStemplist.getCount() > 0)
@@ -56,3 +56,46 @@ void AlienMonster::Attack(Game* gameptr)
 	while (EStemplist.dequeue(attackedUnit))
 		gameptr->getEarthArmy()->addUnit(attackedUnit);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//int attackedSoldiers = min(getAttackCapacity() / 2, gameptr->getEarthArmy()->getESCount());
+//int attackedTanks = getAttackCapacity() - attackedSoldiers;
+//attackedSoldiers = getAttackCapacity() - attackedTanks;
+//for (int i = 0; i < attackedTanks; i++)
+//{
+//	attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::Tank);
+//	if (attackedUnit)
+//	{
+//		int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+//		attackedUnit->decrementHealth(damage);
+//		if (attackedUnit->getHealth() <= 0)
+//			gameptr->addToKilledList(attackedUnit);
+//		else
+//			ETtemplist.push(attackedUnit);
+//	}
+//}
+//for (int i = 0; i < attackedSoldiers; i++)
+//{
+//	attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::EarthSoldier);
+//	if (attackedUnit)
+//	{
+//		int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+//		attackedUnit->decrementHealth(damage);
+//		if (attackedUnit->getHealth() <= 0)
+//			gameptr->addToKilledList(attackedUnit);
+//		else
+//			EStemplist.enqueue(attackedUnit);
+//	}
+//}

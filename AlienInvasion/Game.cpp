@@ -6,7 +6,7 @@ using namespace std;
 
 
 
-Game::Game() :killedAD(0),killedAM(0),killedAS(0),killedEG(0),killedES(0),killedET(0)
+Game::Game()
 {
 	srand((unsigned)time(NULL));
 	earthArmy = new EarthArmy;
@@ -27,7 +27,6 @@ EarthArmy*& Game::getEarthArmy()
 
 void Game::instantiateGame()
 {
-	
 	HANDLE console_color;
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console_color, 8);
@@ -41,10 +40,9 @@ void Game::instantiateGame()
 
 void Game::loadParams(string filename)
 {
-	
 	ifstream inFile;
 	inFile.open("InputFiles\\"+filename+".txt");
-
+	int Params[21];
 	if (inFile.is_open())
 	{
 		inFile >> Params[0];                            // [0]=>N
@@ -62,7 +60,6 @@ void Game::loadParams(string filename)
 		Params[18] = Params[18] * -1;
 		Params[20] = Params[20] * -1;
 		inFile.close();
-
 		generator->getparameters(Params);
 	}
 	else
@@ -74,17 +71,23 @@ void Game::loadParams(string filename)
 		cout << "make sure of the name of the file and dont put .txt\n";
 		instantiateGame();
 	}
-	
 }
 
-int* Game::getParams() 
-{
-	return Params;
-}
-
-void Game::battle()
+int Game::battle()
 {
 	generator->generateUnits(TimeStep);
+	printStatus();
+	cout << "==============  Units fighting at current step ===============\n";
+	earthArmy->attack(this);
+	alienArmy->attack(this);
+	printKilledlist();
+	HANDLE console_color;
+	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(console_color, 9);
+	system("pause");
+	//system("cls");
+	generator->generateUnits(TimeStep++);
+	return TimeStep;
 }
 
 void Game::printStatus()
@@ -97,10 +100,7 @@ void Game::printStatus()
 
 	SetConsoleTextAttribute(console_color, 15);
 	earthArmy->print();
-	alienArmy->print();
-
-	
-	
+	alienArmy->print();	
 }
 
 void Game::printKilledlist()
@@ -119,46 +119,8 @@ void Game::addToKilledList(Unit* unit)
 {
 	if (unit)
 	{
-		unit->setTd(getCrntTimeStep());
+		unit->setTd(TimeStep);
 		killedlist.enqueue(unit);
-
-		switch (unit->getType())
-		{
-		case UnitType::EarthSoldier:
-		{
-			killedES++;
-			break;
-		}
-		case UnitType::Gunnery:
-		{
-			killedEG++;
-			break;
-		}
-		case UnitType::Tank:
-		{
-			killedET++;
-			break;
-		}
-		case UnitType::AlienSoldier:
-		{
-			killedAS++;
-			break;
-		}
-		case UnitType::Drone:
-		{
-			killedAD++;
-			break;
-		}
-		case UnitType::Monster:
-		{
-			killedAM++;
-			break;
-		}
-		default:
-		{
-			break;
-		}
-		}
 	}
 }
 
@@ -169,11 +131,51 @@ void Game::loadOutputs(string filename)
 	if (outFile.is_open())
 	{
 		Unit* unit;
+		int killedES, killedEG, killedET;
+		int killedAS, killedAD, killedAM;
 		while (killedlist.dequeue(unit))
 		{
+			switch (unit->getType())
+			{
+			case UnitType::EarthSoldier:
+			{
+				killedES++;
+				break;
+			}
+			case UnitType::Gunnery:
+			{
+				killedEG++;
+				break;
+			}
+			case UnitType::Tank:
+			{
+				killedET++;
+				break;
+			}
+			case UnitType::AlienSoldier:
+			{
+				killedAS++;
+				break;
+			}
+			case UnitType::Drone:
+			{
+				killedAD++;
+				break;
+			}
+			case UnitType::Monster:
+			{
+				killedAM++;
+				break;
+			}
+			default:
+			{
+				break;
+			}
+			}
 			outFile << "Td\t" << "ID\t" << "Tj\t" << "Df\t" << "Dd\t" << "Db\t" << endl;
 			outFile << unit->getTd() << "\t" << unit->getID() << "\t" << unit->getJoinTime() << "\t" << unit->getDf() << "\t" << unit->getDd() << "\t" << unit->getDb() << "\t";
 		}
+
 		outFile << "Battle result: \t";
 		int EArmyCount = earthArmy->getEGCount() + earthArmy->getESCount() + earthArmy->getETCount();
 		int AArmyCount = alienArmy->getADCount() + alienArmy->getAMCount() + alienArmy->getASCount();
@@ -188,8 +190,6 @@ void Game::loadOutputs(string filename)
 		outFile << "\t - ( ES_Total : " << earthArmy->getESCount() + killedES;
 		outFile << " , EG_Total : " << earthArmy->getEGCount() + killedEG ;
 		outFile << " , ET_Total : " << earthArmy->getETCount() + killedET <<" )"<< endl;
-		
-
 	}
 	else
 	{
@@ -213,12 +213,11 @@ void Game::EndGame()
 	HANDLE console_color;
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console_color, 8);
-
 	cout << "please enter the Output file name " << endl;
 	string filename;
 	SetConsoleTextAttribute(console_color, 7);
 	cin >> filename;
-	loadParams(filename);
+	loadOutputs(filename);
 }
 
 Game::~Game()
@@ -226,22 +225,5 @@ Game::~Game()
 	delete generator;
 	delete alienArmy;
 	delete earthArmy;
-}
-
-int Game::timeStep()
-{
-	generator->generateUnits(TimeStep);
-	printStatus();
-	cout << "==============  Units fighting at current step ===============\n";
-	earthArmy->attack(this);
-	alienArmy->attack(this);
-	printKilledlist();
-	HANDLE console_color;
-	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(console_color, 9);
-	system("pause");
-	//system("cls");
-	generator->generateUnits(TimeStep++);
-	return TimeStep;
 }
 

@@ -7,23 +7,18 @@ class randGen;
 class Game
 {
 private:
-	int Params[21];
 	int TimeStep;
 	AlienArmy * alienArmy;
 	EarthArmy * earthArmy;
 	randGen * generator;
 	LinkedQueue <Unit* > killedlist;
-	int killedES, killedEG, killedET;
-	int killedAS, killedAD, killedAM;
 public:
 	Game();
 	AlienArmy*& getAlienArmy() ;
 	EarthArmy*& getEarthArmy() ;
 	void instantiateGame();
 	void loadParams(string filename);
-	int* getParams();
-	int timeStep();
-	void battle();
+	int battle();
 	void printStatus();
 	void printKilledlist();
 	void addToKilledList(Unit* unit);
