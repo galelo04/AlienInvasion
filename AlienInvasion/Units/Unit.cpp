@@ -5,7 +5,7 @@ int Unit::last_Earth_Id = 1;
 int Unit::last_Alien_Id = 2000;
 
 Unit::Unit(UnitType type, int id, int jointime, int health, int power, int attackcapacity)
-    :ID(id) ,Type(type) , JoinTime(jointime) , Health(health) , Power(power) , AttackCapacity(attackcapacity), numAttacks(0),intialHealth(health)
+    :ID(id) ,Type(type) , JoinTime(jointime) , Health(health) , Power(power) , AttackCapacity(attackcapacity), makeAttack(false), intialHealth(health)
 {
 }
 
@@ -24,49 +24,34 @@ int Unit::getJoinTime() const
     return JoinTime;
 }
 
-int Unit::getTa() const
+int Unit::getFirstAttackTime() const
 {
     return firstAttackTime;
 }
 
-void Unit::setTa(int Ta)
+void Unit::setFirstAttackTime(int Ta)
 {
     firstAttackTime = Ta;
 }
 
-int Unit::getTd() const
+int Unit::getDestructionTime() const
 {
     return DestructionTime;
 }
 
-void Unit::setTd(int Td)
+void Unit::setDestructionTime(int Td)
 {
     DestructionTime = Td;
 }
 
-int Unit::getDf() const
+bool Unit::getmakeAttack() const
 {
-    return (getTa() - getJoinTime());
+    return makeAttack;
 }
 
-int Unit::getDd() const
+void Unit::setmakeAttack(bool makeatt)
 {
-    return (getTd() - getTa());
-}
-
-int Unit::getDb() const
-{
-    return (getDf() + getDd());
-}
-
-int Unit::getnumAttacks() const
-{
-    return numAttacks;
-}
-
-void Unit::incrementnumAttacks()
-{
-    numAttacks++;
+    makeAttack = makeatt;
 }
 
 int Unit::getHealth() const

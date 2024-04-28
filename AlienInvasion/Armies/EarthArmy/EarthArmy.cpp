@@ -80,34 +80,45 @@ void EarthArmy::attack(Game* gameptr)
 	Unit* unitAttacking = nullptr;
 	int pri = 0;
 	EarthSoldiers.peek(unitAttacking);
-	if (unitAttacking) {
+	if (unitAttacking) 
+	{
 		unitAttacking->Attack(gameptr);
-		unitAttacking->incrementnumAttacks();
-		if(unitAttacking->getnumAttacks() == 1)
-		unitAttacking->setTa(gameptr->getCrntTimeStep());
+		if (!unitAttacking->getmakeAttack())
+		{
+			unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
+			unitAttacking->setmakeAttack(true);
+		}
 	}
 	EarthTanks.peek(unitAttacking);
-	if (unitAttacking) {
+	if (unitAttacking) 
+	{
 	unitAttacking->Attack(gameptr);
-	unitAttacking->incrementnumAttacks();
-	if (unitAttacking->getnumAttacks() == 1)
-		unitAttacking->setTa(gameptr->getCrntTimeStep());
+	if (!unitAttacking->getmakeAttack())
+	{
+		unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
+		unitAttacking->setmakeAttack(true);
 	}
-	/*EarthGunneries.peek(unitAttacking, pri);
-	if (unitAttacking){
+	}
+	EarthGunneries.peek(unitAttacking, pri);
+	if (unitAttacking) 
+	{
 		unitAttacking->Attack(gameptr);
-		unitAttacking->incrementnumAttacks();
-		if(unitAttacking->getnumAttacks() == 1)
-		unitAttacking->setTa(gameptr->getCrntTimeStep());
-		}*/
+		if (!unitAttacking->getmakeAttack())
+		{
+			unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
+			unitAttacking->setmakeAttack(true);
+		}
+	}
 	HealingList.pop(unitAttacking);
 	if (unitAttacking) 
 	{
 		unitAttacking->Attack(gameptr);
 		gameptr->addToKilledList(unitAttacking);
-		unitAttacking->incrementnumAttacks();
-		if (unitAttacking->getnumAttacks() == 1)
-			unitAttacking->setTa(gameptr->getCrntTimeStep());
+		if (!unitAttacking->getmakeAttack())
+		{
+			unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
+			unitAttacking->setmakeAttack(true);
+		}
 	}
 }
 
@@ -158,6 +169,31 @@ int EarthArmy::getETCount()
 int EarthArmy::getEGCount()
 {
 	return EarthGunneries.getCount();
+}
+
+int EarthArmy::getTotalEDf()
+{
+	int Df = 0;
+	int pri = 0;
+	Unit* unit;
+
+	while (EarthSoldiers.dequeue(unit))
+	{
+		if(unit->getmakeAttack())
+			Df += unit->getFirstAttackTime() - unit->getJoinTime();
+	}
+	while (EarthGunneries.dequeue(unit,pri))
+	{
+		if (unit->getmakeAttack())
+			Df += unit->getFirstAttackTime() - unit->getJoinTime();
+	}
+	while (EarthTanks.pop(unit))
+	{
+		if (unit->getmakeAttack())
+			Df += unit->getFirstAttackTime() - unit->getJoinTime();
+	}
+
+	return Df;
 }
 
 EarthArmy::~EarthArmy()

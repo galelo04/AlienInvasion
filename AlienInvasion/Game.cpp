@@ -119,7 +119,7 @@ void Game::addToKilledList(Unit* unit)
 {
 	if (unit)
 	{
-		unit->setTd(TimeStep);
+		unit->setDestructionTime(TimeStep);
 		killedlist.enqueue(unit);
 	}
 }
@@ -130,9 +130,13 @@ void Game::loadOutputs(string filename)
 	outFile.open("InputFiles\\" + filename + ".txt");
 	if (outFile.is_open())
 	{
+		outFile << "Td\t" << "ID\t" << "Tj\t" << "Df\t" << "Dd\t" << "Db\t" << endl;
 		Unit* unit;
-		int killedES, killedEG, killedET;
-		int killedAS, killedAD, killedAM;
+		int killedES = 0, killedEG = 0, killedET = 0;
+		int killedAS = 0, killedAD = 0, killedAM = 0;
+		int EtotalDf = 0, EtotalDd = 0, EtotalDb = 0;
+		int AtotalDf = 0, AtotalDd = 0, AtotalDb = 0;
+		
 		while (killedlist.dequeue(unit))
 		{
 			switch (unit->getType())
@@ -140,31 +144,49 @@ void Game::loadOutputs(string filename)
 			case UnitType::EarthSoldier:
 			{
 				killedES++;
+				EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+				EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+				EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			case UnitType::Gunnery:
 			{
 				killedEG++;
+				EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+				EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+				EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			case UnitType::Tank:
 			{
 				killedET++;
+				EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+				EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+				EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			case UnitType::AlienSoldier:
 			{
 				killedAS++;
+				AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+				AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+				AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			case UnitType::Drone:
 			{
 				killedAD++;
+				AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+				AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+				AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			case UnitType::Monster:
 			{
 				killedAM++;
+				AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+				AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+				AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			default:
@@ -172,10 +194,11 @@ void Game::loadOutputs(string filename)
 				break;
 			}
 			}
-			outFile << "Td\t" << "ID\t" << "Tj\t" << "Df\t" << "Dd\t" << "Db\t" << endl;
-			outFile << unit->getTd() << "\t" << unit->getID() << "\t" << unit->getJoinTime() << "\t" << unit->getDf() << "\t" << unit->getDd() << "\t" << unit->getDb() << "\t";
+			
+			outFile << unit->getDestructionTime() << "\t" << unit->getID() << "\t" << unit->getJoinTime() << "\t" << unit->getFirstAttackTime() - unit->getJoinTime() << "\t" << unit->getDestructionTime() - unit->getFirstAttackTime() << "\t" << unit->getDestructionTime() - unit->getJoinTime() << endl;
 		}
 
+		outFile << endl;
 		outFile << "Battle result: \t";
 		int EArmyCount = earthArmy->getEGCount() + earthArmy->getESCount() + earthArmy->getETCount();
 		int AArmyCount = alienArmy->getADCount() + alienArmy->getAMCount() + alienArmy->getASCount();
@@ -186,10 +209,29 @@ void Game::loadOutputs(string filename)
 		else
 			outFile << "Drawn" << endl;
 
+		int ES_Total = earthArmy->getESCount() + killedES;
+		int EG_Total = earthArmy->getEGCount() + killedEG;
+		int ET_Total = earthArmy->getETCount() + killedET;
 		outFile << "For Earth Army:" << endl;
-		outFile << "\t - ( ES_Total : " << earthArmy->getESCount() + killedES;
-		outFile << " , EG_Total : " << earthArmy->getEGCount() + killedEG ;
-		outFile << " , ET_Total : " << earthArmy->getETCount() + killedET <<" )"<< endl;
+		outFile << "\t - ES_Total : " << ES_Total << " , EG_Total : " << EG_Total << " , ET_Total : "<< ET_Total << endl;
+		outFile << "\t - DestructedES % : " << killedES * 100 / ES_Total<<"%"<< " , DestructedEG % : " << killedEG * 100 / EG_Total << "%" << " , DestructedET %: " << killedET * 100 / ET_Total << "%" << endl;
+		outFile << "\t - DestructedEU % : " << (killedES + killedEG + killedET)  * 100 / (ES_Total + EG_Total + ET_Total) << "%" << endl;
+		outFile << "\t - Av Df : " << ( EtotalDf + earthArmy->getTotalEDf() )/(ES_Total + EG_Total + ET_Total) << " , Av Dd : " << EtotalDd / (killedES + killedEG + killedET) << " , Av Db : " << EtotalDb / (killedES + killedEG + killedET) << endl;
+		outFile << "\t - Df/Db % : " << EtotalDf * 100 / EtotalDb << "%" << " , Dd/Db % : " << EtotalDd * 100 / EtotalDb << "%" << endl;
+
+
+		outFile << endl;
+		
+		int AS_Total = alienArmy->getASCount() + killedAS;
+		int AD_Total = alienArmy->getADCount() + killedAD;
+		int AM_Total = alienArmy->getAMCount() + killedAM;
+		outFile << "For Alien Army:" << endl;
+		outFile << "\t - AS_Total : " << AS_Total << " , AD_Total : " << AD_Total << " , AM_Total : " << AM_Total << endl;
+		outFile << "\t - DestructedAS % : " << killedAS * 100 / AS_Total << "%" << " , DestructedAD % : " << killedAD * 100 / AD_Total << "%" << " , DestructedAM %: " << killedAM * 100 / AM_Total << "%" << endl;
+		outFile << "\t - DestructedAU % : " << (killedAS + killedAD + killedAM) * 100 / (AS_Total + AD_Total + AM_Total) << "%" << endl;
+		outFile << "\t - Av Df : " << ( AtotalDf + alienArmy->getTotalADf() )/ (AS_Total + AD_Total + AM_Total) << " , Av Dd : " << AtotalDd / (killedAS + killedAD + killedAM) << " , Av Db : " << AtotalDb / (killedAS + killedAD + killedAM) << endl;
+		outFile << "\t - Df/Db % : " << AtotalDf * 100 / AtotalDb << "%" << " , Dd/Db % : " << AtotalDd * 100 / AtotalDb << "%" << endl;
+
 	}
 	else
 	{
