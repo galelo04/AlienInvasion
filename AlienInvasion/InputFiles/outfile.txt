@@ -1,5 +1,0 @@
-Td	ID	Tj	Df	Dd	Db	
-
-Battle result: 	Drawn
-For Earth Army:
-	 - ES_Total : 0 , EG_Total : 0 , ET_Total : 0
