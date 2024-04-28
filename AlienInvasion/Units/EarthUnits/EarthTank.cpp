@@ -29,10 +29,6 @@ void EarthTank::Attack(Game* gameptr)
 				attackedUnit->decrementHealth(damage);
 				if (attackedUnit->getHealth() <= 0)
 					gameptr->addToKilledList(attackedUnit);
-				else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
-				{
-					gameptr->getEarthArmy()->addToUML(attackedUnit);
-				}
 				else
 					AStemplist.enqueue(attackedUnit);
 			}
@@ -63,7 +59,7 @@ void EarthTank::Attack(Game* gameptr)
 	if (AMtemplist.getcount() > 0)
 	{
 		cout << "ET " << getID() << " shots Monsters ";
-		AMtemplist.printlist();
+		AStemplist.printlist();
 	}
 	while (AStemplist.dequeue(attackedUnit))
 		gameptr->getAlienArmy()->addUnit(attackedUnit);

@@ -24,6 +24,5 @@ public:
 	int getASCount();
 	int getADCount();
 	int getAMCount();
-	int getTotalADf();
 	~AlienArmy();
 };
