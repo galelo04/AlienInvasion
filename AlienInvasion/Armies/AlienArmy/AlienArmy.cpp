@@ -99,10 +99,10 @@ void AlienArmy::attack(Game* gameptr)
 	if (unitAttacking)
 	{
 		unitAttacking->Attack(gameptr);
-		if (!unitAttacking->getmakeAttack())
+		if (!unitAttacking->didAttack())
 		{
 			unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
-			unitAttacking->setmakeAttack(true);
+			unitAttacking->makeAttack(true);
 		}
 	}
 	if (AlienDrones.getCount() >= 2)
@@ -111,20 +111,20 @@ void AlienArmy::attack(Game* gameptr)
 		if (unitAttacking) 
 		{
 			unitAttacking->Attack(gameptr);
-			if (!unitAttacking->getmakeAttack())
+			if (!unitAttacking->didAttack())
 			{
 				unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
-				unitAttacking->setmakeAttack(true);
+				unitAttacking->makeAttack(true);
 			}
 		}
 		AlienDrones.peekrear(unitAttacking);
 		if (unitAttacking) 
 		{
 			unitAttacking->Attack(gameptr);
-			if (!unitAttacking->getmakeAttack())
+			if (!unitAttacking->didAttack())
 			{
 				unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
-				unitAttacking->setmakeAttack(true);
+				unitAttacking->makeAttack(true);
 			}
 		}
 	}
@@ -132,10 +132,10 @@ void AlienArmy::attack(Game* gameptr)
 	if (unitAttacking) 
 	{
 		unitAttacking->Attack(gameptr);
-		if (!unitAttacking->getmakeAttack())
+		if (!unitAttacking->didAttack())
 		{
 			unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
-			unitAttacking->setmakeAttack(true);
+			unitAttacking->makeAttack(true);
 		}
 	}
 }
@@ -178,17 +178,17 @@ int AlienArmy::getTotalADf()
 
 	while (AlienSoldiers.dequeue(unit))
 	{
-		if (unit->getmakeAttack())
+		if (unit->didAttack())
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
 	}
 	while (AlienDrones.dequeue(unit))
 	{
-		if (unit->getmakeAttack())
+		if (unit->didAttack())
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
 	}
 	while (AlienMonsters.remove(unit))
 	{
-		if (unit->getmakeAttack())
+		if (unit->didAttack())
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
 	}
 

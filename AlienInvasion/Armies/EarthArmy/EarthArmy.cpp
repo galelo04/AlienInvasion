@@ -83,30 +83,30 @@ void EarthArmy::attack(Game* gameptr)
 	if (unitAttacking) 
 	{
 		unitAttacking->Attack(gameptr);
-		if (!unitAttacking->getmakeAttack())
+		if (!unitAttacking->didAttack())
 		{
 			unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
-			unitAttacking->setmakeAttack(true);
+			unitAttacking->makeAttack(true);
 		}
 	}
 	EarthTanks.peek(unitAttacking);
 	if (unitAttacking) 
 	{
 	unitAttacking->Attack(gameptr);
-	if (!unitAttacking->getmakeAttack())
+	if (!unitAttacking->didAttack())
 	{
 		unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
-		unitAttacking->setmakeAttack(true);
+		unitAttacking->makeAttack(true);
 	}
 	}
 	EarthGunneries.peek(unitAttacking, pri);
 	if (unitAttacking) 
 	{
 		unitAttacking->Attack(gameptr);
-		if (!unitAttacking->getmakeAttack())
+		if (!unitAttacking->didAttack())
 		{
 			unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
-			unitAttacking->setmakeAttack(true);
+			unitAttacking->makeAttack(true);
 		}
 	}
 	HealingList.pop(unitAttacking);
@@ -114,10 +114,10 @@ void EarthArmy::attack(Game* gameptr)
 	{
 		unitAttacking->Attack(gameptr);
 		gameptr->addToKilledList(unitAttacking);
-		if (!unitAttacking->getmakeAttack())
+		if (!unitAttacking->didAttack())
 		{
 			unitAttacking->setFirstAttackTime(gameptr->getCrntTimeStep());
-			unitAttacking->setmakeAttack(true);
+			unitAttacking->makeAttack(true);
 		}
 	}
 }
@@ -179,17 +179,17 @@ int EarthArmy::getTotalEDf()
 
 	while (EarthSoldiers.dequeue(unit))
 	{
-		if(unit->getmakeAttack())
+		if(unit->didAttack())
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
 	}
 	while (EarthGunneries.dequeue(unit,pri))
 	{
-		if (unit->getmakeAttack())
+		if (unit->didAttack())
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
 	}
 	while (EarthTanks.pop(unit))
 	{
-		if (unit->getmakeAttack())
+		if (unit->didAttack())
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
 	}
 

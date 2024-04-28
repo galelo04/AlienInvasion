@@ -5,7 +5,7 @@ int Unit::last_Earth_Id = 1;
 int Unit::last_Alien_Id = 2000;
 
 Unit::Unit(UnitType type, int id, int jointime, int health, int power, int attackcapacity)
-    :ID(id) ,Type(type) , JoinTime(jointime) , Health(health) , Power(power) , AttackCapacity(attackcapacity), makeAttack(false), intialHealth(health)
+    :ID(id) ,Type(type) , JoinTime(jointime) , Health(health) , Power(power) , AttackCapacity(attackcapacity), Attacked(false), intialHealth(health)
 {
 }
 
@@ -44,14 +44,14 @@ void Unit::setDestructionTime(int Td)
     DestructionTime = Td;
 }
 
-bool Unit::getmakeAttack() const
+bool Unit::didAttack() const
 {
-    return makeAttack;
+    return Attacked;
 }
 
-void Unit::setmakeAttack(bool makeatt)
+void Unit::makeAttack(bool makeatt)
 {
-    makeAttack = makeatt;
+    Attacked = makeatt;
 }
 
 int Unit::getHealth() const

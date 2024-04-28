@@ -25,7 +25,7 @@ private:
 	int Power;
 	int AttackCapacity;
 	int intialHealth;
-	bool makeAttack;
+	bool Attacked;
 protected:
 	static int last_Earth_Id;
 	static int last_Alien_Id;
@@ -40,8 +40,8 @@ public:
 	virtual void setFirstAttackTime(int Ta);
 	virtual int getDestructionTime() const;
 	virtual void setDestructionTime(int Td);
-	virtual bool getmakeAttack() const;
-	virtual void setmakeAttack(bool makeatt);
+	virtual bool didAttack() const;
+	virtual void makeAttack(bool makeatt);
 	virtual int getHealth() const;
 	virtual int getPower() const;
 	virtual int getAttackCapacity() const;

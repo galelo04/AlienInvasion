@@ -138,54 +138,55 @@ void Game::loadOutputs(string filename)
 		
 		while (killedlist.dequeue(unit))
 		{
-			switch (unit->getType())
+			UnitType type = unit->getType();
+			if (type == UnitType::EarthSoldier || type == UnitType::Tank || type == UnitType::Gunnery)
+			{
+				if (unit->didAttack())
+				{
+					EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+					EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+				}
+				EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
+			}
+			if (type == UnitType::AlienSoldier || type == UnitType::Monster || type == UnitType::Drone)
+			{
+				if (unit->didAttack())
+				{
+					AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+					AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+				}
+				AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
+			}
+			switch (type)
 			{
 			case UnitType::EarthSoldier:
 			{
 				killedES++;
-				EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-				EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			case UnitType::Gunnery:
 			{
 				killedEG++;
-				EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-				EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			case UnitType::Tank:
 			{
 				killedET++;
-				EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-				EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			case UnitType::AlienSoldier:
 			{
 				killedAS++;
-				AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-				AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			case UnitType::Drone:
 			{
 				killedAD++;
-				AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-				AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			case UnitType::Monster:
 			{
 				killedAM++;
-				AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-				AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 				break;
 			}
 			default:
