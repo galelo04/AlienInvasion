@@ -42,7 +42,6 @@ void Game::loadParams(string filename)
 {
 	ifstream inFile;
 	inFile.open("InputFiles\\"+filename+".txt");
-	int Params[21];
 	if (inFile.is_open())
 	{
 		inFile >> Params[0];                            // [0]=>N

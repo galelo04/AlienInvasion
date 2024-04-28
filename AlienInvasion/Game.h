@@ -7,6 +7,7 @@ class randGen;
 class Game
 {
 private:
+	int Params[21];
 	int TimeStep;
 	AlienArmy * alienArmy;
 	EarthArmy * earthArmy;
