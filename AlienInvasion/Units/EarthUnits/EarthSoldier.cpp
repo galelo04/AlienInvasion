@@ -6,7 +6,7 @@ EarthSoldier::EarthSoldier(int jointime, int health, int power, int attackcapaci
 {
 }
 
-void EarthSoldier::Attack(Game* gameptr)
+void EarthSoldier::Attack(Game* gameptr, bool isSilent)
 {
 	LinkedQueue<Unit*>AStemplist;
 	Unit* attackedUnit = nullptr;
@@ -29,10 +29,12 @@ void EarthSoldier::Attack(Game* gameptr)
 				AStemplist.enqueue(attackedUnit);
 		}
 	}
-	if (AStemplist.getCount() > 0)
-	{
-		cout << "ES " << getID() << " shots ";
-		AStemplist.printlist();
+	if (!isSilent) {
+		if (AStemplist.getCount() > 0)
+		{
+			cout << "ES " << getID() << " shots ";
+			AStemplist.printlist();
+		}
 	}
 	while (AStemplist.dequeue(attackedUnit))
 		gameptr->getAlienArmy()->addUnit(attackedUnit);

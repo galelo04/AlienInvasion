@@ -92,31 +92,31 @@ Unit* AlienArmy::removeUnit(UnitType type)
 	return removedUnit;
 }
 
-void AlienArmy::attack(Game* gameptr)
+void AlienArmy::attack(Game* gameptr, bool isSilent)
 {
 	Unit* unitAttacking = nullptr;
 	AlienSoldiers.peek(unitAttacking);
 	if (unitAttacking)
 	{
-		unitAttacking->Attack(gameptr);
+		unitAttacking->Attack(gameptr, isSilent);
 	}
 	if (AlienDrones.getCount() >= 2)
 	{
 		AlienDrones.peek(unitAttacking);
 		if (unitAttacking) 
 		{
-			unitAttacking->Attack(gameptr);
+			unitAttacking->Attack(gameptr, isSilent);
 		}
 		AlienDrones.peekrear(unitAttacking);
 		if (unitAttacking) 
 		{
-			unitAttacking->Attack(gameptr);
+			unitAttacking->Attack(gameptr, isSilent);
 		}
 	}
 	AlienMonsters.peekRandomly(unitAttacking);
 	if (unitAttacking) 
 	{
-		unitAttacking->Attack(gameptr);
+		unitAttacking->Attack(gameptr, isSilent);
 	}
 }
 

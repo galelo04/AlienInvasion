@@ -20,7 +20,7 @@ public:
 	EarthArmy();
 	virtual void addUnit(Unit* unit);
 	virtual Unit* removeUnit(UnitType type);
-	virtual void attack(Game* gameptr);
+	virtual void attack(Game* gameptr, bool isSilent);
 	virtual void print();
 	virtual void addToUML(Unit* unit);
 	int getESCount();

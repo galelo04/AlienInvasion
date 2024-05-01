@@ -9,7 +9,7 @@ AlienMonster::AlienMonster(int jointime, int health, int power, int attackcapaci
 
 }
 
-void AlienMonster::Attack(Game* gameptr)
+void AlienMonster::Attack(Game* gameptr, bool isSilent)
 {
 	LinkedQueue<Unit*>EStemplist;
 	ArrayStack<Unit*>ETtemplist;
@@ -59,15 +59,17 @@ void AlienMonster::Attack(Game* gameptr)
 			i++;
 		}
 	}
-	if (EStemplist.getCount() > 0)
-	{
-		cout << "AM " << getID() << " shots Soldiers ";
-		EStemplist.printlist();
-	}
-	if (ETtemplist.getCount() > 0)
-	{
-		cout << "AM " << getID() << " shots Tanks ";
-		ETtemplist.printlist();
+	if (!isSilent) {
+		if (EStemplist.getCount() > 0)
+		{
+			cout << "AM " << getID() << " shots Soldiers ";
+			EStemplist.printlist();
+		}
+		if (ETtemplist.getCount() > 0)
+		{
+			cout << "AM " << getID() << " shots Tanks ";
+			ETtemplist.printlist();
+		}
 	}
 	while (ETtemplist.pop(attackedUnit))
 		gameptr->getEarthArmy()->addUnit(attackedUnit);

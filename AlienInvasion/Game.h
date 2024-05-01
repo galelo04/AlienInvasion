@@ -27,7 +27,7 @@ public:
 	void printStatus();
 	void printKilledlist();
 	void addToKilledList(Unit* unit);
-	void loadOutputs(string filename);
+	void loadOutputs();
 	int getCrntTimeStep();
 	void EndGame();
 	~Game();

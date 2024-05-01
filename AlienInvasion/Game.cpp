@@ -74,13 +74,18 @@ void Game::loadParams(string filename)
 
 int Game::battle(Mode mode)
 {
+	bool isSilent = true;
+	generator->generateUnits(TimeStep);
 	if (mode == Mode::Normal)
 	{
-		generator->generateUnits(TimeStep);
+		isSilent = false;
 		printStatus();
 		cout << "==============  Units fighting at current step ===============\n";
-		earthArmy->attack(this);
-		alienArmy->attack(this);
+	}
+	earthArmy->attack(this, isSilent);
+	alienArmy->attack(this, isSilent);
+	if (mode == Mode::Normal)
+	{
 		printKilledlist();
 		HANDLE console_color;
 		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -126,10 +131,10 @@ void Game::addToKilledList(Unit* unit)
 	}
 }
 
-void Game::loadOutputs(string filename)
+void Game::loadOutputs()
 {
 	ofstream outFile;
-	outFile.open("OutputFile\\" + filename + ".txt");
+	outFile.open("OutputFile\\outfile.txt");
 	if (outFile.is_open())
 	{
 		outFile << "Td\t" << "ID\t" << "Tj\t" << "Df\t" << "Dd\t" << "Db\t" << endl;
@@ -317,7 +322,7 @@ void Game::EndGame()
 	HANDLE console_color;
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console_color, 7);
-	loadOutputs("outfile");
+	loadOutputs();
 	cout << "Simulation ends, Output file is created" << endl;
 	SetConsoleTextAttribute(console_color, 8);
 

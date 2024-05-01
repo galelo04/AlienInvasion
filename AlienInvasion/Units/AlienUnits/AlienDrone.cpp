@@ -8,7 +8,7 @@ AlienDrone::AlienDrone(int jointime, int health, int power, int attackcapacity)
 
 }
 
-void AlienDrone::Attack(Game* gameptr)
+void AlienDrone::Attack(Game* gameptr, bool isSilent)
 {
 	ArrayStack<Unit*>ETtemplist;
 	priQueue<Unit*>EGtemplist;
@@ -60,16 +60,17 @@ void AlienDrone::Attack(Game* gameptr)
 		}
 	}
 	
-
-	if (EGtemplist.getCount() > 0)
-	{
-		cout << "ED " << getID() << " shots Gunneries ";
-		EGtemplist.printlist();
-	}
-	if (ETtemplist.getCount() > 0)
-	{
-		cout << "ED " << getID() << " shots Tanks ";
-		ETtemplist.printlist();
+	if (!isSilent) {
+		if (EGtemplist.getCount() > 0)
+		{
+			cout << "ED " << getID() << " shots Gunneries ";
+			EGtemplist.printlist();
+		}
+		if (ETtemplist.getCount() > 0)
+		{
+			cout << "ED " << getID() << " shots Tanks ";
+			ETtemplist.printlist();
+		}
 	}
 	while (EGtemplist.dequeue(attackedUnit, pri))
 		gameptr->getAlienArmy()->addUnit(attackedUnit);

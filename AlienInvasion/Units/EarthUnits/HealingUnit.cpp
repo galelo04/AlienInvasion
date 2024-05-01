@@ -5,6 +5,6 @@ HealingUnit::HealingUnit(int jointime, int health, int power, int attackcapacity
 {
 }
 
-void HealingUnit::Attack(Game* gameptr)
+void HealingUnit::Attack(Game* gameptr, bool isSilent)
 {
 }
