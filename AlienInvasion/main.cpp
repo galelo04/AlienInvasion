@@ -7,9 +7,9 @@ int main()
 	game.instantiateGame();
 	char c;
 	Mode mode;
-	cout << "For Normal Mode press Enter , For Silent Mode press 1 then Enter " << endl;
+	cout << "For Normal Mode enters 1 , For Silent Mode enters 2 " << endl;
 	cin >> c;
-	if (c == '1')
+	if (c == '2')
 		mode = Mode::Silent;
 	else
 		mode = Mode::Normal;

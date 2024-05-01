@@ -223,12 +223,12 @@ void Game::loadOutputs(string filename)
 		else
 			outFile << " , DestructedEG % : " << killedEG * 100 / EG_Total << "%";
 		if (ET_Total == 0)
-			outFile << " , DestructedET % is Undefined";
+			outFile << " , DestructedET % is Undefined" << endl;
 		else
 			outFile << " , DestructedET %: " << killedET * 100 / ET_Total << "%" << endl;
 		if ((ES_Total + EG_Total + ET_Total) == 0)
 		{
-			outFile << "\t - DestructedEU % is Undefined";
+			outFile << "\t - DestructedEU % is Undefined" << endl;
 			outFile << "\t - Av_Df is Undefined";
 		}
 		else
@@ -267,12 +267,12 @@ void Game::loadOutputs(string filename)
 		else
 			outFile << " , DestructedAD % : " << killedAD * 100 / AD_Total << "%";
 		if (AM_Total == 0)
-			outFile << " , DestructedAM % is Undefined";
+			outFile << " , DestructedAM % is Undefined" << endl;
 		else
 			outFile << " , DestructedAM %: " << killedAM * 100 / AM_Total << "%" << endl;
 		if ((AS_Total + AD_Total + AM_Total) == 0)
 		{
-			outFile << "\t - DestructedAU % is Undefined";
+			outFile << "\t - DestructedAU % is Undefined" << endl;
 			outFile << "\t - Av_Df is Undefined";
 		}
 		else
