@@ -126,7 +126,7 @@ void Game::addToKilledList(Unit* unit)
 void Game::loadOutputs(string filename)
 {
 	ofstream outFile;
-	outFile.open("InputFiles\\" + filename + ".txt");
+	outFile.open("OutputFile\\" + filename + ".txt");
 	if (outFile.is_open())
 	{
 		outFile << "Td\t" << "ID\t" << "Tj\t" << "Df\t" << "Dd\t" << "Db\t" << endl;
@@ -136,25 +136,19 @@ void Game::loadOutputs(string filename)
 		int EtotalDf = 0, EtotalDd = 0, EtotalDb = 0;
 		int AtotalDf = 0, AtotalDd = 0, AtotalDb = 0;
 		
-		while (killedlist.dequeue(unit))
+		while (killedlist.dequeue(unit) && unit->getType() != UnitType::HealingUnit)
 		{
 			UnitType type = unit->getType();
 			if (type == UnitType::EarthSoldier || type == UnitType::Tank || type == UnitType::Gunnery)
 			{
-				if (unit->IsAttacked())
-				{
-					EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-					EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				}
+				EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+				EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
 				EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 			}
 			if (type == UnitType::AlienSoldier || type == UnitType::Monster || type == UnitType::Drone)
 			{
-				if (unit->IsAttacked())
-				{
-					AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-					AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				}
+				AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+				AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
 				AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
 			}
 			switch (type)
@@ -194,11 +188,12 @@ void Game::loadOutputs(string filename)
 				break;
 			}
 			}
-			
 			outFile << unit->getDestructionTime() << "\t" << unit->getID() << "\t" << unit->getJoinTime() << "\t" << unit->getFirstAttackTime() - unit->getJoinTime() << "\t" << unit->getDestructionTime() - unit->getFirstAttackTime() << "\t" << unit->getDestructionTime() - unit->getJoinTime() << endl;
+
 		}
 
 		outFile << endl;
+
 		outFile << "Battle result: \t";
 		int EArmyCount = earthArmy->getEGCount() + earthArmy->getESCount() + earthArmy->getETCount();
 		int AArmyCount = alienArmy->getADCount() + alienArmy->getAMCount() + alienArmy->getASCount();
@@ -209,15 +204,48 @@ void Game::loadOutputs(string filename)
 		else
 			outFile << "Drawn" << endl;
 
+		outFile << endl;
+
 		int ES_Total = earthArmy->getESCount() + killedES;
 		int EG_Total = earthArmy->getEGCount() + killedEG;
 		int ET_Total = earthArmy->getETCount() + killedET;
 		outFile << "For Earth Army:" << endl;
 		outFile << "\t - ES_Total : " << ES_Total << " , EG_Total : " << EG_Total << " , ET_Total : "<< ET_Total << endl;
-		outFile << "\t - DestructedES % : " << killedES * 100 / ES_Total<<"%"<< " , DestructedEG % : " << killedEG * 100 / EG_Total << "%" << " , DestructedET %: " << killedET * 100 / ET_Total << "%" << endl;
-		outFile << "\t - DestructedEU % : " << (killedES + killedEG + killedET)  * 100 / (ES_Total + EG_Total + ET_Total) << "%" << endl;
-		outFile << "\t - Av Df : " << ( EtotalDf + earthArmy->getTotalEDf() )/(ES_Total + EG_Total + ET_Total) << " , Av Dd : " << EtotalDd / (killedES + killedEG + killedET) << " , Av Db : " << EtotalDb / (killedES + killedEG + killedET) << endl;
-		outFile << "\t - Df/Db % : " << EtotalDf * 100 / EtotalDb << "%" << " , Dd/Db % : " << EtotalDd * 100 / EtotalDb << "%" << endl;
+		if (ES_Total == 0)
+			outFile << "\t - DestructedES % is Undefined";
+		else 
+			outFile << "\t - DestructedES % : " << killedES * 100 / ES_Total << "%";
+		if (EG_Total == 0)
+			outFile << " , DestructedEG % is Undefined";
+		else
+			outFile << " , DestructedEG % : " << killedEG * 100 / EG_Total << "%";
+		if (ET_Total == 0)
+			outFile << " , DestructedET % is Undefined";
+		else
+			outFile << " , DestructedET %: " << killedET * 100 / ET_Total << "%" << endl;
+		if ((ES_Total + EG_Total + ET_Total) == 0)
+		{
+			outFile << "\t - DestructedEU % is Undefined";
+			outFile << "\t - Av_Df is Undefined";
+		}
+		else
+		{
+			outFile << "\t - DestructedEU % : " << (killedES + killedEG + killedET) * 100 / (ES_Total + EG_Total + ET_Total) << "%" << endl;
+			outFile << "\t - Av_Df : " << (EtotalDf + earthArmy->getTotalEDf()) / (ES_Total + EG_Total + ET_Total);
+		}
+		if ((killedES + killedEG + killedET) == 0)
+		{
+			outFile << " , Av_Dd is Undefined , Av_Db is Undefined" << endl;
+		}
+		else
+		{
+			outFile << " , Av_Dd : " << EtotalDd / (killedES + killedEG + killedET);
+			outFile << " , Av_Db : " << EtotalDb / (killedES + killedEG + killedET) << endl;
+		}
+		if(EtotalDb == 0)
+			outFile << "\t - Df/Db % is Undefined , Dd/Db % is Undefined" << endl;
+		else
+			outFile << "\t - Df/Db % : " << EtotalDf * 100 / EtotalDb << "%" << " , Dd/Db % : " << EtotalDd * 100 / EtotalDb << "%" << endl;
 
 
 		outFile << endl;
@@ -227,10 +255,41 @@ void Game::loadOutputs(string filename)
 		int AM_Total = alienArmy->getAMCount() + killedAM;
 		outFile << "For Alien Army:" << endl;
 		outFile << "\t - AS_Total : " << AS_Total << " , AD_Total : " << AD_Total << " , AM_Total : " << AM_Total << endl;
-		outFile << "\t - DestructedAS % : " << killedAS * 100 / AS_Total << "%" << " , DestructedAD % : " << killedAD * 100 / AD_Total << "%" << " , DestructedAM %: " << killedAM * 100 / AM_Total << "%" << endl;
-		outFile << "\t - DestructedAU % : " << (killedAS + killedAD + killedAM) * 100 / (AS_Total + AD_Total + AM_Total) << "%" << endl;
-		outFile << "\t - Av Df : " << ( AtotalDf + alienArmy->getTotalADf() )/ (AS_Total + AD_Total + AM_Total) << " , Av Dd : " << AtotalDd / (killedAS + killedAD + killedAM) << " , Av Db : " << AtotalDb / (killedAS + killedAD + killedAM) << endl;
-		outFile << "\t - Df/Db % : " << AtotalDf * 100 / AtotalDb << "%" << " , Dd/Db % : " << AtotalDd * 100 / AtotalDb << "%" << endl;
+		if (AS_Total == 0)
+			outFile << "\t - DestructedAS % is Undefined";
+		else
+			outFile << "\t - DestructedAS % : " << killedAS * 100 / AS_Total << "%";
+		if (AD_Total == 0)
+			outFile << " , DestructedAD % is Undefined";
+		else
+			outFile << " , DestructedAD % : " << killedAD * 100 / AD_Total << "%";
+		if (AM_Total == 0)
+			outFile << " , DestructedAM % is Undefined";
+		else
+			outFile << " , DestructedAM %: " << killedAM * 100 / AM_Total << "%" << endl;
+		if ((AS_Total + AD_Total + AM_Total) == 0)
+		{
+			outFile << "\t - DestructedAU % is Undefined";
+			outFile << "\t - Av_Df is Undefined";
+		}
+		else
+		{
+			outFile << "\t - DestructedAU % : " << (killedAS + killedAD + killedAM) * 100 / (AS_Total + AD_Total + AM_Total) << "%" << endl;
+			outFile << "\t - Av_Df : " << (AtotalDf + alienArmy->getTotalADf()) / (AS_Total + AD_Total + AM_Total);
+		}
+		if ((killedAS + killedAD + killedAM) == 0)
+		{
+			outFile << " , Av_Dd is Undefined , Av_Db is Undefined" << endl;
+		}
+		else
+		{
+			outFile << " , Av_Dd : " << AtotalDd / (killedAS + killedAD + killedAM);
+			outFile << " , Av_Db : " << AtotalDb / (killedAS + killedAD + killedAM) << endl;
+		}
+		if (AtotalDb == 0)
+			outFile << "\t - Df/Db % is Undefined , Dd/Db % is Undefined" << endl;
+		else
+			outFile << "\t - Df/Db % : " << AtotalDf * 100 / AtotalDb << "%" << " , Dd/Db % : " << AtotalDd * 100 / AtotalDb << "%" << endl;
 
 	}
 	else
