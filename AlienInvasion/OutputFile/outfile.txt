@@ -1,16 +1,18 @@
 Td	ID	Tj	Df	Dd	Db	
+1	4	1	1	-1	0
 
-Battle result: 	Win
+Battle result: 	Loss
 
 For Earth Army:
-	 - ES_Total : 71 , EG_Total : 0 , ET_Total : 1
-	 - DestructedES % : 0% , DestructedEG % is Undefined , DestructedET %: 0%
+	 - ES_Total : 128 , EG_Total : 0 , ET_Total : 1
+	 - DestructedES % : 0% , DestructedEG % is Undefined , DestructedET %: 100%
 	 - DestructedEU % : 0%
-	 - Av_Df : 0 , Av_Dd is Undefined , Av_Db is Undefined
+	 - Av_Df : 4 , Av_Dd : -1 , Av_Db : 0
 	 - Df/Db % is Undefined , Dd/Db % is Undefined
 
 For Alien Army:
-	 - AS_Total : 0 , AD_Total : 31 , AM_Total : 0
-	 - DestructedAS % is Undefined , DestructedAD % : 0% , DestructedAM % is Undefined	 - DestructedAU % : 0%
+	 - AS_Total : 0 , AD_Total : 183 , AM_Total : 3
+	 - DestructedAS % is Undefined , DestructedAD % : 0% , DestructedAM %: 0%
+	 - DestructedAU % : 0%
 	 - Av_Df : 0 , Av_Dd is Undefined , Av_Db is Undefined
 	 - Df/Db % is Undefined , Dd/Db % is Undefined
