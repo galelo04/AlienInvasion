@@ -4,6 +4,10 @@
 #include "Armies/EarthArmy/EarthArmy.h"
 
 class randGen;
+enum class Mode {
+	Normal,
+	Silent
+};
 class Game
 {
 private:
@@ -19,7 +23,7 @@ public:
 	EarthArmy*& getEarthArmy() ;
 	void instantiateGame();
 	void loadParams(string filename);
-	int battle();
+	int battle(Mode mode);
 	void printStatus();
 	void printKilledlist();
 	void addToKilledList(Unit* unit);

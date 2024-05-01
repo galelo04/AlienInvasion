@@ -1,42 +1,17 @@
 Td	ID	Tj	Df	Dd	Db	
-3	2014	3	0	0	0
-3	2020	3	0	0	0
-3	2017	3	0	0	0
-3	2007	2	1	0	1
-3	2	2	1	0	1
-4	2026	3	1	0	1
-4	2025	3	1	0	1
-4	14	3	1	0	1
-5	2011	2	1	2	3
-11	4	2	3	6	9
-12	6	2	4	6	10
-7	2047	6	1	0	1
-7	1	2	1	4	5
-8	2055	7	1	0	1
-8	19	7	1	0	1
-9	2034	4	4	1	5
-9	24	9	0	0	0
-10	13	3	7	0	7
-11	4	2	3	6	9
-12	2075	11	1	0	1
-12	6	2	4	6	10
-13	2083	12	1	0	1
-13	33	12	1	0	1
-14	2085	13	1	0	1
-14	2062	9	4	1	5
 
 Battle result: 	Loss
 
 For Earth Army:
-	 - ES_Total : 104 , EG_Total : 1 , ET_Total : 4
-	 - DestructedES % : 5% , DestructedEG % : 100% , DestructedET %: 100%
-	 - DestructedEU % : 10%
-	 - Av_Df : 5 , Av_Dd : 2 , Av_Db : 4
-	 - Df/Db % : 48% , Dd/Db % : 51%
+	 - ES_Total : 59 , EG_Total : 5 , ET_Total : 10
+	 - DestructedES % : 0% , DestructedEG % : 0% , DestructedET %: 0%
+	 - DestructedEU % : 0%
+	 - Av_Df : 0 , Av_Dd is Undefined , Av_Db is Undefined
+	 - Df/Db % is Undefined , Dd/Db % is Undefined
 
 For Alien Army:
-	 - AS_Total : 3 , AD_Total : 166 , AM_Total : 10
-	 - DestructedAS % : 100% , DestructedAD % : 1% , DestructedAM %: 90%
-	 - DestructedAU % : 7%
-	 - Av_Df : 0 , Av_Dd : 0 , Av_Db : 1
-	 - Df/Db % : 80% , Dd/Db % : 19%
+	 - AS_Total : 2 , AD_Total : 74 , AM_Total : 8
+	 - DestructedAS % : 0% , DestructedAD % : 0% , DestructedAM %: 0%
+	 - DestructedAU % : 0%
+	 - Av_Df : 0 , Av_Dd is Undefined , Av_Db is Undefined
+	 - Df/Db % is Undefined , Dd/Db % is Undefined

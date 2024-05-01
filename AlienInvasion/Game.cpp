@@ -72,19 +72,22 @@ void Game::loadParams(string filename)
 	}
 }
 
-int Game::battle()
+int Game::battle(Mode mode)
 {
-	generator->generateUnits(TimeStep);
-	printStatus();
-	cout << "==============  Units fighting at current step ===============\n";
-	earthArmy->attack(this);
-	alienArmy->attack(this);
-	printKilledlist();
-	HANDLE console_color;
-	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(console_color, 9);
-	system("pause");
-	//system("cls");
+	if (mode == Mode::Normal)
+	{
+		generator->generateUnits(TimeStep);
+		printStatus();
+		cout << "==============  Units fighting at current step ===============\n";
+		earthArmy->attack(this);
+		alienArmy->attack(this);
+		printKilledlist();
+		HANDLE console_color;
+		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(console_color, 9);
+		system("pause");
+		//system("cls");
+	}
 	generator->generateUnits(TimeStep++);
 	return TimeStep;
 }
@@ -313,12 +316,11 @@ void Game::EndGame()
 {
 	HANDLE console_color;
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(console_color, 8);
-	cout << "please enter the Output file name " << endl;
-	string filename;
 	SetConsoleTextAttribute(console_color, 7);
-	cin >> filename;
-	loadOutputs(filename);
+	loadOutputs("outfile");
+	cout << "Simulation ends, Output file is created" << endl;
+	SetConsoleTextAttribute(console_color, 8);
+
 }
 
 Game::~Game()
