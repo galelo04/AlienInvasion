@@ -141,7 +141,7 @@ void Game::loadOutputs(string filename)
 			UnitType type = unit->getType();
 			if (type == UnitType::EarthSoldier || type == UnitType::Tank || type == UnitType::Gunnery)
 			{
-				if (unit->didAttack())
+				if (unit->IsAttacked())
 				{
 					EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
 					EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
@@ -150,7 +150,7 @@ void Game::loadOutputs(string filename)
 			}
 			if (type == UnitType::AlienSoldier || type == UnitType::Monster || type == UnitType::Drone)
 			{
-				if (unit->didAttack())
+				if (unit->IsAttacked())
 				{
 					AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
 					AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
