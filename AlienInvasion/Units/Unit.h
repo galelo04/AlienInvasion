@@ -40,8 +40,8 @@ public:
 	virtual void setFirstAttackTime(int Ta);
 	virtual int getDestructionTime() const;
 	virtual void setDestructionTime(int Td);
-	virtual bool didAttack() const;
-	virtual void makeAttack(bool makeatt);
+	virtual bool IsAttacked() const;
+	virtual void makeAttacked(bool makeatt);
 	virtual int getHealth() const;
 	virtual int getPower() const;
 	virtual int getAttackCapacity() const;

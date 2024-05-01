@@ -44,12 +44,12 @@ void Unit::setDestructionTime(int Td)
     DestructionTime = Td;
 }
 
-bool Unit::didAttack() const
+bool Unit::IsAttacked() const
 {
     return Attacked;
 }
 
-void Unit::makeAttack(bool makeatt)
+void Unit::makeAttacked(bool makeatt)
 {
     Attacked = makeatt;
 }

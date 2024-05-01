@@ -21,6 +21,11 @@ void AlienMonster::Attack(Game* gameptr)
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::Tank);
 		if (attackedUnit)
 		{
+			if (!attackedUnit->IsAttacked())
+			{
+				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
+				attackedUnit->makeAttacked(true);
+			}
 			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
@@ -36,6 +41,11 @@ void AlienMonster::Attack(Game* gameptr)
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::EarthSoldier);
 		if (attackedUnit)
 		{
+			if (!attackedUnit->IsAttacked())
+			{
+				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
+				attackedUnit->makeAttacked(true);
+			}
 			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)

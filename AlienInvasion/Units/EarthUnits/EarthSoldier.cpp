@@ -16,6 +16,11 @@ void EarthSoldier::Attack(Game* gameptr)
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::AlienSoldier);
 		if (attackedUnit)
 		{
+			if (!attackedUnit->IsAttacked())
+			{
+				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
+				attackedUnit->makeAttacked(true);
+			}
 			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
