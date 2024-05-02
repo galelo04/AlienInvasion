@@ -5,6 +5,6 @@ class AlienMonster :
 {
 public:
     AlienMonster(int jointime , int health , int power , int attackcapacity);
-    virtual void Attack(Game* gameptr, bool isSilent);
+    virtual void Attack(Game* gameptr);
 };
 

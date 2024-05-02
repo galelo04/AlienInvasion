@@ -17,16 +17,19 @@ private:
 	EarthArmy * earthArmy;
 	randGen * generator;
 	LinkedQueue <Unit* > killedlist;
+	Mode _mode;
 public:
 	Game();
 	AlienArmy*& getAlienArmy() ;
 	EarthArmy*& getEarthArmy() ;
 	void instantiateGame();
 	void loadParams(string filename);
-	int battle(Mode mode);
+	int battle();
+	Mode getMode() const;
+	void setMode(Mode mode);
 	void printStatus();
 	void printKilledlist();
-	void addToKilledList(Unit* unit);
+	void addToKilledList(Unit*& unit);
 	void loadOutputs();
 	int getCrntTimeStep();
 	void EndGame();

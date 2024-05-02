@@ -9,7 +9,7 @@ AlienMonster::AlienMonster(int jointime, int health, int power, int attackcapaci
 
 }
 
-void AlienMonster::Attack(Game* gameptr, bool isSilent)
+void AlienMonster::Attack(Game* gameptr)
 {
 	LinkedQueue<Unit*>EStemplist;
 	ArrayStack<Unit*>ETtemplist;
@@ -59,7 +59,7 @@ void AlienMonster::Attack(Game* gameptr, bool isSilent)
 			i++;
 		}
 	}
-	if (!isSilent) {
+	if (gameptr->getMode() == Mode::Normal) {
 		if (EStemplist.getCount() > 0)
 		{
 			cout << "AM " << getID() << " shots Soldiers ";

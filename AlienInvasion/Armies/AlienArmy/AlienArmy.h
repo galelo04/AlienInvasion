@@ -19,7 +19,7 @@ public:
 	AlienArmy();
 	virtual void addUnit(Unit* unit);
 	virtual Unit* removeUnit(UnitType type );
-	virtual void attack(Game* gameptr, bool isSilent);
+	virtual void attack(Game* gameptr);
 	virtual void print();
 	int getASCount();
 	int getADCount();

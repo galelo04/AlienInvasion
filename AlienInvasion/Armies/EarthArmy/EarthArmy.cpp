@@ -75,29 +75,29 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	return removedUnit;
 }
 
-void EarthArmy::attack(Game* gameptr, bool isSilent)
+void EarthArmy::attack(Game* gameptr)
 {
 	Unit* unitAttacking = nullptr;
 	int pri = 0;
 	EarthSoldiers.peek(unitAttacking);
 	if (unitAttacking) 
 	{
-		unitAttacking->Attack(gameptr, isSilent);
+		unitAttacking->Attack(gameptr);
 	}
 	EarthTanks.peek(unitAttacking);
 	if (unitAttacking) 
 	{
-	unitAttacking->Attack(gameptr, isSilent);
+	unitAttacking->Attack(gameptr);
 	}
 	EarthGunneries.peek(unitAttacking, pri);
 	if (unitAttacking) 
 	{
-		unitAttacking->Attack(gameptr, isSilent);
+		unitAttacking->Attack(gameptr);
 	}
 	HealingList.pop(unitAttacking);
 	if (unitAttacking) 
 	{
-		unitAttacking->Attack(gameptr, isSilent);
+		unitAttacking->Attack(gameptr);
 		gameptr->addToKilledList(unitAttacking);
 	}
 }

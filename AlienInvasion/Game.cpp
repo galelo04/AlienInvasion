@@ -72,26 +72,38 @@ void Game::loadParams(string filename)
 	}
 }
 
-int Game::battle(Mode mode)
+Mode Game::getMode() const
 {
-	bool isSilent = true;
+	return _mode;
+}
+
+void Game::setMode(Mode mode)
+{
+	_mode = mode;
+}
+
+int Game::battle()
+{
 	generator->generateUnits(TimeStep);
-	if (mode == Mode::Normal)
+	if (_mode == Mode::Normal)
 	{
-		isSilent = false;
 		printStatus();
 		cout << "==============  Units fighting at current step ===============\n";
-	}
-	earthArmy->attack(this, isSilent);
-	alienArmy->attack(this, isSilent);
-	if (mode == Mode::Normal)
-	{
+	
+		earthArmy->attack(this);
+		alienArmy->attack(this);
+	
 		printKilledlist();
 		HANDLE console_color;
 		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleTextAttribute(console_color, 9);
 		system("pause");
 		//system("cls");
+	}
+	else
+	{
+		earthArmy->attack(this);
+		alienArmy->attack(this);
 	}
 	generator->generateUnits(TimeStep++);
 	return TimeStep;
@@ -122,7 +134,7 @@ void Game::printKilledlist()
 	killedlist.printlist();
 }
 
-void Game::addToKilledList(Unit* unit)
+void Game::addToKilledList(Unit*& unit)
 {
 	if (unit)
 	{

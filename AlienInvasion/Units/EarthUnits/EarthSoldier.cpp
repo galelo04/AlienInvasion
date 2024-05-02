@@ -6,7 +6,7 @@ EarthSoldier::EarthSoldier(int jointime, int health, int power, int attackcapaci
 {
 }
 
-void EarthSoldier::Attack(Game* gameptr, bool isSilent)
+void EarthSoldier::Attack(Game* gameptr)
 {
 	LinkedQueue<Unit*>AStemplist;
 	Unit* attackedUnit = nullptr;
@@ -29,7 +29,7 @@ void EarthSoldier::Attack(Game* gameptr, bool isSilent)
 				AStemplist.enqueue(attackedUnit);
 		}
 	}
-	if (!isSilent) {
+	if (gameptr->getMode() == Mode::Normal) {
 		if (AStemplist.getCount() > 0)
 		{
 			cout << "ES " << getID() << " shots ";

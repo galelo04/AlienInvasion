@@ -16,6 +16,7 @@ int main()
 	else
 		mode = Mode::Normal;
 	cout << "Simulation starts..." << endl;
-	while (game.battle(mode) != 40);
+	game.setMode(mode);
+	while (game.battle() != 40);
 	game.EndGame();
 }

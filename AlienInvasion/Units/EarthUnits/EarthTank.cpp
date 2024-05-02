@@ -6,7 +6,7 @@ EarthTank::EarthTank(int jointime, int health, int power, int attackcapacity)
 {
 }
 
-void EarthTank::Attack(Game* gameptr, bool isSilent)
+void EarthTank::Attack(Game* gameptr)
 {	
 	arrayADT<Unit*>AMtemplist;
 	LinkedQueue<Unit*>AStemplist;
@@ -64,7 +64,7 @@ void EarthTank::Attack(Game* gameptr, bool isSilent)
 				AMtemplist.add(attackedUnit);
 		}
 	}
-	if (!isSilent) {
+	if (gameptr->getMode() == Mode::Normal) {
 		if (AStemplist.getCount() > 0)
 		{
 			cout << "ET " << getID() << " shots Soldiers ";

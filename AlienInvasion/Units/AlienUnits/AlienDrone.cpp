@@ -8,7 +8,7 @@ AlienDrone::AlienDrone(int jointime, int health, int power, int attackcapacity)
 
 }
 
-void AlienDrone::Attack(Game* gameptr, bool isSilent)
+void AlienDrone::Attack(Game* gameptr)
 {
 	ArrayStack<Unit*>ETtemplist;
 	priQueue<Unit*>EGtemplist;
@@ -60,7 +60,7 @@ void AlienDrone::Attack(Game* gameptr, bool isSilent)
 		}
 	}
 	
-	if (!isSilent) {
+	if (gameptr->getMode()==Mode::Normal) {
 		if (EGtemplist.getCount() > 0)
 		{
 			cout << "ED " << getID() << " shots Gunneries ";

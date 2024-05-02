@@ -6,7 +6,7 @@ EarthGunnery::EarthGunnery(int jointime, int health, int power, int attackcapaci
 	setPri(power + health);
 }
 
-void EarthGunnery::Attack(Game* gameptr, bool isSilent)
+void EarthGunnery::Attack(Game* gameptr)
 {
 	arrayADT<Unit*>AMtemplist;
 	LinkedQueue<Unit*>ADtemplist;
@@ -71,7 +71,7 @@ void EarthGunnery::Attack(Game* gameptr, bool isSilent)
 		}
 	}
 	
-	if (!isSilent) {
+	if (gameptr->getMode() == Mode::Normal) {
 		if (AMtemplist.getcount() > 0)
 		{
 			cout << "ES " << getID() << " shots Alien Monsters ";
