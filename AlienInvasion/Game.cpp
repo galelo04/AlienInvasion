@@ -156,60 +156,61 @@ void Game::loadOutputs()
 		int EtotalDf = 0, EtotalDd = 0, EtotalDb = 0;
 		int AtotalDf = 0, AtotalDd = 0, AtotalDb = 0;
 		
-		while (killedlist.dequeue(unit, pri) && unit->getType() != UnitType::HealingUnit)
+		while (killedlist.dequeue(unit, pri))
 		{
 			UnitType type = unit->getType();
-			if (type == UnitType::EarthSoldier || type == UnitType::Tank || type == UnitType::Gunnery)
-			{
-				EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-				EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
+			if (type != UnitType::HealingUnit) {
+				if (type == UnitType::EarthSoldier || type == UnitType::Tank || type == UnitType::Gunnery)
+				{
+					EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+					EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+					EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
+				}
+				if (type == UnitType::AlienSoldier || type == UnitType::Monster || type == UnitType::Drone)
+				{
+					AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+					AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+					AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
+				}
+				switch (type)
+				{
+				case UnitType::EarthSoldier:
+				{
+					killedES++;
+					break;
+				}
+				case UnitType::Gunnery:
+				{
+					killedEG++;
+					break;
+				}
+				case UnitType::Tank:
+				{
+					killedET++;
+					break;
+				}
+				case UnitType::AlienSoldier:
+				{
+					killedAS++;
+					break;
+				}
+				case UnitType::Drone:
+				{
+					killedAD++;
+					break;
+				}
+				case UnitType::Monster:
+				{
+					killedAM++;
+					break;
+				}
+				default:
+				{
+					break;
+				}
+				}
+				outFile << unit->getDestructionTime() << "\t" << unit->getID() << "\t" << unit->getJoinTime() << "\t" << unit->getFirstAttackTime() - unit->getJoinTime() << "\t" << unit->getDestructionTime() - unit->getFirstAttackTime() << "\t" << unit->getDestructionTime() - unit->getJoinTime() << endl;
 			}
-			if (type == UnitType::AlienSoldier || type == UnitType::Monster || type == UnitType::Drone)
-			{
-				AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-				AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
-			}
-			switch (type)
-			{
-			case UnitType::EarthSoldier:
-			{
-				killedES++;
-				break;
-			}
-			case UnitType::Gunnery:
-			{
-				killedEG++;
-				break;
-			}
-			case UnitType::Tank:
-			{
-				killedET++;
-				break;
-			}
-			case UnitType::AlienSoldier:
-			{
-				killedAS++;
-				break;
-			}
-			case UnitType::Drone:
-			{
-				killedAD++;
-				break;
-			}
-			case UnitType::Monster:
-			{
-				killedAM++;
-				break;
-			}
-			default:
-			{
-				break;
-			}
-			}
-			outFile << unit->getDestructionTime() << "\t" << unit->getID() << "\t" << unit->getJoinTime() << "\t" << unit->getFirstAttackTime() - unit->getJoinTime() << "\t" << unit->getDestructionTime() - unit->getFirstAttackTime() << "\t" << unit->getDestructionTime() - unit->getJoinTime() << endl;
-
 		}
 
 		outFile << endl;
