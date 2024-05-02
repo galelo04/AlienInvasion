@@ -16,7 +16,7 @@ private:
 	AlienArmy * alienArmy;
 	EarthArmy * earthArmy;
 	randGen * generator;
-	LinkedQueue <Unit* > killedlist;
+	priQueue <Unit* > killedlist;
 	Mode _mode;
 public:
 	Game();

@@ -139,7 +139,7 @@ void Game::addToKilledList(Unit*& unit)
 	if (unit)
 	{
 		unit->setDestructionTime(TimeStep);
-		killedlist.enqueue(unit);
+		killedlist.enqueue(unit,-TimeStep);
 	}
 }
 
@@ -150,13 +150,13 @@ void Game::loadOutputs()
 	if (outFile.is_open())
 	{
 		outFile << "Td\t" << "ID\t" << "Tj\t" << "Df\t" << "Dd\t" << "Db\t" << endl;
-		Unit* unit;
+		Unit* unit;int pri = 0;
 		int killedES = 0, killedEG = 0, killedET = 0;
 		int killedAS = 0, killedAD = 0, killedAM = 0;
 		int EtotalDf = 0, EtotalDd = 0, EtotalDb = 0;
 		int AtotalDf = 0, AtotalDd = 0, AtotalDb = 0;
 		
-		while (killedlist.dequeue(unit) && unit->getType() != UnitType::HealingUnit)
+		while (killedlist.dequeue(unit, pri) && unit->getType() != UnitType::HealingUnit)
 		{
 			UnitType type = unit->getType();
 			if (type == UnitType::EarthSoldier || type == UnitType::Tank || type == UnitType::Gunnery)
@@ -328,6 +328,61 @@ int Game::getCrntTimeStep()
 {
 	return TimeStep;
 }
+
+//void Game::battleResult()
+//{
+//	int ES_Count = earthArmy->getESCount();
+//	int EG_Count = earthArmy->getEGCount();
+//	int ET_Count = earthArmy->getETCount();
+//	int AS_Count = alienArmy->getASCount();
+//	int AD_Count = alienArmy->getADCount();
+//	int AM_Count = alienArmy->getAMCount();
+//
+//	if (ES_Count > 0 && EG_Count == 0 && ET_Count == 0)
+//	{
+//		if (AM_Count > 0)
+//		{
+//			cout << "Loss";
+//			return;
+//		}
+//		else if(AS_Count == 0 && AD_Count == 0)
+//		{
+//			cout << "Win";
+//			return;
+//		}
+//		else
+//		{
+//			cout << "Drawn";
+//			return;
+//		}
+//	}
+//	else if (ES_Count > 0 && EG_Count > 0 && ET_Count == 0)
+//	{
+//		if (AD_Count <= 1  && AS_Count == 0)
+//		{
+//			cout << "Win";
+//			return;
+//		}
+//		else
+//		{
+//			cout << "Drawn";
+//			return;
+//		}
+//	}
+//	else if (ES_Count > 0 && EG_Count == 0 && ET_Count > 0)
+//	{
+//		if (AD_Count <= 1 && AS_Count == 0)
+//		{
+//			cout << "Win";
+//			return;
+//		}
+//		else
+//		{
+//			cout << "Drawn";
+//			return;
+//		}
+//	}
+//}
 
 void Game::EndGame()
 {
