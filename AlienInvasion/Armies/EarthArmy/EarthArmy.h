@@ -14,15 +14,14 @@ private:
 	ArrayStack<Unit*>EarthTanks;
 	priQueue<Unit*>EarthGunneries;
 	ArrayStack<Unit*>HealingList;
-	priQueue<Unit*>UMLsoldiers;
-	LinkedQueue<Unit*>UMLtanks;
+	priQueue <Unit*> UML;
 public:
 	EarthArmy();
 	virtual void addUnit(Unit* unit);
+	void addToUML(Unit*& unit, int priority,int JT);
 	virtual Unit* removeUnit(UnitType type);
 	virtual void attack(Game* gameptr);
 	virtual void print();
-	virtual void addToUML(Unit* unit);
 	int getESCount();
 	int getETCount();
 	int getEGCount();

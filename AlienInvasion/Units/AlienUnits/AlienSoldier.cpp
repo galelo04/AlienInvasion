@@ -23,7 +23,11 @@ void AlienSoldier::Attack(Game* gameptr)
 			}
 			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
+
+			if ((attackedUnit->getHealth() > 0) && (attackedUnit->getHealth() < attackedUnit->getIntialHealth() * .2))
+				gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->E_ArmyMaxHealth() - attackedUnit->getHealth(),gameptr->getCrntTimeStep());
+
+			else if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
 			else
 				EStemplist.enqueue(attackedUnit);

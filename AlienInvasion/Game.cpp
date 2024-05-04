@@ -48,8 +48,8 @@ void Game::loadParams(string filename)
 		inFile >> Params[1] >> Params[2] >> Params[3] >> Params[4];  // [1]=>ES%, [2]=>ET%, [3]=>EG% , [4]=>HU%
 		inFile >> Params[5] >> Params[6] >> Params[7];  // [5]=>AS%, [6]=>AM%, [7]=>AD%
 		inFile >> Params[8];                            // [8]=>Prob
-		inFile >> Params[9] >> Params[10] >> Params[11] >> Params[12] >> Params[13] >> Params[14];    //[9,10]=>ES_R, [11,12]=>ET_R, [13,14]=>EG_R
-		inFile >> Params[15] >> Params[16] >> Params[17] >> Params[18] >> Params[19] >> Params[20];  //[15,16]=>AS_R, [17,18]=>AM_R, [19,20]=>AD_R
+		inFile >> Params[9] >> Params[10] >> Params[11] >> Params[12] >> Params[13] >> Params[14];    //[9,10]=>E_P, [11,12]=>E_H, [13,14]=>E_C
+		inFile >> Params[15] >> Params[16] >> Params[17] >> Params[18] >> Params[19] >> Params[20];  //[15,16]=>A_P, [17,18]=>A_H, [19,20]=>A_C
 
 		Params[10] = Params[10] * -1;
 		Params[12] = Params[12] * -1;
@@ -70,6 +70,10 @@ void Game::loadParams(string filename)
 		cout << "make sure of the name of the file and dont put .txt\n";
 		instantiateGame();
 	}
+}
+int  Game::E_ArmyMaxHealth()
+{
+	return Params[12];
 }
 
 Mode Game::getMode() const
@@ -105,7 +109,9 @@ int Game::battle()
 		earthArmy->attack(this);
 		alienArmy->attack(this);
 	}
-	generator->generateUnits(TimeStep++);
+	
+	//generator->generateUnits(TimeStep++);
+	TimeStep++;
 	return TimeStep;
 }
 
@@ -142,6 +148,7 @@ void Game::addToKilledList(Unit*& unit)
 		killedlist.enqueue(unit,-TimeStep);
 	}
 }
+
 
 void Game::loadOutputs()
 {

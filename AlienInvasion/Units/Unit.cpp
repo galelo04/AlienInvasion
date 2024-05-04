@@ -44,6 +44,16 @@ void Unit::setDestructionTime(int Td)
     DestructionTime = Td;
 }
 
+int Unit::getUMLJoiningTime() const
+{
+    return UMLJoiningTime;
+}
+
+void Unit::setUMLJoiningTime(int TU)
+{
+    UMLJoiningTime = TU;
+}
+
 bool Unit::IsAttacked() const
 {
     return Attacked;
@@ -73,6 +83,11 @@ void Unit::decrementHealth(int damage)
 {
     Health -= damage;
 }
+void Unit::Heal(int imp)
+{
+    Health += imp;
+}
+
 
 int Unit::getIntialHealth() const
 {

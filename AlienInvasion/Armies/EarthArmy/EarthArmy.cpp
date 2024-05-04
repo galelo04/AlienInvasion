@@ -42,6 +42,16 @@ void EarthArmy::addUnit(Unit* unit)
 	}
 }
 
+void EarthArmy::addToUML(Unit*& unit,int priority,int JT)
+{
+	if (unit)
+	{
+		unit->setUMLJoiningTime(JT);
+		UML.enqueue(unit, priority);
+
+	}
+}
+
 Unit* EarthArmy::removeUnit(UnitType type)
 {
 	Unit* removedUnit = nullptr;
@@ -67,6 +77,11 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	case(UnitType::HealingUnit):
 	{
 		HealingList.pop(removedUnit);
+		break;
+	}
+	case(UnitType::UMLUnit):
+	{
+		UML.dequeue(removedUnit,pri);
 		break;
 	}
 	default:
@@ -118,23 +133,7 @@ void EarthArmy::print()
 	EarthGunneries.printlist();
 }
 
-void EarthArmy::addToUML(Unit* unit)
-{
-	switch (unit->getType())
-	{
-	case UnitType::EarthSoldier:
-	{
-		UMLsoldiers.enqueue(unit,-unit->getHealth());
-		break;
-	}
-	case UnitType::Tank:
-	{
-		UMLtanks.enqueue(unit);
-	}
-	default:
-		break;
-	}
-}
+
 
 int EarthArmy::getESCount()
 {

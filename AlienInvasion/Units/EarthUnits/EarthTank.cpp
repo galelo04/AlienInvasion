@@ -34,10 +34,6 @@ void EarthTank::Attack(Game* gameptr)
 				attackedUnit->decrementHealth(damage);
 				if (attackedUnit->getHealth() <= 0)
 					gameptr->addToKilledList(attackedUnit);
-				else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
-				{
-					gameptr->getEarthArmy()->addToUML(attackedUnit);
-				}
 				else
 					AStemplist.enqueue(attackedUnit);
 			}
