@@ -79,23 +79,22 @@ void EarthArmy::attack(Game* gameptr)
 {
 	Unit* unitAttacking = nullptr;
 	int pri = 0;
-	EarthSoldiers.peek(unitAttacking);
-	if (unitAttacking) 
+	
+	if (EarthSoldiers.peek(unitAttacking))
 	{
 		unitAttacking->Attack(gameptr);
 	}
-	EarthTanks.peek(unitAttacking);
-	if (unitAttacking) 
-	{
-	unitAttacking->Attack(gameptr);
-	}
-	EarthGunneries.peek(unitAttacking, pri);
-	if (unitAttacking) 
+
+	if (EarthTanks.peek(unitAttacking))
 	{
 		unitAttacking->Attack(gameptr);
 	}
-	HealingList.pop(unitAttacking);
-	if (unitAttacking) 
+
+	if (EarthGunneries.peek(unitAttacking, pri))
+	{
+		unitAttacking->Attack(gameptr);
+	}
+	if (HealingList.pop(unitAttacking))
 	{
 		unitAttacking->Attack(gameptr);
 		gameptr->addToKilledList(unitAttacking);
