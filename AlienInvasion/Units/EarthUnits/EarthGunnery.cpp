@@ -14,8 +14,37 @@ void EarthGunnery::Attack(Game* gameptr)
 	int attackcapacity = getAttackCapacity();
 
 	Unit* attackedUnit = nullptr;
+///////////////////////////////////////////////////////////////////////////////////////
+	int monsters, drones;
+	if (gameptr->getAlienArmy()->getADCount() > gameptr->getAlienArmy()->getAMCount())
+	{
+		if ((attackcapacity / 2) > gameptr->getAlienArmy()->getAMCount())
+		{
+			monsters = gameptr->getAlienArmy()->getAMCount();
+		}
+		else
+		{
+			monsters = attackcapacity / 2;
+		}
+		drones = attackcapacity - monsters;
+	}
+	else
+	{
+		if ((attackcapacity / 2) > gameptr->getAlienArmy()->getADCount())
+		{
+			drones = gameptr->getAlienArmy()->getADCount();
+		}
+		else
+		{
+			drones = attackcapacity / 2;
+		}
+		monsters = attackcapacity - drones;
 
-	for (int i = 0; i < attackcapacity / 2; i++)
+		if (monsters > gameptr->getAlienArmy()->getAMCount())
+			monsters = gameptr->getAlienArmy()->getAMCount();
+	}
+	////////////////////////////////////////////////////////////////////
+	for (int i = 0; i < monsters; i++)
 	{
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Monster);
 		if (attackedUnit)
@@ -34,7 +63,9 @@ void EarthGunnery::Attack(Game* gameptr)
 		}
 	}
 
-	for (int i = 0; i < attackcapacity - (attackcapacity / 2); i++)
+	
+
+	for (int i = 0; i < drones; i++)
 	{
 
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);

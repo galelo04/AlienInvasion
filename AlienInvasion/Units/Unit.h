@@ -3,13 +3,14 @@
 
 class Game;
 enum class UnitType {
-	EarthSoldier,
+	EarthSoldier =0,
 	Tank,
 	Gunnery,
 	HealingUnit,
 	AlienSoldier,
 	Monster,
-	Drone
+	Drone,
+	UMLUnit
 };
 
 class Unit 
@@ -21,6 +22,7 @@ private:
 	int JoinTime;
 	int firstAttackTime;
 	int DestructionTime;
+	int UMLJoiningTime;
 	int Health;
 	int Power;
 	int AttackCapacity;
@@ -40,6 +42,8 @@ public:
 	virtual void setFirstAttackTime(int Ta);
 	virtual int getDestructionTime() const;
 	virtual void setDestructionTime(int Td);
+	virtual int getUMLJoiningTime()const;
+	virtual void setUMLJoiningTime(int TU);
 	virtual bool IsAttacked() const;
 	virtual void makeAttacked(bool makeatt);
 	virtual int getHealth() const;
@@ -47,6 +51,7 @@ public:
 	virtual int getAttackCapacity() const;
 	virtual void decrementHealth(int damage);
 	virtual int getIntialHealth() const;
+	virtual void Heal(int imp);
 	friend std::ostream& operator<<(std::ostream& stream, Unit* unit)
 	{
 		if (unit)

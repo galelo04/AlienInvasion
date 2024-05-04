@@ -32,7 +32,7 @@ void AlienDrone::Attack(Game* gameptr)
 				gameptr->addToKilledList(attackedUnit);
 			else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
 			{
-				gameptr->getEarthArmy()->addToUML(attackedUnit);
+				gameptr->getEarthArmy()->addToUML(attackedUnit,0,gameptr->getCrntTimeStep());
 			}
 			else
 				ETtemplist.push(attackedUnit);
@@ -50,10 +50,6 @@ void AlienDrone::Attack(Game* gameptr)
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
-			else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
-			{
-				gameptr->getEarthArmy()->addToUML(attackedUnit);
-			}
 			else
 				EGtemplist.enqueue(attackedUnit, pri);
 			i++;

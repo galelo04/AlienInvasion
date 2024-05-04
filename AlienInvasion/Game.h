@@ -16,7 +16,9 @@ private:
 	AlienArmy * alienArmy;
 	EarthArmy * earthArmy;
 	randGen * generator;
-	LinkedQueue <Unit* > killedlist;
+	priQueue <Unit* > killedlist;
+	
+
 	Mode _mode;
 public:
 	Game();
@@ -32,6 +34,7 @@ public:
 	void addToKilledList(Unit*& unit);
 	void loadOutputs();
 	int getCrntTimeStep();
+	int E_ArmyMaxHealth();
 	void EndGame();
 	~Game();
 };

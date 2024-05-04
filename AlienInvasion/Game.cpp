@@ -48,8 +48,8 @@ void Game::loadParams(string filename)
 		inFile >> Params[1] >> Params[2] >> Params[3] >> Params[4];  // [1]=>ES%, [2]=>ET%, [3]=>EG% , [4]=>HU%
 		inFile >> Params[5] >> Params[6] >> Params[7];  // [5]=>AS%, [6]=>AM%, [7]=>AD%
 		inFile >> Params[8];                            // [8]=>Prob
-		inFile >> Params[9] >> Params[10] >> Params[11] >> Params[12] >> Params[13] >> Params[14];    //[9,10]=>ES_R, [11,12]=>ET_R, [13,14]=>EG_R
-		inFile >> Params[15] >> Params[16] >> Params[17] >> Params[18] >> Params[19] >> Params[20];  //[15,16]=>AS_R, [17,18]=>AM_R, [19,20]=>AD_R
+		inFile >> Params[9] >> Params[10] >> Params[11] >> Params[12] >> Params[13] >> Params[14];    //[9,10]=>E_P, [11,12]=>E_H, [13,14]=>E_C
+		inFile >> Params[15] >> Params[16] >> Params[17] >> Params[18] >> Params[19] >> Params[20];  //[15,16]=>A_P, [17,18]=>A_H, [19,20]=>A_C
 
 		Params[10] = Params[10] * -1;
 		Params[12] = Params[12] * -1;
@@ -70,6 +70,10 @@ void Game::loadParams(string filename)
 		cout << "make sure of the name of the file and dont put .txt\n";
 		instantiateGame();
 	}
+}
+int  Game::E_ArmyMaxHealth()
+{
+	return Params[12];
 }
 
 Mode Game::getMode() const
@@ -105,7 +109,9 @@ int Game::battle()
 		earthArmy->attack(this);
 		alienArmy->attack(this);
 	}
-	generator->generateUnits(TimeStep++);
+	
+	//generator->generateUnits(TimeStep++);
+	TimeStep++;
 	return TimeStep;
 }
 
@@ -139,9 +145,10 @@ void Game::addToKilledList(Unit*& unit)
 	if (unit)
 	{
 		unit->setDestructionTime(TimeStep);
-		killedlist.enqueue(unit);
+		killedlist.enqueue(unit,-TimeStep);
 	}
 }
+
 
 void Game::loadOutputs()
 {
@@ -150,66 +157,67 @@ void Game::loadOutputs()
 	if (outFile.is_open())
 	{
 		outFile << "Td\t" << "ID\t" << "Tj\t" << "Df\t" << "Dd\t" << "Db\t" << endl;
-		Unit* unit;
+		Unit* unit;int pri = 0;
 		int killedES = 0, killedEG = 0, killedET = 0;
 		int killedAS = 0, killedAD = 0, killedAM = 0;
 		int EtotalDf = 0, EtotalDd = 0, EtotalDb = 0;
 		int AtotalDf = 0, AtotalDd = 0, AtotalDb = 0;
 		
-		while (killedlist.dequeue(unit) && unit->getType() != UnitType::HealingUnit)
+		while (killedlist.dequeue(unit, pri))
 		{
 			UnitType type = unit->getType();
-			if (type == UnitType::EarthSoldier || type == UnitType::Tank || type == UnitType::Gunnery)
-			{
-				EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-				EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
+			if (type != UnitType::HealingUnit) {
+				if (type == UnitType::EarthSoldier || type == UnitType::Tank || type == UnitType::Gunnery)
+				{
+					EtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+					EtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+					EtotalDb += unit->getDestructionTime() - unit->getJoinTime();
+				}
+				if (type == UnitType::AlienSoldier || type == UnitType::Monster || type == UnitType::Drone)
+				{
+					AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
+					AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
+					AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
+				}
+				switch (type)
+				{
+				case UnitType::EarthSoldier:
+				{
+					killedES++;
+					break;
+				}
+				case UnitType::Gunnery:
+				{
+					killedEG++;
+					break;
+				}
+				case UnitType::Tank:
+				{
+					killedET++;
+					break;
+				}
+				case UnitType::AlienSoldier:
+				{
+					killedAS++;
+					break;
+				}
+				case UnitType::Drone:
+				{
+					killedAD++;
+					break;
+				}
+				case UnitType::Monster:
+				{
+					killedAM++;
+					break;
+				}
+				default:
+				{
+					break;
+				}
+				}
+				outFile << unit->getDestructionTime() << "\t" << unit->getID() << "\t" << unit->getJoinTime() << "\t" << unit->getFirstAttackTime() - unit->getJoinTime() << "\t" << unit->getDestructionTime() - unit->getFirstAttackTime() << "\t" << unit->getDestructionTime() - unit->getJoinTime() << endl;
 			}
-			if (type == UnitType::AlienSoldier || type == UnitType::Monster || type == UnitType::Drone)
-			{
-				AtotalDf += unit->getFirstAttackTime() - unit->getJoinTime();
-				AtotalDd += unit->getDestructionTime() - unit->getFirstAttackTime();
-				AtotalDb += unit->getDestructionTime() - unit->getJoinTime();
-			}
-			switch (type)
-			{
-			case UnitType::EarthSoldier:
-			{
-				killedES++;
-				break;
-			}
-			case UnitType::Gunnery:
-			{
-				killedEG++;
-				break;
-			}
-			case UnitType::Tank:
-			{
-				killedET++;
-				break;
-			}
-			case UnitType::AlienSoldier:
-			{
-				killedAS++;
-				break;
-			}
-			case UnitType::Drone:
-			{
-				killedAD++;
-				break;
-			}
-			case UnitType::Monster:
-			{
-				killedAM++;
-				break;
-			}
-			default:
-			{
-				break;
-			}
-			}
-			outFile << unit->getDestructionTime() << "\t" << unit->getID() << "\t" << unit->getJoinTime() << "\t" << unit->getFirstAttackTime() - unit->getJoinTime() << "\t" << unit->getDestructionTime() - unit->getFirstAttackTime() << "\t" << unit->getDestructionTime() - unit->getJoinTime() << endl;
-
 		}
 
 		outFile << endl;
@@ -328,6 +336,61 @@ int Game::getCrntTimeStep()
 {
 	return TimeStep;
 }
+
+//void Game::battleResult()
+//{
+//	int ES_Count = earthArmy->getESCount();
+//	int EG_Count = earthArmy->getEGCount();
+//	int ET_Count = earthArmy->getETCount();
+//	int AS_Count = alienArmy->getASCount();
+//	int AD_Count = alienArmy->getADCount();
+//	int AM_Count = alienArmy->getAMCount();
+//
+//	if (ES_Count > 0 && EG_Count == 0 && ET_Count == 0)
+//	{
+//		if (AM_Count > 0)
+//		{
+//			cout << "Loss";
+//			return;
+//		}
+//		else if(AS_Count == 0 && AD_Count == 0)
+//		{
+//			cout << "Win";
+//			return;
+//		}
+//		else
+//		{
+//			cout << "Drawn";
+//			return;
+//		}
+//	}
+//	else if (ES_Count > 0 && EG_Count > 0 && ET_Count == 0)
+//	{
+//		if (AD_Count <= 1  && AS_Count == 0)
+//		{
+//			cout << "Win";
+//			return;
+//		}
+//		else
+//		{
+//			cout << "Drawn";
+//			return;
+//		}
+//	}
+//	else if (ES_Count > 0 && EG_Count == 0 && ET_Count > 0)
+//	{
+//		if (AD_Count <= 1 && AS_Count == 0)
+//		{
+//			cout << "Win";
+//			return;
+//		}
+//		else
+//		{
+//			cout << "Drawn";
+//			return;
+//		}
+//	}
+//}
 
 void Game::EndGame()
 {
