@@ -83,10 +83,7 @@ void Unit::decrementHealth(int damage)
 {
     Health -= damage;
 }
-void Unit::Heal(int imp)
-{
-    Health += imp;
-}
+
 
 
 int Unit::getIntialHealth() const

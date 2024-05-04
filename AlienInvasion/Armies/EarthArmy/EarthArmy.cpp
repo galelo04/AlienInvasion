@@ -75,6 +75,28 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	return removedUnit;
 }
 
+Unit* EarthArmy::removefromUML(UnitType type)
+{
+	Unit* removedUnit = nullptr;
+	int pri;
+
+	switch (type)
+	{
+	case(UnitType::EarthSoldier):
+	{
+		UML1.dequeue(removedUnit,pri);
+		break;
+	}
+	case(UnitType::Tank):
+	{
+		UML2.dequeue(removedUnit);
+		break;
+	}
+	default: break;
+	}
+	return removedUnit;
+}
+
 void EarthArmy::attack(Game* gameptr)
 {
 	Unit* unitAttacking = nullptr;
@@ -117,18 +139,21 @@ void EarthArmy::print()
 	EarthGunneries.printlist();
 }
 
-void EarthArmy::addToUML(Unit* unit)
+void EarthArmy::addToUML(Unit* unit,int UT)
 {
 	switch (unit->getType())
 	{
 	case UnitType::EarthSoldier:
 	{
-		UMLsoldiers.enqueue(unit,-unit->getHealth());
+		UML1.enqueue(unit,-unit->getHealth());
+		unit->setUMLJoiningTime(UT);
 		break;
 	}
 	case UnitType::Tank:
 	{
-		UMLtanks.enqueue(unit);
+		UML2.enqueue(unit);
+		unit->setUMLJoiningTime(UT);
+		break;
 	}
 	default:
 		break;
@@ -196,6 +221,8 @@ EarthArmy::~EarthArmy()
 		delete unittobedeleted;
 	while(HealingList.pop(unittobedeleted))
 		delete unittobedeleted;
-	while(UML.dequeue(unittobedeleted, pri))
+	while(UML1.dequeue(unittobedeleted, pri))
+		delete unittobedeleted;
+	while (UML2.dequeue(unittobedeleted))
 		delete unittobedeleted;
 }

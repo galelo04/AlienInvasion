@@ -9,8 +9,7 @@ enum class UnitType {
 	HealingUnit,
 	AlienSoldier,
 	Monster,
-	Drone,
-	UMLUnit
+	Drone
 };
 
 class Unit 
@@ -51,7 +50,6 @@ public:
 	virtual int getAttackCapacity() const;
 	virtual void decrementHealth(int damage);
 	virtual int getIntialHealth() const;
-	virtual void Heal(int imp);
 	friend std::ostream& operator<<(std::ostream& stream, Unit* unit)
 	{
 		if (unit)

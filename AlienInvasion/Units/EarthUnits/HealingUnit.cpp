@@ -13,7 +13,7 @@ void HealingUnit::Attack(Game* gameptr)
 	int attackCapacity = getAttackCapacity();
 	for (int i = 0; i < attackCapacity; i++)
 	{
-		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::UMLUnit);
+		attackedUnit = gameptr->getEarthArmy()->removefromUML(UnitType::EarthSoldier);
 		if (attackedUnit)
 		{
 			if (!attackedUnit->IsAttacked())
@@ -25,7 +25,7 @@ void HealingUnit::Attack(Game* gameptr)
 			else
 			{
 				int improvement = (this->getPower() * (this->getHealth() / 100)) / sqrt(attackedUnit->getHealth());
-				attackedUnit->Heal(improvement);
+				attackedUnit->decrementHealth(-improvement);
 
 				if (attackedUnit->getHealth() > attackedUnit->getIntialHealth() * .2)
 				{
@@ -47,11 +47,8 @@ void HealingUnit::Attack(Game* gameptr)
 	while (templist.dequeue(attackedUnit))
 	{
 		if(int(attackedUnit->getType())== 0)
-		gameptr->getEarthArmy()->addToUML(attackedUnit,gameptr->E_ArmyMaxHealth()-attackedUnit->getHealth(),attackedUnit->getUMLJoiningTime());
+		gameptr->getEarthArmy()->addToUML(attackedUnit, attackedUnit->getUMLJoiningTime());
 		else
-			gameptr->getEarthArmy()->addToUML(attackedUnit, 0, attackedUnit->getUMLJoiningTime());
+			gameptr->getEarthArmy()->addToUML(attackedUnit, attackedUnit->getUMLJoiningTime());
 	}
-	Unit* ptr = this;
-
-	gameptr->addToKilledList(ptr);
 }
