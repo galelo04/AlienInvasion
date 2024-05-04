@@ -109,11 +109,13 @@ void EarthArmy::attack(Game* gameptr)
 	{
 		unitAttacking->Attack(gameptr);
 	}
-	HealingList.pop(unitAttacking);
-	if (unitAttacking) 
+	if (HealingList.pop(unitAttacking))
 	{
-		unitAttacking->Attack(gameptr);
-		gameptr->addToKilledList(unitAttacking);
+		if (unitAttacking)
+		{
+			unitAttacking->Attack(gameptr);
+			gameptr->addToKilledList(unitAttacking);
+		}
 	}
 }
 
