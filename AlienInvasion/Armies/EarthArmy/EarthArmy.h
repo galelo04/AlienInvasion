@@ -14,8 +14,8 @@ private:
 	ArrayStack<Unit*>EarthTanks;
 	priQueue<Unit*>EarthGunneries;
 	ArrayStack<Unit*>HealingList;
-	priQueue <Unit*> UML1;
-	LinkedQueue<Unit*>UML2;
+	priQueue <Unit*> UMLsoldiers;
+	LinkedQueue<Unit*>UMLtanks;
 public:
 	EarthArmy();
 	virtual void addUnit(Unit* unit);
