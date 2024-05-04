@@ -25,7 +25,7 @@ public:
 	int getESCount();
 	int getETCount();
 	int getEGCount();
-	int getTotalEDf();
+	int getTotalEDf(int &totalAlivegotAttacked);
 	~EarthArmy();
 };
 
