@@ -67,7 +67,7 @@ void Game::loadParams(string filename)
 		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleTextAttribute(console_color, 12);
 		system("cls");
-		cout << "make sure of the name of the file and dont put .txt\n";
+		cout << "make sure of the name of the file and don't put .txt\n";
 		instantiateGame();
 	}
 }
@@ -153,7 +153,7 @@ void Game::addToKilledList(Unit*& unit)
 void Game::loadOutputs()
 {
 	ofstream outFile;
-	outFile.open("OutputFile\\outfile.txt");
+	outFile.open("OutputFile\\outputfile.txt");
 	if (outFile.is_open())
 	{
 		outFile << "Td\t" << "ID\t" << "Tj\t" << "Df\t" << "Dd\t" << "Db\t" << endl;
@@ -237,39 +237,48 @@ void Game::loadOutputs()
 		int ES_Total = earthArmy->getESCount() + killedES;
 		int EG_Total = earthArmy->getEGCount() + killedEG;
 		int ET_Total = earthArmy->getETCount() + killedET;
+
+		int ETotalgotAttacked = 0;
+		EtotalDf += earthArmy->getTotalEDf(ETotalgotAttacked);
+		ETotalgotAttacked += killedES + killedEG + killedET;
+
 		outFile << "For Earth Army:" << endl;
+		
 		outFile << "\t - ES_Total : " << ES_Total << " , EG_Total : " << EG_Total << " , ET_Total : "<< ET_Total << endl;
+		
 		if (ES_Total == 0)
 			outFile << "\t - DestructedES % is Undefined";
 		else 
 			outFile << "\t - DestructedES % : " << killedES * 100 / ES_Total << "%";
+		
 		if (EG_Total == 0)
 			outFile << " , DestructedEG % is Undefined";
 		else
 			outFile << " , DestructedEG % : " << killedEG * 100 / EG_Total << "%";
+		
 		if (ET_Total == 0)
 			outFile << " , DestructedET % is Undefined" << endl;
 		else
 			outFile << " , DestructedET %: " << killedET * 100 / ET_Total << "%" << endl;
+		
 		if ((ES_Total + EG_Total + ET_Total) == 0)
-		{
 			outFile << "\t - DestructedEU % is Undefined" << endl;
-			outFile << "\t - Av_Df is Undefined";
-		}
 		else
-		{
 			outFile << "\t - DestructedEU % : " << (killedES + killedEG + killedET) * 100 / (ES_Total + EG_Total + ET_Total) << "%" << endl;
-			outFile << "\t - Av_Df : " << (EtotalDf + earthArmy->getTotalEDf()) / (ES_Total + EG_Total + ET_Total);
-		}
+		
+		if(ETotalgotAttacked == 0)
+			outFile << "\t - Av_Df is Undefined";
+		else
+			outFile << "\t - Av_Df : " << EtotalDf / ETotalgotAttacked;
+		
 		if ((killedES + killedEG + killedET) == 0)
-		{
 			outFile << " , Av_Dd is Undefined , Av_Db is Undefined" << endl;
-		}
 		else
 		{
 			outFile << " , Av_Dd : " << EtotalDd / (killedES + killedEG + killedET);
 			outFile << " , Av_Db : " << EtotalDb / (killedES + killedEG + killedET) << endl;
 		}
+		
 		if(EtotalDb == 0)
 			outFile << "\t - Df/Db % is Undefined , Dd/Db % is Undefined" << endl;
 		else
@@ -281,39 +290,48 @@ void Game::loadOutputs()
 		int AS_Total = alienArmy->getASCount() + killedAS;
 		int AD_Total = alienArmy->getADCount() + killedAD;
 		int AM_Total = alienArmy->getAMCount() + killedAM;
+
+		int ATotalgotAttacked = 0;
+		AtotalDf += earthArmy->getTotalEDf(ATotalgotAttacked);
+		ATotalgotAttacked += killedAS + killedAD + killedAM;
+
 		outFile << "For Alien Army:" << endl;
+
 		outFile << "\t - AS_Total : " << AS_Total << " , AD_Total : " << AD_Total << " , AM_Total : " << AM_Total << endl;
+		
 		if (AS_Total == 0)
 			outFile << "\t - DestructedAS % is Undefined";
 		else
 			outFile << "\t - DestructedAS % : " << killedAS * 100 / AS_Total << "%";
+
 		if (AD_Total == 0)
 			outFile << " , DestructedAD % is Undefined";
 		else
 			outFile << " , DestructedAD % : " << killedAD * 100 / AD_Total << "%";
+
 		if (AM_Total == 0)
 			outFile << " , DestructedAM % is Undefined" << endl;
 		else
 			outFile << " , DestructedAM %: " << killedAM * 100 / AM_Total << "%" << endl;
+
 		if ((AS_Total + AD_Total + AM_Total) == 0)
-		{
 			outFile << "\t - DestructedAU % is Undefined" << endl;
-			outFile << "\t - Av_Df is Undefined";
-		}
 		else
-		{
 			outFile << "\t - DestructedAU % : " << (killedAS + killedAD + killedAM) * 100 / (AS_Total + AD_Total + AM_Total) << "%" << endl;
-			outFile << "\t - Av_Df : " << (AtotalDf + alienArmy->getTotalADf()) / (AS_Total + AD_Total + AM_Total);
-		}
+		
+		if (ATotalgotAttacked == 0)
+			outFile << "\t - Av_Df is Undefined";
+		else
+			outFile << "\t - Av_Df : " << AtotalDf / ATotalgotAttacked;
+
 		if ((killedAS + killedAD + killedAM) == 0)
-		{
 			outFile << " , Av_Dd is Undefined , Av_Db is Undefined" << endl;
-		}
 		else
 		{
 			outFile << " , Av_Dd : " << AtotalDd / (killedAS + killedAD + killedAM);
 			outFile << " , Av_Db : " << AtotalDb / (killedAS + killedAD + killedAM) << endl;
 		}
+		
 		if (AtotalDb == 0)
 			outFile << "\t - Df/Db % is Undefined , Dd/Db % is Undefined" << endl;
 		else
@@ -326,7 +344,7 @@ void Game::loadOutputs()
 		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleTextAttribute(console_color, 12);
 		system("cls");
-		cout << "make sure of the name of the file and dont put .txt\n";
+		cout << "make sure of the name of the file and don't put .txt\n";
 		EndGame();
 	}
 	outFile.close();

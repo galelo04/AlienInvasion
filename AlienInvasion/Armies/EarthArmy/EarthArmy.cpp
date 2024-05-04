@@ -152,7 +152,7 @@ int EarthArmy::getEGCount()
 	return EarthGunneries.getCount();
 }
 
-int EarthArmy::getTotalEDf()
+int EarthArmy::getTotalEDf(int& totalAlivegotAttacked)
 {
 	int Df = 0;
 	int pri = 0;
@@ -160,18 +160,27 @@ int EarthArmy::getTotalEDf()
 
 	while (EarthSoldiers.dequeue(unit))
 	{
-		if(unit->IsAttacked())
+		if (unit->IsAttacked())
+		{
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
+			totalAlivegotAttacked++;
+		}
 	}
-	while (EarthGunneries.dequeue(unit,pri))
+	while (EarthGunneries.dequeue(unit, pri))
 	{
 		if (unit->IsAttacked())
+		{
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
+			totalAlivegotAttacked++;
+		}
 	}
 	while (EarthTanks.pop(unit))
 	{
 		if (unit->IsAttacked())
+		{
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
+			totalAlivegotAttacked++;
+		}
 	}
 
 	return Df;
@@ -180,11 +189,15 @@ int EarthArmy::getTotalEDf()
 EarthArmy::~EarthArmy()
 {
 	Unit* unittobedeleted;
-	int pri;
+	int pri = 0;
 	while (EarthSoldiers.dequeue(unittobedeleted))
 		delete unittobedeleted;
-	while (EarthGunneries.dequeue(unittobedeleted,pri))
+	while (EarthGunneries.dequeue(unittobedeleted, pri))
 		delete unittobedeleted;
 	while (EarthTanks.pop(unittobedeleted))
+		delete unittobedeleted;
+	while(HealingList.pop(unittobedeleted))
+		delete unittobedeleted;
+	while(UML.dequeue(unittobedeleted, pri))
 		delete unittobedeleted;
 }

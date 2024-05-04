@@ -151,7 +151,7 @@ int AlienArmy::getAMCount()
 	return AlienMonsters.getcount();
 }
 
-int AlienArmy::getTotalADf()
+int AlienArmy::getTotalADf(int& totalAlivegotAttacked)
 {
 	int Df = 0;
 	Unit* unit;
@@ -159,17 +159,26 @@ int AlienArmy::getTotalADf()
 	while (AlienSoldiers.dequeue(unit))
 	{
 		if (unit->IsAttacked())
+		{
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
+			totalAlivegotAttacked++;
+		}
 	}
 	while (AlienDrones.dequeue(unit))
 	{
 		if (unit->IsAttacked())
+		{
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
+			totalAlivegotAttacked++;
+		}
 	}
 	while (AlienMonsters.remove(unit))
 	{
 		if (unit->IsAttacked())
+		{
 			Df += unit->getFirstAttackTime() - unit->getJoinTime();
+			totalAlivegotAttacked++;
+		}
 	}
 
 	return Df;

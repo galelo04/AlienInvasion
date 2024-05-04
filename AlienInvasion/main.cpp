@@ -19,6 +19,6 @@ int main()
 	game.setMode(mode);
 
 
-	while (game.battle() != 40);
+	while (game.battle() != 41);
 	game.EndGame();
 }
