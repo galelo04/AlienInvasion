@@ -123,30 +123,6 @@ void EarthArmy::attack(Game* gameptr)
 	}
 }
 
-//void EarthArmy::infectionSpread()
-//{
-//	LinkedQueue<Unit*> left;
-//	LinkedQueue<Unit*> right;
-//	Unit* removed;
-//	Unit* infected;
-//	while (EarthSoldiers.dequeue(removed))
-//	{
-//		if (!removed->isInfected())
-//			left.enqueue(removed);
-//		else
-//		{
-//			infected = removed;
-//			while (EarthSoldiers.dequeue(removed))
-//			{
-//				right.enqueue(removed);
-//			}
-//		}
-//		left.enqueue(infected);
-//		while (right.dequeue(removed))
-//			EarthSoldiers.enqueue(removed);
-//	}
-//}
-
 void EarthArmy::print()
 {
 	HANDLE console_color;

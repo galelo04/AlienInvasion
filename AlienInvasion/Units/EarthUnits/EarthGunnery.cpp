@@ -105,12 +105,12 @@ void EarthGunnery::Attack(Game* gameptr)
 	if (gameptr->getMode() == Mode::Normal) {
 		if (AMtemplist.getcount() > 0)
 		{
-			cout << "EG " << getID() << " shots Alien Monsters ";
+			cout << "ES " << getID() << " shots Alien Monsters ";
 			AMtemplist.printlist();
 		}
 		if (ADtemplist.getCount() > 0)
 		{
-			cout << "EG " << getID() << " shots Drones ";
+			cout << "ES " << getID() << " shots Drones ";
 			ADtemplist.printlist();
 		}
 	}

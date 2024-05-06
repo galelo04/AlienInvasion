@@ -1,4 +1,4 @@
-﻿#include "HealingUnit.h"
+#include "HealingUnit.h"
 #include "../../Game.h"
 
 HealingUnit::HealingUnit(int jointime, int health, int power, int attackcapacity)
@@ -16,28 +16,19 @@ void HealingUnit::Attack(Game* gameptr)
 		attackedUnit = gameptr->getEarthArmy()->removefromUML(UnitType::EarthSoldier);
 		if (attackedUnit)
 		{
-			/*if (!attackedUnit->IsAttacked())
+			if (!attackedUnit->IsAttacked())
 			{
-				attackedUnit->makeAttacked(true); هل دي مقصودة؟ المفروض الهيلينج يونت بتعمل هيل مش اتاك 
-			}*/
+				attackedUnit->makeAttacked(true);
+			}
 			if(gameptr->getCrntTimeStep()-attackedUnit->getUMLJoiningTime()>10)
 				gameptr->addToKilledList(attackedUnit);
 			else
 			{
-
 				int improvement = (this->getPower() * (this->getHealth() / 100)) / sqrt(attackedUnit->getHealth());
-				if (attackedUnit->isInfected())
-					attackedUnit->heal(improvement);
-				else
-					attackedUnit->heal(improvement/2);
+				attackedUnit->heal(improvement);
 
 				if (attackedUnit->getHealth() > attackedUnit->getIntialHealth() * .2)
 				{
-					if (attackedUnit->isInfected())
-					{
-						attackedUnit->infect(false);
-						attackedUnit->immune(true);
-					}
 					gameptr->getEarthArmy()->addUnit(attackedUnit);
 				}
 				else

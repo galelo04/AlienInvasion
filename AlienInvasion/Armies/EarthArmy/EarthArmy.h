@@ -23,7 +23,6 @@ public:
 	Unit* removefromUML(UnitType type);
 	void addToUML(Unit* unit,int UT);
 	virtual void attack(Game* gameptr);
-	//virtual void infectionSpread();
 	virtual void print();
 	int getESCount();
 	int getETCount();
