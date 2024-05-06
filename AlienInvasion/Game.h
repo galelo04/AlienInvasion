@@ -11,7 +11,7 @@ enum class Mode {
 class Game
 {
 private:
-	int Params[21];
+	int Params[22];
 	int TimeStep;
 	AlienArmy * alienArmy;
 	EarthArmy * earthArmy;

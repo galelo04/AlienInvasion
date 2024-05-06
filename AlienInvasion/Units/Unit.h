@@ -27,6 +27,8 @@ private:
 	int AttackCapacity;
 	int intialHealth;
 	bool Attacked;
+	bool infected;
+	bool immuned;
 protected:
 	static int last_Earth_Id;
 	static int last_Alien_Id;
@@ -51,10 +53,16 @@ public:
 	virtual void decrementHealth(int damage);
 	virtual void heal(int imp) = 0;
 	virtual int getIntialHealth() const;
+	virtual void infect(bool state) ;
+	virtual bool isInfected();
+	virtual void immune(bool state);
+	virtual bool isImmuned();
 	friend std::ostream& operator<<(std::ostream& stream, Unit* unit)
 	{
 		if (unit)
 			stream << unit->ID;
+		if (unit->isInfected())
+			stream << "(#)";
 		return stream;
 	}
 };

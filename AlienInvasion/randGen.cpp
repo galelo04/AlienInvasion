@@ -92,7 +92,7 @@ Unit* randGen::createUnit(int H,int P,int C,bool is_E,int timestep)
         }
         else if (B <= params[4] + params[6])
         {
-             newUnit = new AlienMonster(timestep, H, P, C);
+             newUnit = new AlienMonster(timestep, H, P, C,params[21]);
         }
         else
         {

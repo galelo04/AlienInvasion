@@ -3,20 +3,52 @@
 
 
 
-AlienMonster::AlienMonster(int jointime, int health, int power, int attackcapacity)
-	:Unit(UnitType::Monster, last_Alien_Id++, jointime, health, power, attackcapacity)
+AlienMonster::AlienMonster(int jointime, int health, int power, int attackcapacity, int infprob)
+	:Unit(UnitType::Monster, last_Alien_Id++, jointime, health, power, attackcapacity) , infection_probability(infprob)
 {
-
+	srand((unsigned)time(NULL));
 }
 
 void AlienMonster::Attack(Game* gameptr)
 {
 	LinkedQueue<Unit*>EStemplist;
 	ArrayStack<Unit*>ETtemplist;
-	int attackcapacity = getAttackCapacity();
 	Unit* attackedUnit = nullptr;
-	int i = 0;
-	while (i < attackcapacity && (gameptr->getEarthArmy()->getESCount() >0 || gameptr->getEarthArmy()->getETCount() > 0))
+	int attackedSoldiers = min(getAttackCapacity() / 2, gameptr->getEarthArmy()->getESCount());
+	int attackedTanks = getAttackCapacity() - attackedSoldiers;
+	attackedSoldiers = getAttackCapacity() - attackedTanks;
+	
+	for (int i = 0; i < attackedSoldiers; i++)
+	{
+		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::EarthSoldier);
+		if (attackedUnit)
+		{
+			if (!attackedUnit->IsAttacked())
+			{
+				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
+				attackedUnit->makeAttacked(true);
+			}
+			int prob = 1 + (rand() % 100);
+			if (prob <= infection_probability && !attackedUnit->isImmuned())
+			{
+				attackedUnit->infect(true);
+			}
+			else
+			{
+				int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+				attackedUnit->decrementHealth(damage);
+			}
+			if (attackedUnit->getHealth() <= 0)
+				gameptr->addToKilledList(attackedUnit);
+			else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
+			{
+				gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
+			}
+			else
+				EStemplist.enqueue(attackedUnit);
+		}
+	}
+	for (int i = 0; i < attackedTanks; i++)
 	{
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::Tank);
 		if (attackedUnit)
@@ -30,33 +62,12 @@ void AlienMonster::Attack(Game* gameptr)
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
-			else if(attackedUnit->getHealth()<.2*attackedUnit->getIntialHealth())
+			else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
 			{
-				gameptr->getEarthArmy()->addToUML(attackedUnit,gameptr->getCrntTimeStep());
+				gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
 			}
 			else
 				ETtemplist.push(attackedUnit);
-			i++;
-		}
-		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::EarthSoldier);
-		if (attackedUnit)
-		{
-			if (!attackedUnit->IsAttacked())
-			{
-				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
-				attackedUnit->makeAttacked(true);
-			}
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
-			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
-			else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
-			{
-				gameptr->getEarthArmy()->addToUML(attackedUnit,gameptr->getCrntTimeStep());
-			}
-			else
-				EStemplist.enqueue(attackedUnit);
-			i++;
 		}
 	}
 	if (gameptr->getMode() == Mode::Normal) {
@@ -90,32 +101,3 @@ void AlienMonster::Attack(Game* gameptr)
 
 
 
-//int attackedSoldiers = min(getAttackCapacity() / 2, gameptr->getEarthArmy()->getESCount());
-//int attackedTanks = getAttackCapacity() - attackedSoldiers;
-//attackedSoldiers = getAttackCapacity() - attackedTanks;
-//for (int i = 0; i < attackedTanks; i++)
-//{
-//	attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::Tank);
-//	if (attackedUnit)
-//	{
-//		int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
-//		attackedUnit->decrementHealth(damage);
-//		if (attackedUnit->getHealth() <= 0)
-//			gameptr->addToKilledList(attackedUnit);
-//		else
-//			ETtemplist.push(attackedUnit);
-//	}
-//}
-//for (int i = 0; i < attackedSoldiers; i++)
-//{
-//	attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::EarthSoldier);
-//	if (attackedUnit)
-//	{
-//		int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
-//		attackedUnit->decrementHealth(damage);
-//		if (attackedUnit->getHealth() <= 0)
-//			gameptr->addToKilledList(attackedUnit);
-//		else
-//			EStemplist.enqueue(attackedUnit);
-//	}
-//}
