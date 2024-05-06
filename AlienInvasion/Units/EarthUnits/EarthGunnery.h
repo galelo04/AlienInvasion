@@ -9,5 +9,6 @@ public:
 	virtual void Attack(Game* gameptr);
 	int getPri();
 	void setPri(int pri);
+	virtual void heal(int imp) {};
 };
 

@@ -25,7 +25,7 @@ void HealingUnit::Attack(Game* gameptr)
 			else
 			{
 				int improvement = (this->getPower() * (this->getHealth() / 100)) / sqrt(attackedUnit->getHealth());
-				attackedUnit->decrementHealth(-improvement);
+				attackedUnit->heal(improvement);
 
 				if (attackedUnit->getHealth() > attackedUnit->getIntialHealth() * .2)
 				{

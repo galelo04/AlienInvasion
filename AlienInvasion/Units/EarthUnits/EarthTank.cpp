@@ -80,4 +80,9 @@ void EarthTank::Attack(Game* gameptr)
 
 }
 
+void EarthTank::heal(int imp)
+{
+	decrementHealth(-imp);
+}
+
 

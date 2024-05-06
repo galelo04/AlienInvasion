@@ -71,10 +71,7 @@ void Game::loadParams(string filename)
 		instantiateGame();
 	}
 }
-int  Game::E_ArmyMaxHealth()
-{
-	return Params[12];
-}
+
 
 Mode Game::getMode() const
 {

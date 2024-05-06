@@ -6,5 +6,6 @@ class AlienMonster :
 public:
     AlienMonster(int jointime , int health , int power , int attackcapacity);
     virtual void Attack(Game* gameptr);
+    virtual void heal(int imp) {};
 };
 

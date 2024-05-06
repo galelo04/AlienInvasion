@@ -34,7 +34,6 @@ public:
 	void addToKilledList(Unit*& unit);
 	void loadOutputs();
 	int getCrntTimeStep();
-	int E_ArmyMaxHealth();
 	void EndGame();
 	~Game();
 };

@@ -40,3 +40,8 @@ void EarthSoldier::Attack(Game* gameptr)
 		gameptr->getAlienArmy()->addUnit(attackedUnit);
 }
 
+void EarthSoldier::heal(int imp)
+{
+	decrementHealth(-imp);
+}
+
