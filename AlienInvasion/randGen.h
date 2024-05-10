@@ -6,11 +6,14 @@
 class randGen
 {
 private:
-	int* params;
+	int params[21];
 	Game* gameptr;
+	bool earth_limit;
+	bool alien_limit;
+
 public:
 	randGen(Game* _gameptr);
-	void getparameters(int* parameters);
+	void getparameters(int parameters[], int size);
 	Unit* createUnit(int EH, int P, int C,bool is_E,int timestep);
 	void generateUnits(int timestep);
 };

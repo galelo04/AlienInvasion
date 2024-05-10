@@ -28,6 +28,7 @@ public:
 	int getETCount();
 	int getEGCount();
 	int getTotalEDf(int &totalAlivegotAttacked);
+	void destroyUML(Game* gameptr);
 	~EarthArmy();
 };
 

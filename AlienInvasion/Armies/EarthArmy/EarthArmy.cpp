@@ -209,6 +209,22 @@ int EarthArmy::getTotalEDf(int& totalAlivegotAttacked)
 	return Df;
 }
 
+void EarthArmy::destroyUML(Game* gameptr)
+{
+	Unit* removeUnit;
+	int pri= 0;
+	while (UMLsoldiers.dequeue(removeUnit,pri))
+	{
+		removeUnit->decrementHealth(removeUnit->getHealth());
+		gameptr->addToKilledList(removeUnit);
+	}
+	while (UMLtanks.dequeue(removeUnit))
+	{
+		removeUnit->decrementHealth(removeUnit->getHealth());
+		gameptr->addToKilledList(removeUnit);
+	}
+}
+
 EarthArmy::~EarthArmy()
 {
 	Unit* unittobedeleted;

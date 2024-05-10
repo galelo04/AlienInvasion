@@ -59,7 +59,7 @@ void Game::loadParams(string filename)
 		Params[18] = Params[18] * -1;
 		Params[20] = Params[20] * -1;
 		inFile.close();
-		generator->getparameters(Params);
+		generator->getparameters(Params , 21);
 	}
 	else
 	{
@@ -129,7 +129,7 @@ bool Game::battle()
 			result = Result::Loss;
 			return false;
 		}
-		else if ((TimeStep == 100) || (E_Total == 0 && A_Total == 0)||(ES_Total!=0 && EG_Total==0 && ET_Total==0 && AS_Total==0 && AD_Total!=0 && AM_Total==0) || (ES_Total == 0 && EG_Total != 0 && ET_Total == 0 && AS_Total != 0 && AD_Total == 0 && AM_Total == 0))
+		else if ((E_Total == 0 && A_Total == 0) || (ES_Total!=0 && EG_Total==0 && ET_Total==0 && AS_Total==0 && AD_Total!=0 && AM_Total==0) || (ES_Total == 0 && EG_Total != 0 && ET_Total == 0 && AS_Total != 0 && AD_Total == 0 && AM_Total == 0))
 		{
 			result = Result::Drawn;
 			return false;
@@ -383,6 +383,7 @@ void Game::EndGame()
 	HANDLE console_color;
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console_color, 7);
+	earthArmy->destroyUML(this);
 	loadOutputs();
 	cout << "Simulation ends, Output file is created" << endl;
 	SetConsoleTextAttribute(console_color, 8);

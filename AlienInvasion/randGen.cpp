@@ -16,11 +16,16 @@ randGen::randGen(Game* _gameptr)
 {
     gameptr = _gameptr;
     srand((unsigned)time(NULL));
+    earth_limit = false;
+    alien_limit = false;
 }
 
-void randGen::getparameters(int* parameters)
+void randGen::getparameters(int parameters[], int size)
 {  
-    params = parameters;
+    for (int i = 0; i < size; i++)
+    {
+        params[i] = parameters[i];
+    }
 }
 
 void randGen::generateUnits(int timestep)
@@ -28,7 +33,7 @@ void randGen::generateUnits(int timestep)
     Unit* newUnit;
     int A = 1+(rand() % 100);
 
-    if (A <= params[8])
+    if (A <= params[8] && !earth_limit)
     {
         for (int i = 0; i < params[0]; i++)
         {
@@ -44,7 +49,7 @@ void randGen::generateUnits(int timestep)
     ////////////////////////////////////
     A = 1 + (rand() % 100);
 
-    if (A <= params[8])
+    if (A <= params[8] && !alien_limit)
     {
         for (int i = 0; i < params[0]; i++)
         {
@@ -83,14 +88,16 @@ Unit* randGen::createUnit(int H,int P,int C,bool is_E,int timestep)
         {
             newUnit = new HealingUnit(timestep, H, P, C);
         }
+        if (newUnit->getID() == 999)
+            earth_limit = true;
     }
     else
     {
-        if (B <= params[4])
+        if (B <= params[5])
         {
              newUnit = new AlienSoldier(timestep, H, P, C);
         }
-        else if (B <= params[4] + params[6])
+        else if (B <= params[5] + params[6]) 
         {
              newUnit = new AlienMonster(timestep, H, P, C);
         }
@@ -98,6 +105,8 @@ Unit* randGen::createUnit(int H,int P,int C,bool is_E,int timestep)
         {
              newUnit = new AlienDrone(timestep, H, P, C);
         }
+        if (newUnit->getID() == 2999)
+            alien_limit = true;
     }
     return newUnit;
 }
