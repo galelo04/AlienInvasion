@@ -83,7 +83,7 @@ void Game::setMode(Mode mode)
 	_mode = mode;
 }
 
-int Game::battle()
+bool Game::battle()
 {
 	generator->generateUnits(TimeStep);
 	if (_mode == Mode::Normal)
@@ -107,9 +107,36 @@ int Game::battle()
 		alienArmy->attack(this);
 	}
 	
-	//generator->generateUnits(TimeStep++);
+	if (TimeStep >= 40)
+	{
+		int ES_Total = earthArmy->getESCount();
+		int EG_Total = earthArmy->getEGCount();
+		int ET_Total = earthArmy->getETCount();
+		int AS_Total = alienArmy->getASCount();
+		int AD_Total = alienArmy->getADCount();
+		int AM_Total = alienArmy->getAMCount();
+		int E_Total = ES_Total + EG_Total + ET_Total;
+		int A_Total = AS_Total + AD_Total + AM_Total;
+
+
+		if (A_Total == 0 && E_Total != 0)
+		{
+			result = Result::Win;
+			return false;
+		}
+		else if (E_Total == 0 && A_Total != 0)
+		{
+			result = Result::Loss;
+			return false;
+		}
+		else if ((TimeStep == 100) || (E_Total == 0 && A_Total == 0)||(ES_Total!=0 && EG_Total==0 && ET_Total==0 && AS_Total==0 && AD_Total!=0 && AM_Total==0) || (ES_Total == 0 && EG_Total != 0 && ET_Total == 0 && AS_Total != 0 && AD_Total == 0 && AM_Total == 0))
+		{
+			result = Result::Drawn;
+			return false;
+		}
+	}
 	TimeStep++;
-	return TimeStep;
+	return true;
 }
 
 void Game::printStatus()
@@ -220,11 +247,10 @@ void Game::loadOutputs()
 		outFile << endl;
 
 		outFile << "Battle result: \t";
-		int EArmyCount = earthArmy->getEGCount() + earthArmy->getESCount() + earthArmy->getETCount();
-		int AArmyCount = alienArmy->getADCount() + alienArmy->getAMCount() + alienArmy->getASCount();
-		if (EArmyCount > AArmyCount)
+		
+		if (result == Result::Win)
 			outFile << "Win" << endl;
-		else if (EArmyCount < AArmyCount)
+		else if (result == Result::Loss)
 			outFile << "Loss" << endl;
 		else
 			outFile << "Drawn" << endl;
@@ -351,61 +377,6 @@ int Game::getCrntTimeStep()
 {
 	return TimeStep;
 }
-
-//void Game::battleResult()
-//{
-//	int ES_Count = earthArmy->getESCount();
-//	int EG_Count = earthArmy->getEGCount();
-//	int ET_Count = earthArmy->getETCount();
-//	int AS_Count = alienArmy->getASCount();
-//	int AD_Count = alienArmy->getADCount();
-//	int AM_Count = alienArmy->getAMCount();
-//
-//	if (ES_Count > 0 && EG_Count == 0 && ET_Count == 0)
-//	{
-//		if (AM_Count > 0)
-//		{
-//			cout << "Loss";
-//			return;
-//		}
-//		else if(AS_Count == 0 && AD_Count == 0)
-//		{
-//			cout << "Win";
-//			return;
-//		}
-//		else
-//		{
-//			cout << "Drawn";
-//			return;
-//		}
-//	}
-//	else if (ES_Count > 0 && EG_Count > 0 && ET_Count == 0)
-//	{
-//		if (AD_Count <= 1  && AS_Count == 0)
-//		{
-//			cout << "Win";
-//			return;
-//		}
-//		else
-//		{
-//			cout << "Drawn";
-//			return;
-//		}
-//	}
-//	else if (ES_Count > 0 && EG_Count == 0 && ET_Count > 0)
-//	{
-//		if (AD_Count <= 1 && AS_Count == 0)
-//		{
-//			cout << "Win";
-//			return;
-//		}
-//		else
-//		{
-//			cout << "Drawn";
-//			return;
-//		}
-//	}
-//}
 
 void Game::EndGame()
 {

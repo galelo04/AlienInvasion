@@ -8,6 +8,11 @@ enum class Mode {
 	Normal,
 	Silent
 };
+enum class Result {
+	Win,
+	Loss,
+	Drawn
+};
 class Game
 {
 private:
@@ -17,8 +22,7 @@ private:
 	EarthArmy * earthArmy;
 	randGen * generator;
 	priQueue <Unit* > killedlist;
-	
-
+	Result result;
 	Mode _mode;
 public:
 	Game();
@@ -26,7 +30,7 @@ public:
 	EarthArmy*& getEarthArmy() ;
 	void instantiateGame();
 	void loadParams(string filename);
-	int battle();
+	bool battle();
 	Mode getMode() const;
 	void setMode(Mode mode);
 	void printStatus();
