@@ -60,9 +60,11 @@ public:
 	friend std::ostream& operator<<(std::ostream& stream, Unit* unit)
 	{
 		if (unit)
+		{
 			stream << unit->ID;
-		if (unit->isInfected())
-			stream << "(#)";
+			if (unit->isInfected())
+				stream << "(#)";
+		}
 		return stream;
 	}
 };
