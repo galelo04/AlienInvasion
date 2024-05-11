@@ -37,7 +37,7 @@ void randGen::generateUnits(int timestep)
     {
         for (int i = 0; i < params[0]; i++)
         {
-            int B = 1 + (rand() % 100);
+             int B = 1 + (rand() % 100);
             int E_P = params[9] + (rand() % (params[10] - params[9] + 1));
             int E_H = params[11] + (rand() % (params[12] - params[11] + 1));
             int E_C = params[13] + (rand() % (params[14] - params[13] + 1));

@@ -88,15 +88,16 @@ bool Game::battle()
 	generator->generateUnits(TimeStep);
 	if (_mode == Mode::Normal)
 	{
+		HANDLE console_color;
+		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 		printStatus();
+		SetConsoleTextAttribute(console_color, 13);
 		cout << "==============  Units fighting at current step ===============\n";
-	
+		SetConsoleTextAttribute(console_color, 15);
 		earthArmy->attack(this);
 		alienArmy->attack(this);
 	
 		printKilledlist();
-		HANDLE console_color;
-		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleTextAttribute(console_color, 9);
 		system("pause");
 		//system("cls");
