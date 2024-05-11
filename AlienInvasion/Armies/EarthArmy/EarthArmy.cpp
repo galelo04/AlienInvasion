@@ -149,6 +149,7 @@ void EarthArmy::infectionSpread()
 						removed->infect(true);
 						incrementInfES();
 					}
+					cout << "alooo\n";
 				}
 				templist.enqueue(removed);
 				i++;
