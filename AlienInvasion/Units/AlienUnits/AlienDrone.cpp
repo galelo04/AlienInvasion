@@ -69,9 +69,9 @@ void AlienDrone::Attack(Game* gameptr)
 		}
 	}
 	while (EGtemplist.dequeue(attackedUnit, pri))
-		gameptr->getAlienArmy()->addUnit(attackedUnit);
+		gameptr->getEarthArmy()->addUnit(attackedUnit);
 	while (ETtemplist.pop(attackedUnit))
-		gameptr->getAlienArmy()->addUnit(attackedUnit);
+		gameptr->getEarthArmy()->addUnit(attackedUnit);
 
 }
 
