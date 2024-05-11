@@ -118,9 +118,11 @@ void EarthArmy::attack(Game* gameptr)
 	{
 		unitAttacking->Attack(gameptr);
 	}
-	if (HealingList.peek(unitAttacking)&&UMLsoldiers.getCount()>0||UMLtanks.getCount()>0)
+	if (HealingList.peek(unitAttacking)&&(UMLsoldiers.getCount()>0||UMLtanks.getCount()>0))
 	{
 		unitAttacking->Attack(gameptr);
+
+		HealingList.pop(unitAttacking);
 		gameptr->addToKilledList(unitAttacking);
 	}
 	
