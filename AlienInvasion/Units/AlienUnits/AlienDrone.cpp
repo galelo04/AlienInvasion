@@ -59,12 +59,12 @@ void AlienDrone::Attack(Game* gameptr)
 	if (gameptr->getMode()==Mode::Normal) {
 		if (EGtemplist.getCount() > 0)
 		{
-			cout << "ED " << getID() << " shots Gunneries ";
+			cout << "AD " << getID() << " shots Gunneries ";
 			EGtemplist.printlist();
 		}
 		if (ETtemplist.getCount() > 0)
 		{
-			cout << "ED " << getID() << " shots Tanks ";
+			cout << "AD " << getID() << " shots Tanks ";
 			ETtemplist.printlist();
 		}
 	}
