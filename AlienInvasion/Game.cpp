@@ -108,7 +108,7 @@ int Game::battle()
 		earthArmy->attack(this);
 		alienArmy->attack(this);
 		allyArmy->attack(this);
-	
+		
 		printKilledlist();
 		HANDLE console_color;
 		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -120,6 +120,7 @@ int Game::battle()
 	{
 		earthArmy->attack(this);
 		alienArmy->attack(this);
+		allyArmy->attack(this);
 	}
 	
 	//generator->generateUnits(TimeStep++);

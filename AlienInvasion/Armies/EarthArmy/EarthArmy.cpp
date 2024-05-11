@@ -4,6 +4,7 @@
 
 EarthArmy::EarthArmy()
 {
+	srand((unsigned)time(NULL));
 	InfectedSoldiers = 0;
 }
 
@@ -123,31 +124,39 @@ void EarthArmy::attack(Game* gameptr)
 		unitAttacking->Attack(gameptr);
 		gameptr->addToKilledList(unitAttacking);
 	}
+	infectionSpread();
 }
 
-//void EarthArmy::infectionSpread()
-//{
-//	LinkedQueue<Unit*> left;
-//	LinkedQueue<Unit*> right;
-//	Unit* removed;
-//	Unit* infected;
-//	while (EarthSoldiers.dequeue(removed))
-//	{
-//		if (!removed->isInfected())
-//			left.enqueue(removed);
-//		else
-//		{
-//			infected = removed;
-//			while (EarthSoldiers.dequeue(removed))
-//			{
-//				right.enqueue(removed);
-//			}
-//		}
-//		left.enqueue(infected);
-//		while (right.dequeue(removed))
-//			EarthSoldiers.enqueue(removed);
-//	}
-//}
+void EarthArmy::infectionSpread()
+{
+	LinkedQueue<Unit*> templist;
+	Unit* removed = nullptr;
+	if (InfectedSoldiers > 0)
+	{
+		int A = 1 + (rand() % 100);
+		if (A <= 2)
+		{
+			int size = getESCount();
+			int index = 1 + (rand() % size);
+			int i = 0;
+			while(EarthSoldiers.dequeue(removed))
+			{
+				if (i == index)
+				{
+					if (!removed->isInfected())
+					{
+						removed->infect(true);
+						incrementInfES();
+					}
+				}
+				templist.enqueue(removed);
+				i++;
+			}
+			while (templist.dequeue(removed))
+				EarthSoldiers.enqueue(removed);
+		}
+	}
+}
 
 void EarthArmy::print()
 {
