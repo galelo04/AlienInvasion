@@ -18,6 +18,7 @@
 
 randGen::randGen(Game* _gameptr)
 {
+    allyLimit = false;
     gameptr = _gameptr;
     srand((unsigned)time(NULL));
     generateSU = false;
@@ -88,6 +89,8 @@ void randGen::generateUnits(int timestep)
 
             newUnit = createUnit(SU_P, SU_H, SU_C, allyarmy, timestep);
             gameptr->getAllyArmy()->addUnit(newUnit);
+            if (newUnit->getID() == 4250)
+                allyLimit = true;
         }
     }
 }
@@ -134,7 +137,7 @@ Unit* randGen::createUnit(int H,int P,int C,ArmyType type,int timestep)
              newUnit = new AlienDrone(timestep, H, P, C);
         }
     }
-    else
+    else if(type==allyarmy && !allyLimit)
     {
         newUnit = new SaverUnit(timestep, H, P, C);
     }

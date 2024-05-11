@@ -15,6 +15,7 @@ private:
 	int* params;
 	bool generateSU;
 	Game* gameptr;
+	bool allyLimit;
 public:
 	randGen(Game* _gameptr);
 	void getparameters(int* parameters);
