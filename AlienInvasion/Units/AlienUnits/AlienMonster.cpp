@@ -62,7 +62,7 @@ void AlienMonster::Attack(Game* gameptr)
 	if (gameptr->getMode() == Mode::Normal) {
 		if (EStemplist.getCount() > 0)
 		{
-			cout << "AM " << getID() << " shots Soldiers ";
+			cout << "AM " << getID() << " shots Earth Soldiers ";
 			EStemplist.printlist();
 		}
 		if (ETtemplist.getCount() > 0)

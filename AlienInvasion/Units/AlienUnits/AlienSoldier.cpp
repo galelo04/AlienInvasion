@@ -36,7 +36,7 @@ void AlienSoldier::Attack(Game* gameptr)
 	if (gameptr->getMode() == Mode::Normal) {
 		if (EStemplist.getCount() > 0)
 		{
-			cout << "AS " << getID() << " shots ";
+			cout << "AS " << getID() << " shots Earth Soldiers ";
 			EStemplist.printlist();
 		}
 	}

@@ -24,13 +24,14 @@ void EarthArmy::addUnit(Unit* unit)
 	}
 	case(UnitType::Gunnery):
 	{
-		EarthGunnery* gunnery = dynamic_cast <EarthGunnery*> (unit);
+		/*EarthGunnery* gunnery = dynamic_cast <EarthGunnery*> (unit);
 		if (gunnery)
 		{
 			gunnery->setPri(unit->getHealth() + unit->getPower());
 			EarthGunneries.enqueue(gunnery, gunnery->getPri());
-		}
-			break;
+		}*/
+		EarthGunneries.enqueue(unit, unit->getHealth() + unit->getPower());
+		break;
 	}
 	case(UnitType::HealingUnit):
 	{
@@ -62,6 +63,7 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	case (UnitType::Gunnery):
 	{
 		EarthGunneries.dequeue(removedUnit, pri);
+
 		break;
 	}
 	case(UnitType::HealingUnit):
@@ -137,6 +139,8 @@ void EarthArmy::print()
 	EarthTanks.printlist();
 	cout << EarthGunneries.getCount() << " EG ";
 	EarthGunneries.printlist();
+	cout << HealingList.getCount() << " HU ";
+	HealingList.printlist();
 }
 
 void EarthArmy::addToUML(Unit* unit,int UT)
