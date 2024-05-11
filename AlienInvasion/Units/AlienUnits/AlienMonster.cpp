@@ -32,6 +32,7 @@ void AlienMonster::Attack(Game* gameptr)
 			if (prob <= infection_probability && !attackedUnit->isImmuned())
 			{
 				attackedUnit->infect(true);
+				gameptr->getEarthArmy()->incrementInfES();
 			}
 			else
 			{

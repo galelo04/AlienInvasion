@@ -36,6 +36,7 @@ void HealingUnit::Attack(Game* gameptr)
 					if (attackedUnit->isInfected())
 					{
 						attackedUnit->infect(false);
+						gameptr->getEarthArmy()->decrementInfES();
 						attackedUnit->immune(true);
 					}
 					gameptr->getEarthArmy()->addUnit(attackedUnit);

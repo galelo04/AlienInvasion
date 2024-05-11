@@ -9,7 +9,8 @@ enum class UnitType {
 	HealingUnit,
 	AlienSoldier,
 	Monster,
-	Drone
+	Drone,
+	SaverUnit
 };
 
 class Unit 
@@ -32,6 +33,7 @@ private:
 protected:
 	static int last_Earth_Id;
 	static int last_Alien_Id;
+	static int last_Ally_Id;
 public:
 
 	Unit(UnitType type,int id,  int jointime, int health, int power, int attackcapacity);

@@ -3,7 +3,9 @@
 #include "../../Game.h"
 
 EarthArmy::EarthArmy()
-{}
+{
+	InfectedSoldiers = 0;
+}
 
 void EarthArmy::addUnit(Unit* unit)
 {
@@ -161,6 +163,7 @@ void EarthArmy::print()
 	EarthTanks.printlist();
 	cout << EarthGunneries.getCount() << " EG ";
 	EarthGunneries.printlist();
+	cout << "ES inf% " << infES_P()<<endl;
 }
 
 void EarthArmy::addToUML(Unit* unit,int UT)
@@ -199,6 +202,11 @@ int EarthArmy::getEGCount()
 	return EarthGunneries.getCount();
 }
 
+int EarthArmy::getInfESCount()
+{
+	return InfectedSoldiers;
+}
+
 int EarthArmy::getTotalEDf(int& totalAlivegotAttacked)
 {
 	int Df = 0;
@@ -231,6 +239,22 @@ int EarthArmy::getTotalEDf(int& totalAlivegotAttacked)
 	}
 
 	return Df;
+}
+
+void EarthArmy::incrementInfES()
+{
+	InfectedSoldiers++;
+}
+
+void EarthArmy::decrementInfES()
+{
+	InfectedSoldiers--;
+}
+
+int EarthArmy::infES_P()
+{
+	if (EarthSoldiers.getCount() == 0) return 0;
+	return ((InfectedSoldiers*100)/EarthSoldiers.getCount());
 }
 
 EarthArmy::~EarthArmy()

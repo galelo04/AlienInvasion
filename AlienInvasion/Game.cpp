@@ -11,6 +11,7 @@ Game::Game()
 	srand((unsigned)time(NULL));
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
+	allyArmy = new AllyArmy;
 	generator = new randGen(this);
 	TimeStep = 1;
 }
@@ -23,6 +24,11 @@ AlienArmy*& Game::getAlienArmy()
 EarthArmy*& Game::getEarthArmy()
 {
 	return earthArmy;
+}
+
+AllyArmy*& Game::getAllyArmy()
+{
+	return allyArmy;
 }
 
 void Game::instantiateGame()
@@ -50,7 +56,10 @@ void Game::loadParams(string filename)
 		inFile >> Params[8];                            // [8]=>Prob
 		inFile >> Params[9] >> Params[10] >> Params[11] >> Params[12] >> Params[13] >> Params[14];    //[9,10]=>E_P, [11,12]=>E_H, [13,14]=>E_C
 		inFile >> Params[15] >> Params[16] >> Params[17] >> Params[18] >> Params[19] >> Params[20];  //[15,16]=>A_P, [17,18]=>A_H, [19,20]=>A_C
-		inFile >> Params[21]; //[Monster infection prop ]
+		inFile >> Params[21] >> Params[22] >> Params[23] >> Params[24] >> Params[25] >> Params[26];  //[21,22]=>SU_P, [23,24]=>SU_H, [25,26]=>SU_C
+		inFile >> Params[27]; //[Monster infection prop ]
+		inFile >> Params[28]; //[Infection Threshold]
+
 		Params[10] = Params[10] * -1;
 		Params[12] = Params[12] * -1;
 		Params[14] = Params[14] * -1;
@@ -58,6 +67,11 @@ void Game::loadParams(string filename)
 		Params[16] = Params[16] * -1;
 		Params[18] = Params[18] * -1;
 		Params[20] = Params[20] * -1;
+
+		Params[22] = Params[22] * -1;
+		Params[24] = Params[24] * -1;
+		Params[26] = Params[26] * -1;
+
 		inFile.close();
 		generator->getparameters(Params);
 	}
@@ -93,6 +107,7 @@ int Game::battle()
 	
 		earthArmy->attack(this);
 		alienArmy->attack(this);
+		allyArmy->attack(this);
 	
 		printKilledlist();
 		HANDLE console_color;
@@ -123,6 +138,7 @@ void Game::printStatus()
 	SetConsoleTextAttribute(console_color, 15);
 	earthArmy->print();
 	alienArmy->print();	
+	allyArmy->print();
 }
 
 void Game::printKilledlist()
@@ -136,6 +152,8 @@ void Game::printKilledlist()
 	cout << killedlist.getCount() << " Units ";
 	killedlist.printlist();
 }
+
+
 
 void Game::addToKilledList(Unit*& unit)
 {
