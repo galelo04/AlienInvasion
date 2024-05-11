@@ -100,7 +100,7 @@ void randGen::generateUnits(int timestep)
 
 Unit* randGen::createUnit(int H,int P,int C,ArmyType type,int timestep)
 {
-    Unit* newUnit = nullptr;
+    Unit* newUnit = nullptr; // exception nullptr
     int B = 1 + (rand() % 100);
 
     if (type==eartharmy)
