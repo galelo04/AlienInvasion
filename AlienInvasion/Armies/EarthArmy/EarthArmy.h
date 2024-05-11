@@ -17,6 +17,7 @@ private:
 	priQueue <Unit*> UMLsoldiers;
 	LinkedQueue<Unit*>UMLtanks;
 	int InfectedSoldiers;
+	int TotalinfES;
 public:
 	EarthArmy();
 	virtual void addUnit(Unit* unit);
@@ -31,6 +32,8 @@ public:
 	int getEGCount();
 	int getInfESCount();
 	int getTotalEDf(int &totalAlivegotAttacked);
+	int getTotalinfES();
+	void incTotalinfES();
 	void incrementInfES();
 	void decrementInfES();
 	int infES_P();

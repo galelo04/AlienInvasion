@@ -124,11 +124,11 @@ Unit* randGen::createUnit(int H,int P,int C,ArmyType type,int timestep)
     }
     else if(type==alienarmy)
     {
-        if (B <= params[4])
+        if (B <= params[5])
         {
              newUnit = new AlienSoldier(timestep, H, P, C);
         }
-        else if (B <= params[4] + params[6])
+        else if (B <= params[5] + params[6])
         {
              newUnit = new AlienMonster(timestep, H, P, C,params[27]);
         }

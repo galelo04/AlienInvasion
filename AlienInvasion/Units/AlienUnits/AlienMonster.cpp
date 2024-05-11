@@ -33,6 +33,7 @@ void AlienMonster::Attack(Game* gameptr)
 			{
 				attackedUnit->infect(true);
 				gameptr->getEarthArmy()->incrementInfES();
+				gameptr->getEarthArmy()->incTotalinfES();
 			}
 			else
 			{

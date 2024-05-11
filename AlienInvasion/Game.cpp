@@ -300,6 +300,12 @@ void Game::loadOutputs()
 		else
 			outFile << "\t - Df/Db % : " << EtotalDf * 100 / EtotalDb << "%" << " , Dd/Db % : " << EtotalDd * 100 / EtotalDb << "%" << endl;
 
+		if (ES_Total == 0)
+			outFile << "\t - Infection % is Undefined";
+		else
+			outFile << "\t - Infection % : " << earthArmy->getTotalinfES() * 100 / ES_Total << "%";
+
+
 
 		outFile << endl;
 		

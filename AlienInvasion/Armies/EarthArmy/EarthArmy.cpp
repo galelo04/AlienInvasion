@@ -6,6 +6,7 @@ EarthArmy::EarthArmy()
 {
 	srand((unsigned)time(NULL));
 	InfectedSoldiers = 0;
+	TotalinfES = 0;
 }
 
 void EarthArmy::addUnit(Unit* unit)
@@ -248,6 +249,16 @@ int EarthArmy::getTotalEDf(int& totalAlivegotAttacked)
 	}
 
 	return Df;
+}
+
+int EarthArmy::getTotalinfES()
+{
+	return TotalinfES;
+}
+
+void EarthArmy::incTotalinfES()
+{
+	TotalinfES++;
 }
 
 void EarthArmy::incrementInfES()
