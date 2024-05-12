@@ -31,6 +31,9 @@ void randGen::getparameters(int* parameters)
 
 void randGen::EA_help()
 {
+   /* int infP = gameptr->getEarthArmy()->infES_P();
+    cout << "Inf% before generation " << infP << endl;
+    */
     if (generateSU == false)
     {
         if (gameptr->getEarthArmy()->infES_P() >= params[28])

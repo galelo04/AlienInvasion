@@ -1,6 +1,6 @@
 #include "AllyArmy.h"
 #include "../../Game.h"
-
+#include "Windows.h"
 AllyArmy::AllyArmy()
 {
 }
@@ -33,8 +33,12 @@ void AllyArmy::attack(Game* gameptr)
 
 void AllyArmy::print()
 {
+	HANDLE console_color;
+	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	SetConsoleTextAttribute(console_color, 14);
 	cout << "==============  Alive Saver Units   =============\n";
-	
+	SetConsoleTextAttribute(console_color, 15);
 	cout << SaverUnits.getCount() << " SU ";
 	SaverUnits.printlist();
 }

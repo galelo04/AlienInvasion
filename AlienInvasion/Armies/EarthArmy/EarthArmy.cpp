@@ -275,7 +275,7 @@ void EarthArmy::decrementInfES()
 int EarthArmy::infES_P()
 {
 	if (EarthSoldiers.getCount() == 0) return 0;
-	return ((InfectedSoldiers*100)/EarthSoldiers.getCount());
+	return ((getInfESCount()*100)/EarthSoldiers.getCount());
 }
 
 EarthArmy::~EarthArmy()

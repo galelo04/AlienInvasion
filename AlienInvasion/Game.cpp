@@ -103,15 +103,16 @@ int Game::battle()
 	if (_mode == Mode::Normal)
 	{
 		printStatus();
+		HANDLE console_color;
+		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(console_color, 13);
 		cout << "==============  Units fighting at current step ===============\n";
-	
+		SetConsoleTextAttribute(console_color, 15);
 		earthArmy->attack(this);
 		alienArmy->attack(this);
 		allyArmy->attack(this);
 		
 		printKilledlist();
-		HANDLE console_color;
-		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleTextAttribute(console_color, 9);
 		system("pause");
 		//system("cls");

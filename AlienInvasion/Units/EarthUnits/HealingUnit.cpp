@@ -8,7 +8,8 @@ HealingUnit::HealingUnit(int jointime, int health, int power, int attackcapacity
 
 void HealingUnit::Attack(Game* gameptr)
 {
-	LinkedQueue<Unit*>templist;
+	LinkedQueue<Unit*>templist_S;
+	LinkedQueue<Unit*>templist_T;
 	Unit* attackedUnit = nullptr;
 	int attackCapacity = getAttackCapacity();
 	for (int i = 0; i < attackCapacity; i++)
@@ -16,49 +17,66 @@ void HealingUnit::Attack(Game* gameptr)
 		attackedUnit = gameptr->getEarthArmy()->removefromUML(UnitType::EarthSoldier);
 		if (attackedUnit)
 		{
-			/*if (!attackedUnit->IsAttacked())
+			if (!attackedUnit->IsAttacked())
 			{
-				attackedUnit->makeAttacked(true); هل دي مقصودة؟ المفروض الهيلينج يونت بتعمل هيل مش اتاك 
-			}*/
-			if(gameptr->getCrntTimeStep()-attackedUnit->getUMLJoiningTime()>10)
+				attackedUnit->makeAttacked(true);
+			}
+			if (gameptr->getCrntTimeStep() - attackedUnit->getUMLJoiningTime() > 10)
 				gameptr->addToKilledList(attackedUnit);
 			else
 			{
-
 				int improvement = (this->getPower() * (this->getHealth() / 100)) / sqrt(attackedUnit->getHealth());
-				if (attackedUnit->isInfected())
-					attackedUnit->heal(improvement);
-				else
-					attackedUnit->heal(improvement/2);
+				attackedUnit->heal(improvement);
 
 				if (attackedUnit->getHealth() > attackedUnit->getIntialHealth() * .2)
 				{
-					if (attackedUnit->isInfected())
-					{
-						attackedUnit->infect(false);
-						gameptr->getEarthArmy()->decrementInfES();
-						attackedUnit->immune(true);
-					}
 					gameptr->getEarthArmy()->addUnit(attackedUnit);
 				}
 				else
-					templist.enqueue(attackedUnit);
+					templist_S.enqueue(attackedUnit);
 			}
-			
+
+		}
+		else
+		{
+			attackedUnit = gameptr->getEarthArmy()->removefromUML(UnitType::Tank);
+			if (attackedUnit)
+			{
+				if (!attackedUnit->IsAttacked())
+				{
+					attackedUnit->makeAttacked(true);
+				}
+				if (gameptr->getCrntTimeStep() - attackedUnit->getUMLJoiningTime() > 10)
+					gameptr->addToKilledList(attackedUnit);
+				else
+				{
+					int improvement = (this->getPower() * (this->getHealth() / 100)) / sqrt(attackedUnit->getHealth());
+					attackedUnit->heal(improvement);
+
+					if (attackedUnit->getHealth() > attackedUnit->getIntialHealth() * .2)
+					{
+						gameptr->getEarthArmy()->addUnit(attackedUnit);
+					}
+					else
+						templist_T.enqueue(attackedUnit);
+				}
+			}
 		}
 	}
 	if (gameptr->getMode() == Mode::Normal) {
-		if (templist.getCount() > 0)
+		if (templist_S.getCount() > 0)
 		{
-			cout << "HU " << getID() << " Heals ";
-			templist.printlist();
+			cout << "HU " << getID() << " Heals Soldiers ";
+			templist_S.printlist();
+		}
+		if (templist_T.getCount() > 0)
+		{
+			cout << "HU " << getID() << " Fixes Gunneries ";
+			templist_T.printlist();
 		}
 	}
-	while (templist.dequeue(attackedUnit))
-	{
-		if(int(attackedUnit->getType())== 0)
+	while (templist_S.dequeue(attackedUnit))
 		gameptr->getEarthArmy()->addToUML(attackedUnit, attackedUnit->getUMLJoiningTime());
-		else
-			gameptr->getEarthArmy()->addToUML(attackedUnit, attackedUnit->getUMLJoiningTime());
-	}
+	while (templist_T.dequeue(attackedUnit))
+		gameptr->getEarthArmy()->addToUML(attackedUnit, attackedUnit->getUMLJoiningTime());
 }
