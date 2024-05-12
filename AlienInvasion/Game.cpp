@@ -74,7 +74,7 @@ void Game::loadParams(string filename)
 		Params[26] = Params[26] * -1;
 
 		inFile.close();
-		generator->getparameters(Params , 21);
+		generator->getparameters(Params , 29);
 	}
 	else
 	{

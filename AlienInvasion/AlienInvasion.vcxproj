@@ -37,7 +37,6 @@
     <ClInclude Include="DataStructures\Queue\QueueADT.h" />
     <ClInclude Include="DataStructures\Stack\ArrayStack.h" />
     <ClInclude Include="DataStructures\Stack\StackADT.h" />
-    <ClInclude Include="Units\AlienUnits\EarthSoldier.h" />
     <ClInclude Include="Units\EarthUnits\EarthGunnery.h" />
     <ClInclude Include="Units\EarthUnits\EarthSoldier.h" />
     <ClInclude Include="Units\EarthUnits\EarthTank.h" />

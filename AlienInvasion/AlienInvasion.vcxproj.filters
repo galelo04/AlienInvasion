@@ -51,9 +51,6 @@
     <ClInclude Include="Armies\Army.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Units\AlienUnits\EarthSoldier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Units\EarthUnits\EarthGunnery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
