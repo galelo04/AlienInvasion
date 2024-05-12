@@ -24,10 +24,18 @@ void HealingUnit::Attack(Game* gameptr)
 			else
 			{
 				int improvement = (this->getPower() * (this->getHealth() / 100)) / sqrt(attackedUnit->getHealth());
-				attackedUnit->heal(improvement);
+				if (attackedUnit->isInfected())
+					attackedUnit->heal(improvement/2);
+				else
+					attackedUnit->heal(improvement);
 
 				if (attackedUnit->getHealth() > attackedUnit->getIntialHealth() * .2)
 				{
+					if (attackedUnit->isInfected())
+					{
+						attackedUnit->infect(false);
+						attackedUnit->immune(true);
+					}
 					gameptr->getEarthArmy()->addUnit(attackedUnit);
 				}
 				else
