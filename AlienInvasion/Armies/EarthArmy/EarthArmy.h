@@ -16,6 +16,8 @@ private:
 	ArrayStack<Unit*>HealingList;
 	priQueue <Unit*> UMLsoldiers;
 	LinkedQueue<Unit*>UMLtanks;
+	int InfectedSoldiers;
+	int TotalinfES;
 public:
 	EarthArmy();
 	virtual void addUnit(Unit* unit);
@@ -23,12 +25,24 @@ public:
 	Unit* removefromUML(UnitType type);
 	void addToUML(Unit* unit,int UT);
 	virtual void attack(Game* gameptr);
+
+	virtual void infectionSpread();
+
 	virtual void print();
 	int getESCount();
 	int getETCount();
 	int getEGCount();
+	int getInfESCount();
 	int getTotalEDf(int &totalAlivegotAttacked);
+
 	void destroyUML(Game* gameptr);
+
+	int getTotalinfES();
+	void incTotalinfES();
+	void incrementInfES();
+	void decrementInfES();
+	int infES_P();
+
 	~EarthArmy();
 };
 

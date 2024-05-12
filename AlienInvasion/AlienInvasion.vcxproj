@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Armies\AllyArmy\AllyArmy.h" />
     <ClInclude Include="Armies\Army.h" />
     <ClInclude Include="Armies\EarthArmy\EarthArmy.h" />
     <ClInclude Include="Game.h" />
@@ -40,8 +41,10 @@
     <ClInclude Include="Units\EarthUnits\EarthGunnery.h" />
     <ClInclude Include="Units\EarthUnits\EarthSoldier.h" />
     <ClInclude Include="Units\EarthUnits\EarthTank.h" />
+    <ClInclude Include="Units\SaverUints\SaverUnit.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Armies\AllyArmy\AllyArmy.cpp" />
     <ClCompile Include="Armies\Army.cpp" />
     <ClCompile Include="Armies\EarthArmy\EarthArmy.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -55,6 +58,7 @@
     <ClCompile Include="Units\EarthUnits\EarthGunnery.cpp" />
     <ClCompile Include="Units\EarthUnits\EarthSoldier.cpp" />
     <ClCompile Include="Units\EarthUnits\EarthTank.cpp" />
+    <ClCompile Include="Units\SaverUints\SaverUnit.cpp" />
     <ClCompile Include="Units\Unit.cpp" />
     <ClCompile Include="Units\Unit.h" />
   </ItemGroup>

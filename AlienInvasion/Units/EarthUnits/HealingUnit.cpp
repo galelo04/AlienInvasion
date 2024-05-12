@@ -17,11 +17,9 @@ void HealingUnit::Attack(Game* gameptr)
 		attackedUnit = gameptr->getEarthArmy()->removefromUML(UnitType::EarthSoldier);
 		if (attackedUnit)
 		{
-			if (!attackedUnit->IsAttacked())
-			{
-				attackedUnit->makeAttacked(true);
-			}
-			if(gameptr->getCrntTimeStep()-attackedUnit->getUMLJoiningTime()>10)
+
+			if (gameptr->getCrntTimeStep() - attackedUnit->getUMLJoiningTime() > 10)
+
 				gameptr->addToKilledList(attackedUnit);
 			else
 			{
@@ -34,18 +32,16 @@ void HealingUnit::Attack(Game* gameptr)
 				}
 				else
 					templist_S.enqueue(attackedUnit);
+
 			}
-			
+
 		}
 		else
 		{
 			attackedUnit = gameptr->getEarthArmy()->removefromUML(UnitType::Tank);
 			if (attackedUnit)
 			{
-				if (!attackedUnit->IsAttacked())
-				{
-					attackedUnit->makeAttacked(true);
-				}
+
 				if (gameptr->getCrntTimeStep() - attackedUnit->getUMLJoiningTime() > 10)
 					gameptr->addToKilledList(attackedUnit);
 				else
@@ -62,6 +58,7 @@ void HealingUnit::Attack(Game* gameptr)
 				}
 			}
 		}
+
 	}
 	if (gameptr->getMode() == Mode::Normal) {
 		if (templist_S.getCount() > 0)
@@ -71,13 +68,14 @@ void HealingUnit::Attack(Game* gameptr)
 		}
 		if (templist_T.getCount() > 0)
 		{
-			cout << "HU " << getID() << " Fixes Gunneries ";
+			cout << "HU " << getID() << " Fixes Tanks ";
 			templist_T.printlist();
 		}
 	}
 	while (templist_S.dequeue(attackedUnit))
 		gameptr->getEarthArmy()->addToUML(attackedUnit, attackedUnit->getUMLJoiningTime());
 	while(templist_T.dequeue(attackedUnit))
-			gameptr->getEarthArmy()->addToUML(attackedUnit, attackedUnit->getUMLJoiningTime());
+		gameptr->getEarthArmy()->addToUML(attackedUnit, attackedUnit->getUMLJoiningTime());
 	
 }
+

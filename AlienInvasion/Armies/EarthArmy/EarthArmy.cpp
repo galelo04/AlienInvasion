@@ -3,7 +3,11 @@
 #include "../../Game.h"
 
 EarthArmy::EarthArmy()
-{}
+{
+	srand((unsigned)time(NULL));
+	InfectedSoldiers = 0;
+	TotalinfES = 0;
+}
 
 void EarthArmy::addUnit(Unit* unit)
 {
@@ -24,12 +28,6 @@ void EarthArmy::addUnit(Unit* unit)
 	}
 	case(UnitType::Gunnery):
 	{
-		/*EarthGunnery* gunnery = dynamic_cast <EarthGunnery*> (unit);
-		if (gunnery)
-		{
-			gunnery->setPri(unit->getHealth() + unit->getPower());
-			EarthGunneries.enqueue(gunnery, gunnery->getPri());
-		}*/
 		EarthGunneries.enqueue(unit, unit->getHealth() + unit->getPower());
 		break;
 	}
@@ -63,7 +61,6 @@ Unit* EarthArmy::removeUnit(UnitType type)
 	case (UnitType::Gunnery):
 	{
 		EarthGunneries.dequeue(removedUnit, pri);
-
 		break;
 	}
 	case(UnitType::HealingUnit):
@@ -125,7 +122,39 @@ void EarthArmy::attack(Game* gameptr)
 		HealingList.pop(unitAttacking);
 		gameptr->addToKilledList(unitAttacking);
 	}
-	
+	infectionSpread();
+}
+
+
+void EarthArmy::infectionSpread()
+{
+	LinkedQueue<Unit*> templist;
+	Unit* removed = nullptr;
+	if (InfectedSoldiers > 0)
+	{
+		int A = 1 + (rand() % 100);
+		if (A <= 2)
+		{
+			int size = getESCount();
+			int index = 1 + (rand() % size);
+			int i = 0;
+			while(EarthSoldiers.dequeue(removed))
+			{
+				if (i == index)
+				{
+					if (!removed->isInfected())
+					{
+						removed->infect(true);
+						incrementInfES();
+					}
+				}
+				templist.enqueue(removed);
+				i++;
+			}
+			while (templist.dequeue(removed))
+				EarthSoldiers.enqueue(removed);
+		}
+	}
 }
 
 void EarthArmy::print()
@@ -144,6 +173,8 @@ void EarthArmy::print()
 	EarthGunneries.printlist();
 	cout << HealingList.getCount() << " HU ";
 	HealingList.printlist();
+	cout << "ES inf% " << infES_P()<<endl;
+
 }
 
 void EarthArmy::addToUML(Unit* unit,int UT)
@@ -180,6 +211,11 @@ int EarthArmy::getETCount()
 int EarthArmy::getEGCount()
 {
 	return EarthGunneries.getCount();
+}
+
+int EarthArmy::getInfESCount()
+{
+	return InfectedSoldiers;
 }
 
 int EarthArmy::getTotalEDf(int& totalAlivegotAttacked)
@@ -219,8 +255,8 @@ int EarthArmy::getTotalEDf(int& totalAlivegotAttacked)
 void EarthArmy::destroyUML(Game* gameptr)
 {
 	Unit* removeUnit;
-	int pri= 0;
-	while (UMLsoldiers.dequeue(removeUnit,pri))
+	int pri = 0;
+	while (UMLsoldiers.dequeue(removeUnit, pri))
 	{
 		removeUnit->decrementHealth(removeUnit->getHealth());
 		gameptr->addToKilledList(removeUnit);
@@ -230,6 +266,33 @@ void EarthArmy::destroyUML(Game* gameptr)
 		removeUnit->decrementHealth(removeUnit->getHealth());
 		gameptr->addToKilledList(removeUnit);
 	}
+}
+
+int EarthArmy::getTotalinfES()
+{
+	return TotalinfES;
+}
+
+void EarthArmy::incTotalinfES()
+{
+	TotalinfES++;
+}
+
+void EarthArmy::incrementInfES()
+{
+	InfectedSoldiers++;
+}
+
+void EarthArmy::decrementInfES()
+{
+	InfectedSoldiers--;
+}
+
+int EarthArmy::infES_P()
+{
+	if (EarthSoldiers.getCount() == 0) return 0;
+	return ((getInfESCount()*100)/EarthSoldiers.getCount());
+
 }
 
 EarthArmy::~EarthArmy()

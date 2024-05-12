@@ -19,6 +19,8 @@ int main()
 	game.setMode(mode);
 
 
+
 	while (game.battle());
+
 	game.EndGame();
 }

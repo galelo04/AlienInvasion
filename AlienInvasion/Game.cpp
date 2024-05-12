@@ -11,6 +11,7 @@ Game::Game()
 	srand((unsigned)time(NULL));
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
+	allyArmy = new AllyArmy;
 	generator = new randGen(this);
 	TimeStep = 1;
 }
@@ -23,6 +24,11 @@ AlienArmy*& Game::getAlienArmy()
 EarthArmy*& Game::getEarthArmy()
 {
 	return earthArmy;
+}
+
+AllyArmy*& Game::getAllyArmy()
+{
+	return allyArmy;
 }
 
 void Game::instantiateGame()
@@ -51,6 +57,10 @@ void Game::loadParams(string filename)
 		inFile >> Params[9] >> Params[10] >> Params[11] >> Params[12] >> Params[13] >> Params[14];    //[9,10]=>E_P, [11,12]=>E_H, [13,14]=>E_C
 		inFile >> Params[15] >> Params[16] >> Params[17] >> Params[18] >> Params[19] >> Params[20];  //[15,16]=>A_P, [17,18]=>A_H, [19,20]=>A_C
 
+		inFile >> Params[21] >> Params[22] >> Params[23] >> Params[24] >> Params[25] >> Params[26];  //[21,22]=>SU_P, [23,24]=>SU_H, [25,26]=>SU_C
+		inFile >> Params[27]; //[Monster infection prop ]
+		inFile >> Params[28]; //[Infection Threshold]
+
 		Params[10] = Params[10] * -1;
 		Params[12] = Params[12] * -1;
 		Params[14] = Params[14] * -1;
@@ -58,6 +68,11 @@ void Game::loadParams(string filename)
 		Params[16] = Params[16] * -1;
 		Params[18] = Params[18] * -1;
 		Params[20] = Params[20] * -1;
+
+		Params[22] = Params[22] * -1;
+		Params[24] = Params[24] * -1;
+		Params[26] = Params[26] * -1;
+
 		inFile.close();
 		generator->getparameters(Params , 21);
 	}
@@ -91,12 +106,15 @@ bool Game::battle()
 		HANDLE console_color;
 		console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 		printStatus();
+
 		SetConsoleTextAttribute(console_color, 13);
 		cout << "==============  Units fighting at current step ===============\n";
 		SetConsoleTextAttribute(console_color, 15);
+		
 		earthArmy->attack(this);
 		alienArmy->attack(this);
-	
+		allyArmy->attack(this);
+		
 		printKilledlist();
 		SetConsoleTextAttribute(console_color, 9);
 		system("pause");
@@ -106,6 +124,7 @@ bool Game::battle()
 	{
 		earthArmy->attack(this);
 		alienArmy->attack(this);
+		allyArmy->attack(this);
 	}
 	
 	if (TimeStep >= 40)
@@ -151,6 +170,7 @@ void Game::printStatus()
 	SetConsoleTextAttribute(console_color, 15);
 	earthArmy->print();
 	alienArmy->print();	
+	allyArmy->print();
 }
 
 void Game::printKilledlist()
@@ -164,6 +184,8 @@ void Game::printKilledlist()
 	cout << killedlist.getCount() << " Units ";
 	killedlist.printlist();
 }
+
+
 
 void Game::addToKilledList(Unit*& unit)
 {
@@ -307,6 +329,12 @@ void Game::loadOutputs()
 			outFile << "\t - Df/Db % is Undefined , Dd/Db % is Undefined" << endl;
 		else
 			outFile << "\t - Df/Db % : " << EtotalDf * 100 / EtotalDb << "%" << " , Dd/Db % : " << EtotalDd * 100 / EtotalDb << "%" << endl;
+
+		if (ES_Total == 0)
+			outFile << "\t - Infection % is Undefined";
+		else
+			outFile << "\t - Infection % : " << earthArmy->getTotalinfES() * 100 / ES_Total << "%";
+
 
 
 		outFile << endl;

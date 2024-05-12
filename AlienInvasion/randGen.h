@@ -3,19 +3,23 @@
 
 #include "Game.h"
 
+enum  ArmyType {
+	eartharmy=0,
+	alienarmy,
+	allyarmy
+};
+
 class randGen
 {
 private:
-	int params[21];
+	int* params;
 	Game* gameptr;
-	bool earth_limit;
-	bool alien_limit;
-
 public:
 	randGen(Game* _gameptr);
-	void getparameters(int parameters[], int size);
+	void getparameters(int* parameters);
 	Unit* createUnit(int EH, int P, int C,bool is_E,int timestep);
 	void generateUnits(int timestep);
+	void EA_help();
 };
 
 #endif
