@@ -18,7 +18,7 @@ class Game
 {
 private:
 
-	int Params[29];
+	int Params[30];
 	int TimeStep;
 	AlienArmy * alienArmy;
 	EarthArmy * earthArmy;

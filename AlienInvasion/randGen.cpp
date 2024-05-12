@@ -44,7 +44,7 @@ void randGen::EA_help()
 
     if (generateSU == false)
     {
-        if (gameptr->getEarthArmy()->infES_P() >= params[28])
+        if (gameptr->getEarthArmy()->infES_P() >= params[29])
             generateSU = true;
     }
     else
@@ -94,11 +94,11 @@ void randGen::generateUnits(int timestep)
     ////////////////////////
     if (generateSU && !allyLimit)
     {
-        for (int i = 0; i < params[0]; i++)
+        for (int i = 0; i < params[21]; i++)
         {
-            int SU_P = params[21] + (rand() % (params[22] - params[21] + 1));
-            int SU_H = params[23] + (rand() % (params[24] - params[23] + 1));
-            int SU_C = params[25] + (rand() % (params[26] - params[25] + 1));
+            int SU_P = params[22] + (rand() % (params[23] - params[22] + 1));
+            int SU_H = params[24] + (rand() % (params[25] - params[24] + 1));
+            int SU_C = params[26] + (rand() % (params[27] - params[26] + 1));
 
             newUnit = createUnit(SU_P, SU_H, SU_C, allyarmy, timestep);
             gameptr->getAllyArmy()->addUnit(newUnit);
