@@ -54,7 +54,9 @@ void AlienSoldier::Attack(Game* gameptr)
 			attackedUnit->decrementHealth(damage);
 
 			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
+			{
+				delete attackedUnit;
+			}
 
 			else
 				SUtemplist.enqueue(attackedUnit);
