@@ -15,11 +15,12 @@ void AlienMonster::Attack(Game* gameptr)
 	ArrayStack<Unit*>ETtemplist;
 	LinkedQueue<Unit*>SUtemplist;
 	Unit* attackedUnit = nullptr;
-	int attackedSoldiers = min(getAttackCapacity() / 2, gameptr->getEarthArmy()->getESCount()+gameptr->getAllyArmy()->getSUCount());
-	int attackedTanks = getAttackCapacity() - attackedSoldiers;
-	attackedSoldiers = getAttackCapacity() - attackedTanks;
 
-	for (int i = 0; i < attackedSoldiers; i++)
+	int attackcapacity = getAttackCapacity();
+
+	int i = 0;
+	while (i < attackcapacity && (gameptr->getEarthArmy()->getESCount() > 0 || gameptr->getEarthArmy()->getETCount() > 0)
+		|| gameptr->getAllyArmy()->getSUCount() >0 )
 	{
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::EarthSoldier);
 		if (attackedUnit)
@@ -63,32 +64,7 @@ void AlienMonster::Attack(Game* gameptr)
 			i++;
 		}
 	
-			attackedUnit = gameptr->getAllyArmy()->removeUnit(UnitType::SaverUnit);
 
-			if (attackedUnit)
-			{
-				if (!attackedUnit->IsAttacked())
-				{
-					attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
-					attackedUnit->makeAttacked(true);
-				}
-
-
-				int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
-				attackedUnit->decrementHealth(damage);
-
-				if (attackedUnit->getHealth() <= 0)
-				{
-					delete attackedUnit;
-				}
-				else
-					SUtemplist.enqueue(attackedUnit);
-				
-			}
-	}
-	
-	for (int i = 0; i < attackedTanks; i++)
-	{
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::Tank);
 		if (attackedUnit)
 		{
@@ -107,7 +83,26 @@ void AlienMonster::Attack(Game* gameptr)
 			}
 			else
 				ETtemplist.push(attackedUnit);
+			i++;
 		}
+
+
+		attackedUnit = gameptr->getAllyArmy()->removeUnit(UnitType::SaverUnit);
+		if (attackedUnit)
+		{
+			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+			attackedUnit->decrementHealth(damage);
+
+			if (attackedUnit->getHealth() <= 0)
+			{
+				delete attackedUnit;
+			}
+
+			else
+				SUtemplist.enqueue(attackedUnit);
+			i++;
+		}
+
 	}
 	if (gameptr->getMode() == Mode::Normal) {
 		if (EStemplist.getCount() > 0)
