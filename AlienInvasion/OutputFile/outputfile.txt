@@ -1,17 +1,71 @@
 Td	ID	Tj	Df	Dd	Db	
+27	8	23	0	4	4
+28	6	23	0	5	5
+28	7	23	0	5	5
+29	2026	11	12	6	18
+29	1	23	0	6	6
+29	2021	11	12	6	18
+29	2023	11	12	6	18
+30	2028	11	12	7	19
+30	2040	23	0	7	7
+30	2047	23	0	7	7
+30	2000	2	21	7	28
+30	2001	2	21	7	28
+30	2034	16	7	7	14
+39	2036	16	7	16	23
+39	2038	16	7	16	23
+39	2041	23	0	16	16
+39	2045	23	0	16	16
+39	2049	23	0	16	16
+39	2011	4	19	16	35
+39	5	23	0	16	16
+39	4	23	0	16	16
+39	9	23	0	16	16
+39	3	23	0	16	16
+39	2	23	0	16	16
+40	2032	16	7	17	24
+40	2044	23	0	17	17
+40	2010	4	19	17	36
+40	2015	4	19	17	36
+40	2017	4	19	17	36
+40	2019	4	19	17	36
+40	2024	11	12	17	29
+40	2037	16	7	17	24
+40	2027	11	12	17	29
+41	2029	11	12	18	30
+41	2009	2	21	18	39
+41	2030	16	7	18	25
+41	2031	16	7	18	25
+41	2046	23	0	18	18
+42	2042	23	0	19	19
+45	18	39	0	6	6
+46	2048	23	0	23	23
+46	13	39	0	7	7
+46	2082	37	2	7	9
+46	2084	37	2	7	9
+46	2086	37	2	7	9
+46	2088	37	2	7	9
+47	16	39	0	8	8
+48	12	39	0	9	9
+48	14	39	0	9	9
+48	10	23	0	25	25
+48	17	39	0	9	9
+48	20	39	0	9	9
+48	19	39	0	9	9
+48	11	39	0	9	9
 
-Battle result: 	Win
+Battle result: 	Loss
 
 For Earth Army:
-	 - ES_Total : 9 , EG_Total : 0 , ET_Total : 1
-	 - DestructedES % : 0% , DestructedEG % is Undefined , DestructedET %: 0%
-	 - DestructedEU % : 0%
-	 - Av_Df is Undefined , Av_Dd is Undefined , Av_Db is Undefined
-	 - Df/Db % is Undefined , Dd/Db % is Undefined
-	 - Infection % : 0%
+	 - ES_Total : 4 , EG_Total : 9 , ET_Total : 6
+	 - DestructedES % : 100% , DestructedEG % : 100% , DestructedET %: 100%
+	 - DestructedEU % : 100%
+	 - Av_Df : 0 , Av_Dd : 10 , Av_Db : 10
+	 - Df/Db % : 0% , Dd/Db % : 100%
+	 - Infection % : 100%
 For Alien Army:
-	 - AS_Total : 0 , AD_Total : 0 , AM_Total : 0
-	 - DestructedAS % is Undefined , DestructedAD % is Undefined , DestructedAM % is Undefined
-	 - DestructedAU % is Undefined
-	 - Av_Df is Undefined , Av_Dd is Undefined , Av_Db is Undefined
-	 - Df/Db % is Undefined , Dd/Db % is Undefined
+	 - AS_Total : 27 , AD_Total : 11 , AM_Total : 52
+	 - DestructedAS % : 100% , DestructedAD % : 54% , DestructedAM %: 3%
+	 - DestructedAU % : 38%
+	 - Av_Df : 8 , Av_Dd : 13 , Av_Db : 21
+	 - Df/Db % : 38% , Dd/Db % : 61%

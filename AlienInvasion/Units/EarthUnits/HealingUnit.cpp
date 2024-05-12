@@ -19,8 +19,10 @@ void HealingUnit::Attack(Game* gameptr)
 		{
 
 			if (gameptr->getCrntTimeStep() - attackedUnit->getUMLJoiningTime() > 10)
-
+			{
 				gameptr->addToKilledList(attackedUnit);
+				
+			}
 			else
 			{
 				int improvement = (this->getPower() * (this->getHealth() / 100)) / sqrt(attackedUnit->getHealth());
