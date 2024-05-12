@@ -13,7 +13,7 @@ class randGen
 {
 private:
 
-	int params[29];
+	int params[30];
 	bool earth_limit;
 	bool alien_limit;
 	bool allyLimit;
