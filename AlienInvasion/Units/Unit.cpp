@@ -5,7 +5,7 @@ int Unit::last_Earth_Id = 1;
 int Unit::last_Alien_Id = 2000;
 int Unit::last_Ally_Id = 4000;
 Unit::Unit(UnitType type, int id, int jointime, int health, int power, int attackcapacity)
-    :ID(id) ,Type(type) , JoinTime(jointime) , Health(health) , Power(power) , AttackCapacity(attackcapacity), Attacked(false), intialHealth(health)
+    :ID(id), Type(type), JoinTime(jointime), Health(health), Power(power), AttackCapacity(attackcapacity), Attacked(false), intialHealth(health), infected(false), immuned(false)
 {
 }
 
@@ -91,3 +91,22 @@ int Unit::getIntialHealth() const
     return intialHealth;
 }
 
+void Unit::infect(bool state)
+{
+    infected = state;
+}
+
+bool Unit::isInfected()
+{
+    return infected;
+}
+
+void Unit::immune(bool state)
+{
+    immuned = state;
+}
+
+bool Unit::isImmuned()
+{
+    return immuned;
+}

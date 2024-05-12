@@ -4,7 +4,7 @@
 #include "Game.h"
 
 enum  ArmyType {
-	eartharmy=0,
+	eartharmy = 0,
 	alienarmy,
 	allyarmy
 };
@@ -12,12 +12,18 @@ enum  ArmyType {
 class randGen
 {
 private:
-	int* params;
+
+	int params[29];
+	bool earth_limit;
+	bool alien_limit;
+	bool allyLimit;
+	bool generateSU;
 	Game* gameptr;
+
 public:
 	randGen(Game* _gameptr);
-	void getparameters(int* parameters);
-	Unit* createUnit(int EH, int P, int C,bool is_E,int timestep);
+	void getparameters(int parameters[], int size);
+	Unit* createUnit(int EH, int P, int C, ArmyType type, int timestep);
 	void generateUnits(int timestep);
 	void EA_help();
 };
