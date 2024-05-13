@@ -15,10 +15,33 @@ bool EarthTank::Attack(Game* gameptr)
 	int attackCapacity = getAttackCapacity();
 	int i = 0;
 
+	for (i; i < attackCapacity/2; i++)
+	{
+		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Monster);
+		if (attackedUnit)
+		{
+			didAttack = true;
+			if (!attackedUnit->IsAttacked())
+			{
+				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
+				attackedUnit->makeAttacked(true);
+			}
+			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
+			attackedUnit->decrementHealth(damage);
+			if (attackedUnit->getHealth() <= 0)
+				gameptr->addToKilledList(attackedUnit);
+			else
+				AMtemplist.add(attackedUnit);
+		}
+		else
+			break;
+	}
+
+
 	if (gameptr->getEarthArmy()->getESCount() < 0.3 * gameptr->getAlienArmy()->getASCount())
 	{
 		
-		for (i; i < attackCapacity / 2; i++)
+		for (i; i < attackCapacity; i++)
 		{
 			if (gameptr->getEarthArmy()->getESCount() >= 0.8 * gameptr->getAlienArmy()->getASCount())
 				break;
@@ -44,6 +67,7 @@ bool EarthTank::Attack(Game* gameptr)
 		}
 	}
 
+
 	for (i; i < attackCapacity; i++)
 	{
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Monster);
@@ -62,7 +86,11 @@ bool EarthTank::Attack(Game* gameptr)
 			else
 				AMtemplist.add(attackedUnit);
 		}
+		else
+			break;
 	}
+
+	
 	if (gameptr->getMode() == Mode::Normal) {
 		if (AStemplist.getCount() > 0)
 		{
