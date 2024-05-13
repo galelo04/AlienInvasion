@@ -18,7 +18,8 @@ bool EarthSoldier::Attack(Game* gameptr)
 		if (this->isInfected())
 		{
 			attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::EarthSoldier);
-			if (attackedUnit && attackedUnit->getID() != this->getID())
+
+			if (attackedUnit)
 			{
 				didAttack = true;
 				if (!attackedUnit->IsAttacked())
@@ -45,7 +46,7 @@ bool EarthSoldier::Attack(Game* gameptr)
 					EStemplist.enqueue(attackedUnit);
 			}
 		}
-		else
+		
 		{
 			attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::AlienSoldier);
 			if (attackedUnit)

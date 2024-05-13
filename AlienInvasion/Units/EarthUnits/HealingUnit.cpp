@@ -37,7 +37,6 @@ bool HealingUnit::Attack(Game* gameptr)
 					{
 						healedUnit->infect(false);
 						healedUnit->immune(true);
-						cout << "//////////////////////////////////tm 4fa2k ya 3rs/////////////////////////////////////////\n";
 					}
 					gameptr->getEarthArmy()->addUnit(healedUnit);
 				}
