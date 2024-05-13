@@ -100,6 +100,9 @@ void Game::setMode(Mode mode)
 
 bool Game::battle()
 {
+	bool earthAttack = false;
+	bool alienAttack = false;
+	bool allyAttack = false;
 	generator->generateUnits(TimeStep);
 	if (_mode == Mode::Normal)
 	{
@@ -111,9 +114,9 @@ bool Game::battle()
 		cout << "==============  Units fighting at current step ===============\n";
 		SetConsoleTextAttribute(console_color, 15);
 		
-		earthArmy->attack(this);
-		alienArmy->attack(this);
-		allyArmy->attack(this);
+		earthAttack=earthArmy->attack(this);
+		alienAttack=alienArmy->attack(this);
+		allyAttack=allyArmy->attack(this);
 		
 		printKilledlist();
 		SetConsoleTextAttribute(console_color, 9);
@@ -122,9 +125,9 @@ bool Game::battle()
 	}
 	else
 	{
-		earthArmy->attack(this);
-		alienArmy->attack(this);
-		allyArmy->attack(this);
+		earthAttack = earthArmy->attack(this);
+		alienAttack = alienArmy->attack(this);
+		allyAttack = allyArmy->attack(this);
 	}
 	
 	if (TimeStep >= 40)
@@ -149,7 +152,8 @@ bool Game::battle()
 			result = Result::Loss;
 			return false;
 		}
-		else if ((E_Total == 0 && A_Total == 0) || (ES_Total!=0 && EG_Total==0 && ET_Total==0 && AS_Total==0 && AD_Total!=0 && AM_Total==0) || (ES_Total == 0 && EG_Total != 0 && ET_Total == 0 && AS_Total != 0 && AD_Total == 0 && AM_Total == 0))
+		//else if ((E_Total == 0 && A_Total == 0) || (ES_Total!=0 && EG_Total==0 && ET_Total==0 && AS_Total==0 && AD_Total!=0 && AM_Total==0) || (ES_Total == 0 && EG_Total != 0 && ET_Total == 0 && AS_Total != 0 && AD_Total == 0 && AM_Total == 0))
+		else if(!earthAttack && !alienAttack && !allyAttack)
 		{
 			result = Result::Drawn;
 			return false;
