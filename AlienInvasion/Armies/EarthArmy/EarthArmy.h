@@ -38,7 +38,6 @@ public:
 	void destroyUML(Game* gameptr);
 
 	int getTotalinfES();
-	void incTotalinfES();
 	void incrementInfES();
 	void decrementInfES();
 	int infES_P();
