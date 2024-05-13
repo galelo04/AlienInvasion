@@ -27,7 +27,7 @@ bool EarthGunnery::Attack(Game* gameptr)
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
-			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
+			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
@@ -45,7 +45,7 @@ bool EarthGunnery::Attack(Game* gameptr)
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
-			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
+			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
@@ -63,7 +63,7 @@ bool EarthGunnery::Attack(Game* gameptr)
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
-			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
+			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
@@ -150,7 +150,7 @@ void EarthGunnery::setPri(int pri)
 //			attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 //			attackedUnit->makeAttacked(true);
 //		}
-//		double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
+//		double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 //		attackedUnit->decrementHealth(damage);
 //		if (attackedUnit->getHealth() <= 0)
 //			gameptr->addToKilledList(attackedUnit);
@@ -173,7 +173,7 @@ void EarthGunnery::setPri(int pri)
 //			attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 //			attackedUnit->makeAttacked(true);
 //		}
-//		double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
+//		double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 //		attackedUnit->decrementHealth(damage);
 //		if (attackedUnit->getHealth() <= 0)
 //			gameptr->addToKilledList(attackedUnit);
@@ -191,7 +191,7 @@ void EarthGunnery::setPri(int pri)
 //			attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 //			attackedUnit->makeAttacked(true);
 //		}
-//		double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
+//		double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 //		attackedUnit->decrementHealth(damage);
 //		if (attackedUnit->getHealth() <= 0)
 //			gameptr->addToKilledList(attackedUnit);

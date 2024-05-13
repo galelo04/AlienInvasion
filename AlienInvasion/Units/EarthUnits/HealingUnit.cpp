@@ -25,7 +25,7 @@ bool HealingUnit::Attack(Game* gameptr)
 			else
 			{
 				didHeal = true;
-				double improvement = (this->getPower() * (this->getHealth() / 100.0)) / sqrt(healedUnit->getHealth());
+				double improvement = ceil(this->getPower() * (this->getHealth() / 100.0)) / sqrt(healedUnit->getHealth());
 				if (healedUnit->isInfected())
 					healedUnit->heal(improvement/2.0);
 				else
@@ -54,7 +54,7 @@ bool HealingUnit::Attack(Game* gameptr)
 					gameptr->addToKilledList(healedUnit);
 				else
 				{
-					double improvement = (this->getPower() * (this->getHealth() / 100.0)) / sqrt(healedUnit->getHealth());
+					double improvement = ceil(this->getPower() * (this->getHealth() / 100.0)) / sqrt(healedUnit->getHealth());
 					healedUnit->heal(improvement);
 
 					if (healedUnit->getHealth() > healedUnit->getIntialHealth() * .2)

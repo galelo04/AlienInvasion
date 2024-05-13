@@ -40,7 +40,7 @@ bool AlienMonster::Attack(Game* gameptr)
 			}
 			else
 			{
-				double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
+				double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 				attackedUnit->decrementHealth(damage);
 			}
 			if (attackedUnit->getHealth() <= 0)
@@ -71,7 +71,7 @@ bool AlienMonster::Attack(Game* gameptr)
 				attackedUnit->makeAttacked(true);
 			}
 
-			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
+			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
 
 			if (attackedUnit->getHealth() <= 0)
@@ -90,7 +90,7 @@ bool AlienMonster::Attack(Game* gameptr)
 		if (attackedUnit)
 		{
 			didAttack = true;
-			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
+			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
 
 			if (attackedUnit->getHealth() <= 0)
