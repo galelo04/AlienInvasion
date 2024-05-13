@@ -37,7 +37,7 @@ bool SaverUnit::Attack(Game* gameptr)
 	{
 		if (AStemplist.getCount() > 0)
 		{
-			cout << "SU " << getID() << " shots ";
+			cout << "SU " << getID() << " shoots Alien Soldiers";
 			AStemplist.printlist();
 		}
 

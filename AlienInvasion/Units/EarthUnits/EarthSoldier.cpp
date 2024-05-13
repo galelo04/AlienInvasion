@@ -29,11 +29,18 @@ bool EarthSoldier::Attack(Game* gameptr)
 				double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 				attackedUnit->decrementHealth(damage);
 
-				if ((attackedUnit->getHealth() > 0) && (attackedUnit->getHealth() < attackedUnit->getIntialHealth() * .2))
-					gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
-
-				else if (attackedUnit->getHealth() <= 0)
+				if (attackedUnit->getHealth() <= 0)
+				{
 					gameptr->addToKilledList(attackedUnit);
+					if (attackedUnit->isInfected())
+						gameptr->getEarthArmy()->decrementInfES();
+				}
+				else if (attackedUnit->getHealth() < attackedUnit->getIntialHealth() * .2)
+				{
+					gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
+					if (attackedUnit->isInfected())
+						gameptr->getEarthArmy()->decrementInfES();
+				}
 				else
 					EStemplist.enqueue(attackedUnit);
 			}

@@ -27,16 +27,16 @@ bool AlienSoldier::Attack(Game* gameptr)
 			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 
-			if ((attackedUnit->getHealth() > 0) && (attackedUnit->getHealth() < attackedUnit->getIntialHealth() * .2))
-			{
-				gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
-				if (attackedUnit->isInfected() == true)
-					gameptr->getEarthArmy()->decrementInfES();
-			}
-			else if (attackedUnit->getHealth() <= 0)
+			if (attackedUnit->getHealth() <= 0)
 			{
 				gameptr->addToKilledList(attackedUnit);
-				if (attackedUnit->isInfected() == true)
+				if (attackedUnit->isInfected())
+					gameptr->getEarthArmy()->decrementInfES();
+			}
+			else if (attackedUnit->getHealth() < attackedUnit->getIntialHealth() * .2)
+			{
+				gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
+				if (attackedUnit->isInfected())
 					gameptr->getEarthArmy()->decrementInfES();
 			}
 			else
@@ -68,12 +68,12 @@ bool AlienSoldier::Attack(Game* gameptr)
 	if (gameptr->getMode() == Mode::Normal) {
 		if (EStemplist.getCount() > 0)
 		{
-			cout << "AS " << getID() << " shots Earth Soldiers ";
+			cout << "AS " << getID() << " shoots Earth Soldiers ";
 			EStemplist.printlist();
 		}
 		if (SUtemplist.getCount() > 0)
 		{
-			cout << "AS " << getID() << " shots Saver Units ";
+			cout << "AS " << getID() << " shoots Saver Units ";
 			SUtemplist.printlist();
 		}
 	}

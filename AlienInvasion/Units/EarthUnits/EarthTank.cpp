@@ -66,12 +66,12 @@ bool EarthTank::Attack(Game* gameptr)
 	if (gameptr->getMode() == Mode::Normal) {
 		if (AStemplist.getCount() > 0)
 		{
-			cout << "ET " << getID() << " shots Alien Soldiers ";
+			cout << "ET " << getID() << " shoots Alien Soldiers ";
 			AStemplist.printlist();
 		}
 		if (AMtemplist.getcount() > 0)
 		{
-			cout << "ET " << getID() << " shots Monsters ";
+			cout << "ET " << getID() << " shoots Monsters ";
 			AMtemplist.printlist();
 		}
 	}
