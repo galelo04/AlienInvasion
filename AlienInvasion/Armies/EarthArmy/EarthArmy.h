@@ -33,7 +33,6 @@ public:
 	int getETCount();
 	int getEGCount();
 	int getInfESCount();
-	int getTotalEDf(int &totalAlivegotAttacked);
 
 	void destroyUML(Game* gameptr);
 
