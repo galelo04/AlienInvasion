@@ -46,7 +46,7 @@ bool EarthSoldier::Attack(Game* gameptr)
 					EStemplist.enqueue(attackedUnit);
 			}
 		}
-		
+		else
 		{
 			attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::AlienSoldier);
 			if (attackedUnit)

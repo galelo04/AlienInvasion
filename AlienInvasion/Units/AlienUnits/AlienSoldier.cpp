@@ -13,7 +13,8 @@ bool AlienSoldier::Attack(Game* gameptr)
 	LinkedQueue<Unit*>SUtemplist;
 	Unit* attackedUnit = nullptr;
 	int attackCapacity = getAttackCapacity();
-	for (int i = 0; i < attackCapacity; i++)
+	int i = 0;
+	while (i < attackCapacity && (gameptr->getEarthArmy()->getESCount() > 0 || gameptr->getAllyArmy()->getSUCount() > 0))
 	{
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::EarthSoldier);
 		if (attackedUnit)
@@ -63,6 +64,7 @@ bool AlienSoldier::Attack(Game* gameptr)
 
 			else
 				SUtemplist.enqueue(attackedUnit);
+			i++;
 		}
 	}
 	if (gameptr->getMode() == Mode::Normal) {
