@@ -290,7 +290,7 @@ void Game::loadOutputs()
 
 		outFile << "For Earth Army:" << endl;
 		
-		outFile << "\t - ES_Total : " << ES_Total << " , EG_Total : " << EG_Total << " , ET_Total : "<< ET_Total << endl;
+		outFile << "\t - ES_Total : " << ES_Total << " , ET_Total : "<< ET_Total << " , EG_Total : " << EG_Total << endl;
 		
 		if (ES_Total == 0)
 			outFile << "\t - DestructedES % is Undefined";
@@ -349,7 +349,7 @@ void Game::loadOutputs()
 
 		outFile << "For Alien Army:" << endl;
 
-		outFile << "\t - AS_Total : " << AS_Total << " , AD_Total : " << AD_Total << " , AM_Total : " << AM_Total << endl;
+		outFile << "\t - AS_Total : " << AS_Total << " , AM_Total : " << AM_Total << " , AD_Total : " << AD_Total << endl;
 		
 		if (AS_Total == 0)
 			outFile << "\t - DestructedAS % is Undefined";
