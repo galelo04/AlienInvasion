@@ -280,10 +280,6 @@ int EarthArmy::getTotalinfES()
 	return TotalinfES;
 }
 
-void EarthArmy::incTotalinfES()
-{
-	TotalinfES++;
-}
 
 void EarthArmy::incrementInfES()
 {
