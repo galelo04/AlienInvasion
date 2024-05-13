@@ -6,8 +6,9 @@ EarthTank::EarthTank(int jointime, int health, int power, int attackcapacity)
 {
 }
 
-void EarthTank::Attack(Game* gameptr)
+bool EarthTank::Attack(Game* gameptr)
 {	
+	bool didAttack = false;
 	arrayADT<Unit*>AMtemplist;
 	LinkedQueue<Unit*>AStemplist;
 	Unit* attackedUnit = nullptr;
@@ -25,12 +26,13 @@ void EarthTank::Attack(Game* gameptr)
 			attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::AlienSoldier);
 			if (attackedUnit)
 			{
+				didAttack = true;
 				if (!attackedUnit->IsAttacked())
 				{
 					attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 					attackedUnit->makeAttacked(true);
 				}
-				int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+				double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 				attackedUnit->decrementHealth(damage);
 				if (attackedUnit->getHealth() <= 0)
 					gameptr->addToKilledList(attackedUnit);
@@ -47,12 +49,13 @@ void EarthTank::Attack(Game* gameptr)
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Monster);
 		if (attackedUnit)
 		{
+			didAttack = true;
 			if (!attackedUnit->IsAttacked())
 			{
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
@@ -77,7 +80,7 @@ void EarthTank::Attack(Game* gameptr)
 	while (AMtemplist.remove(attackedUnit))
 		gameptr->getAlienArmy()->addUnit(attackedUnit);
 
-
+	return didAttack;
 }
 
 void EarthTank::heal(int imp)

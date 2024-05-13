@@ -37,7 +37,7 @@ protected:
 public:
 
 	Unit(UnitType type, int id, int jointime, int health, int power, int attackcapacity);
-	virtual void Attack(Game* gameptr) = 0;
+	virtual bool Attack(Game* gameptr) = 0;
 	virtual UnitType getType() const;
 	virtual int getID() const;
 	virtual int getJoinTime() const;

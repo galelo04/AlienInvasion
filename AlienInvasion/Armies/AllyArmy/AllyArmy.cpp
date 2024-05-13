@@ -21,14 +21,16 @@ Unit* AllyArmy::removeUnit(UnitType type)
 	return removedUnit;
 }
 
-void AllyArmy::attack(Game* gameptr)
+bool AllyArmy::attack(Game* gameptr)
 {
+	bool didSUAttack = false;
 	Unit* unitAttacking = nullptr;
 
 	if (SaverUnits.peek(unitAttacking))
 	{
 		unitAttacking->Attack(gameptr);
 	}
+	return didSUAttack;
 }
 
 void AllyArmy::print()

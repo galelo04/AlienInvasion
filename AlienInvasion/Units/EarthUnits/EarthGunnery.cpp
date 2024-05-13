@@ -6,8 +6,9 @@ EarthGunnery::EarthGunnery(int jointime, int health, int power, int attackcapaci
 	setPri(power + health);
 }
 
-void EarthGunnery::Attack(Game* gameptr)
+bool EarthGunnery::Attack(Game* gameptr)
 {
+	bool didAttack = false;
 	arrayADT<Unit*>AMtemplist;
 	LinkedQueue<Unit*>ADtemplist;
 
@@ -49,12 +50,13 @@ void EarthGunnery::Attack(Game* gameptr)
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Monster);
 		if (attackedUnit)
 		{
+			didAttack = true;
 			if (!attackedUnit->IsAttacked())
 			{
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
@@ -71,12 +73,13 @@ void EarthGunnery::Attack(Game* gameptr)
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);
 		if (attackedUnit)
 		{
+			didAttack = true;
 			if (!attackedUnit->IsAttacked())
 			{
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
@@ -88,12 +91,13 @@ void EarthGunnery::Attack(Game* gameptr)
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);
 		if (attackedUnit)
 		{
+			didAttack = true;
 			if (!attackedUnit->IsAttacked())
 			{
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
@@ -118,6 +122,9 @@ void EarthGunnery::Attack(Game* gameptr)
 		gameptr->getAlienArmy()->addUnit(attackedUnit);
 	while (ADtemplist.dequeue(attackedUnit))
 		gameptr->getAlienArmy()->addUnit(attackedUnit);
+
+
+	return didAttack;
 }
 
 int EarthGunnery::getPri()

@@ -6,8 +6,9 @@ AlienSoldier::AlienSoldier(int jointime, int health, int power, int attackcapaci
 {
 }
 
-void AlienSoldier::Attack(Game* gameptr)
+bool AlienSoldier::Attack(Game* gameptr)
 {
+	bool didAttack = false;
 	LinkedQueue<Unit*>EStemplist;
 	LinkedQueue<Unit*>SUtemplist;
 	Unit* attackedUnit = nullptr;
@@ -17,12 +18,13 @@ void AlienSoldier::Attack(Game* gameptr)
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::EarthSoldier);
 		if (attackedUnit)
 		{
+			didAttack = true;
 			if (!attackedUnit->IsAttacked())
 			{
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 
 			if ((attackedUnit->getHealth() > 0) && (attackedUnit->getHealth() < attackedUnit->getIntialHealth() * .2))
@@ -44,13 +46,14 @@ void AlienSoldier::Attack(Game* gameptr)
 		attackedUnit = gameptr->getAllyArmy()->removeUnit(UnitType::SaverUnit);
 		if (attackedUnit)
 		{
+			didAttack = true;
 			if (!attackedUnit->IsAttacked())
 			{
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
 
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 
 			if (attackedUnit->getHealth() <= 0)
@@ -78,4 +81,6 @@ void AlienSoldier::Attack(Game* gameptr)
 		gameptr->getEarthArmy()->addUnit(attackedUnit);
 	while (SUtemplist.dequeue(attackedUnit))
 		gameptr->getAllyArmy()->addUnit(attackedUnit);
+
+	return didAttack;
 }

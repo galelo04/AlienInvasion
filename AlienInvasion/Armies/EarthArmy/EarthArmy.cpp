@@ -96,33 +96,39 @@ Unit* EarthArmy::removefromUML(UnitType type)
 	return removedUnit;
 }
 
-void EarthArmy::attack(Game* gameptr)
+bool EarthArmy::attack(Game* gameptr)
 {
+	bool didSoldiersAttack = false;
+	bool didTanksAttack = false;
+	bool didGunneriesAttack = false;
+	bool didHUHeal = false;
 	Unit* unitAttacking = nullptr;
 	int pri = 0;
 	
 	if (EarthSoldiers.peek(unitAttacking))
 	{
-		unitAttacking->Attack(gameptr);
+		didSoldiersAttack=unitAttacking->Attack(gameptr);
 	}
 
 	if (EarthTanks.peek(unitAttacking))
 	{
-		unitAttacking->Attack(gameptr);
+		didTanksAttack=unitAttacking->Attack(gameptr);
 	}
 
 	if (EarthGunneries.peek(unitAttacking, pri))
 	{
-		unitAttacking->Attack(gameptr);
+		didGunneriesAttack=unitAttacking->Attack(gameptr);
 	}
 	if (HealingList.peek(unitAttacking)&&(UMLsoldiers.getCount()>0||UMLtanks.getCount()>0))
 	{
 		unitAttacking->Attack(gameptr);
 
-		HealingList.pop(unitAttacking);
-		gameptr->addToKilledList(unitAttacking);
+		didHUHeal=HealingList.pop(unitAttacking);
+		if(didHUHeal)
+			gameptr->addToKilledList(unitAttacking);
 	}
 	infectionSpread();
+	return (didSoldiersAttack || didTanksAttack || didGunneriesAttack || didHUHeal);
 }
 
 

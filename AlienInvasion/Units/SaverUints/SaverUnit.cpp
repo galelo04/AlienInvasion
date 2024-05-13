@@ -6,8 +6,9 @@ SaverUnit::SaverUnit(int jointime, int health, int power, int attackcapacity) :
 {
 }
 
-void SaverUnit::Attack(Game* gameptr)
+bool SaverUnit::Attack(Game* gameptr)
 {
+	bool didAttack = false;
 	LinkedQueue<Unit*>AStemplist;
 	Unit* attackedUnit = nullptr;
 	int attackCapacity = getAttackCapacity();
@@ -17,12 +18,13 @@ void SaverUnit::Attack(Game* gameptr)
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::AlienSoldier);
 		if (attackedUnit)
 		{
+			didAttack = true;
 			if (!attackedUnit->IsAttacked())
 			{
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
@@ -42,6 +44,8 @@ void SaverUnit::Attack(Game* gameptr)
 	}
 	while (AStemplist.dequeue(attackedUnit))
 		gameptr->getAlienArmy()->addUnit(attackedUnit);
+
+	return didAttack;
 }
 
 

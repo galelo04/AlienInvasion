@@ -8,8 +8,9 @@ AlienDrone::AlienDrone(int jointime, int health, int power, int attackcapacity)
 
 }
 
-void AlienDrone::Attack(Game* gameptr)
+bool AlienDrone::Attack(Game* gameptr)
 {
+	bool didAttack = false;
 	ArrayStack<Unit*>ETtemplist;
 	priQueue<Unit*>EGtemplist;
 	Unit* attackedUnit = nullptr;
@@ -21,12 +22,13 @@ void AlienDrone::Attack(Game* gameptr)
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::Tank);
 		if (attackedUnit)
 		{
+			didAttack = true;
 			if (!attackedUnit->IsAttacked())
 			{
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
@@ -41,12 +43,13 @@ void AlienDrone::Attack(Game* gameptr)
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::Gunnery);
 		if (attackedUnit)
 		{
+			didAttack = true;
 			if (!attackedUnit->IsAttacked())
 			{
 				attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
 				attackedUnit->makeAttacked(true);
 			}
-			int damage = (getPower() * getHealth() / 100) / sqrt(attackedUnit->getHealth());
+			double damage = (getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth());
 			attackedUnit->decrementHealth(damage);
 			if (attackedUnit->getHealth() <= 0)
 				gameptr->addToKilledList(attackedUnit);
@@ -72,6 +75,9 @@ void AlienDrone::Attack(Game* gameptr)
 		gameptr->getEarthArmy()->addUnit(attackedUnit);
 	while (ETtemplist.pop(attackedUnit))
 		gameptr->getEarthArmy()->addUnit(attackedUnit);
+
+
+	return didAttack;
 
 }
 

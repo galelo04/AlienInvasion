@@ -9,7 +9,7 @@ public:
 	AllyArmy();
 	virtual void addUnit(Unit* unit);
 	virtual Unit* removeUnit(UnitType type);
-	virtual void attack(Game* gameptr);
+	virtual bool attack(Game* gameptr);
 	virtual void print();
 	int getSUCount();
 	bool withdrawal(Game* gameptr);

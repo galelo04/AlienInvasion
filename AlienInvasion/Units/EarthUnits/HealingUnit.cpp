@@ -6,8 +6,9 @@ HealingUnit::HealingUnit(int jointime, int health, int power, int attackcapacity
 {
 }
 
-void HealingUnit::Attack(Game* gameptr)
+bool HealingUnit::Attack(Game* gameptr)
 {
+	bool didHeal = false;
 	LinkedQueue<Unit*>templist_S;
 	LinkedQueue<Unit*>templist_T;
 	Unit* attackedUnit = nullptr;
@@ -25,9 +26,10 @@ void HealingUnit::Attack(Game* gameptr)
 			}
 			else
 			{
-				int improvement = (this->getPower() * (this->getHealth() / 100)) / sqrt(attackedUnit->getHealth());
+				didHeal = true;
+				double improvement = (this->getPower() * (this->getHealth() / 100.0)) / sqrt(attackedUnit->getHealth());
 				if (attackedUnit->isInfected())
-					attackedUnit->heal(improvement/2);
+					attackedUnit->heal(improvement/2.0);
 				else
 					attackedUnit->heal(improvement);
 
@@ -37,6 +39,7 @@ void HealingUnit::Attack(Game* gameptr)
 					{
 						attackedUnit->infect(false);
 						attackedUnit->immune(true);
+						cout << "//////////////////////////////////tm 4fa2k ya 3rs/////////////////////////////////////////\n";
 					}
 					gameptr->getEarthArmy()->addUnit(attackedUnit);
 				}
@@ -56,7 +59,7 @@ void HealingUnit::Attack(Game* gameptr)
 					gameptr->addToKilledList(attackedUnit);
 				else
 				{
-					int improvement = (this->getPower() * (this->getHealth() / 100)) / sqrt(attackedUnit->getHealth());
+					double improvement = (this->getPower() * (this->getHealth() / 100.0)) / sqrt(attackedUnit->getHealth());
 					attackedUnit->heal(improvement);
 
 					if (attackedUnit->getHealth() > attackedUnit->getIntialHealth() * .2)
@@ -87,5 +90,7 @@ void HealingUnit::Attack(Game* gameptr)
 	while(templist_T.dequeue(attackedUnit))
 		gameptr->getEarthArmy()->addToUML(attackedUnit, attackedUnit->getUMLJoiningTime());
 	
+
+	return didHeal;
 }
 

@@ -6,7 +6,7 @@ class AlienMonster :
     int infection_probability;
 public:
     AlienMonster(int jointime, int health, int power, int attackcapacity, int infprob);
-    virtual void Attack(Game* gameptr);
+    virtual bool Attack(Game* gameptr);
     virtual void heal(int imp) {};
 };
 

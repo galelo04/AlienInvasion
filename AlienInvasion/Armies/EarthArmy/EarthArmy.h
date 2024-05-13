@@ -24,7 +24,7 @@ public:
 	virtual Unit* removeUnit(UnitType type);
 	Unit* removefromUML(UnitType type);
 	void addToUML(Unit* unit,int UT);
-	virtual void attack(Game* gameptr);
+	virtual bool attack(Game* gameptr);
 
 	virtual void infectionSpread();
 
