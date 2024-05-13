@@ -105,9 +105,10 @@ bool EarthArmy::attack(Game* gameptr)
 	Unit* unitAttacking = nullptr;
 	int pri = 0;
 	
-	if (EarthSoldiers.peek(unitAttacking))
+	if (EarthSoldiers.dequeue(unitAttacking))
 	{
 		didSoldiersAttack=unitAttacking->Attack(gameptr);
+		EarthSoldiers.enqueue(unitAttacking);
 	}
 
 	if (EarthTanks.peek(unitAttacking))
@@ -279,14 +280,11 @@ int EarthArmy::getTotalinfES()
 	return TotalinfES;
 }
 
-void EarthArmy::incTotalinfES()
-{
-	TotalinfES++;
-}
 
 void EarthArmy::incrementInfES()
 {
 	InfectedSoldiers++;
+	TotalinfES++;
 }
 
 void EarthArmy::decrementInfES()
