@@ -24,6 +24,11 @@ bool HealingUnit::Attack(Game* gameptr)
 			}
 			else
 			{
+				if (!healedUnit->isHealed())
+				{
+					healedUnit->makeHealed(true);
+					gameptr->getEarthArmy()->incrementHealedES();
+				}
 				didHeal = true;
 				double improvement = ceil(this->getPower() * (this->getHealth() / 100.0)) / sqrt(healedUnit->getHealth());
 				if (healedUnit->isInfected())
@@ -54,6 +59,12 @@ bool HealingUnit::Attack(Game* gameptr)
 					gameptr->addToKilledList(healedUnit);
 				else
 				{
+					if (!healedUnit->isHealed())
+					{
+						healedUnit->makeHealed(true);
+						gameptr->getEarthArmy()->incrementFixedET();
+					}
+					didHeal = true;
 					double improvement = ceil(this->getPower() * (this->getHealth() / 100.0)) / sqrt(healedUnit->getHealth());
 					healedUnit->heal(improvement);
 

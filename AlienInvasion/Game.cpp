@@ -337,8 +337,10 @@ void Game::loadOutputs()
 		if (ES_Total == 0)
 			outFile << "\t - Infection % is Undefined";
 		else
-			outFile << "\t - Infection % : " << earthArmy->getTotalinfES() * 100 / ES_Total << "%";
-
+			outFile << "\t - Infection % : " << earthArmy->getTotalinfES() * 100 / ES_Total << "%"<<endl;
+		outFile << "\t - Total Healed Units : " << earthArmy->getTotalHealedES() + earthArmy->getTotalFixedET()<<endl;
+		outFile << "\t - Healed Soldiers : " << earthArmy->getTotalHealedES();
+		outFile << "\t , Fixed Tanks : " << earthArmy->getTotalFixedET();
 
 
 		outFile << endl;

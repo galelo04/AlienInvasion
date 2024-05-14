@@ -30,6 +30,7 @@ private:
 	bool Attacked;
 	bool infected;
 	bool immuned;
+	bool healed;
 protected:
 	static int last_Earth_Id;
 	static int last_Alien_Id;
@@ -59,6 +60,8 @@ public:
 	virtual bool isInfected();
 	virtual void immune(bool state);
 	virtual bool isImmuned();
+	virtual bool isHealed();
+	virtual void makeHealed(bool state);
 	friend std::ostream& operator<<(std::ostream& stream, Unit* unit)
 	{
 		if (unit)

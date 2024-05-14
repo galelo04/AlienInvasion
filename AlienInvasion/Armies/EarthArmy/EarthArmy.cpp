@@ -7,6 +7,8 @@ EarthArmy::EarthArmy()
 	srand((unsigned)time(NULL));
 	InfectedSoldiers = 0;
 	TotalinfES = 0;
+	totalHealedES = 0;
+	totalFixedET = 0;
 }
 
 void EarthArmy::addUnit(Unit* unit)
@@ -273,6 +275,26 @@ void EarthArmy::destroyUML(Game* gameptr)
 		removeUnit->decrementHealth(removeUnit->getHealth());
 		gameptr->addToKilledList(removeUnit);
 	}
+}
+
+int EarthArmy::getTotalFixedET()
+{
+	return totalFixedET;
+}
+
+void EarthArmy::incrementFixedET()
+{
+	totalFixedET++;
+}
+
+int EarthArmy::getTotalHealedES()
+{
+	return totalHealedES;
+}
+
+void EarthArmy::incrementHealedES()
+{
+	totalHealedES++;
 }
 
 int EarthArmy::getTotalinfES()

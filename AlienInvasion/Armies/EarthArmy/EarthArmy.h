@@ -18,6 +18,8 @@ private:
 	LinkedQueue<Unit*>UMLtanks;
 	int InfectedSoldiers;
 	int TotalinfES;
+	int totalHealedES;
+	int totalFixedET;
 public:
 	EarthArmy();
 	virtual void addUnit(Unit* unit);
@@ -36,7 +38,10 @@ public:
 	int getTotalEDf(int &totalAlivegotAttacked);
 
 	void destroyUML(Game* gameptr);
-
+	int getTotalFixedET();
+	void incrementFixedET();
+	int getTotalHealedES();
+	void incrementHealedES();
 	int getTotalinfES();
 	void incrementInfES();
 	void decrementInfES();
