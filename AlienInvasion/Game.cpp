@@ -297,22 +297,22 @@ void Game::loadOutputs()
 		if (ES_Total == 0)
 			outFile << "\t - DestructedES % is Undefined";
 		else 
-			outFile << "\t - DestructedES % : " << killedES * 100 / ES_Total << "%";
+			outFile << "\t - DestructedES % : " << killedES * 100.0 / ES_Total << "%";
 
 		if (ET_Total == 0)
 			outFile << " , DestructedET % is Undefined";
 		else
-			outFile << " , DestructedET %: " << killedET * 100 / ET_Total << "%";
+			outFile << " , DestructedET %: " << killedET * 100.0 / ET_Total << "%";
 
 		if (EG_Total == 0)
 			outFile << " , DestructedEG % is Undefined" << endl;
 		else
-			outFile << " , DestructedEG % : " << killedEG * 100 / EG_Total << "%" << endl;
+			outFile << " , DestructedEG % : " << killedEG * 100.0 / EG_Total << "%" << endl;
 		
 		if ((ES_Total + EG_Total + ET_Total) == 0)
 			outFile << "\t - DestructedEU % is Undefined" << endl;
 		else
-			outFile << "\t - DestructedEU % : " << (TotalKilledE) * 100 / (ES_Total + EG_Total + ET_Total) << "%" << endl;
+			outFile << "\t - DestructedEU % : " << (TotalKilledE) * 100.0 / (ES_Total + EG_Total + ET_Total) << "%" << endl;
 
 		if (TotalKilledE == 0)
 			outFile << "\t - Av_Df is Undefined , Av_Dd is Undefined , Av_Db is Undefined" << endl;
@@ -326,15 +326,22 @@ void Game::loadOutputs()
 		if(EtotalDb == 0)
 			outFile << "\t - Df/Db % is Undefined , Dd/Db % is Undefined" << endl;
 		else
-			outFile << "\t - Df/Db % : " << EtotalDf * 100 / EtotalDb << "%" << " , Dd/Db % : " << EtotalDd * 100 / EtotalDb << "%" << endl;
+			outFile << "\t - Df/Db % : " << EtotalDf * 100.0 / EtotalDb << "%" << " , Dd/Db % : " << EtotalDd * 100.0 / EtotalDb << "%" << endl;
+
+		outFile << "\t - Total Healed Units : " << earthArmy->getTotalHealedES() + earthArmy->getTotalFixedET() << endl;
+		outFile << "\t - Healed Soldiers : " << earthArmy->getTotalHealedES();
+		outFile << "\t , Fixed Tanks : " << earthArmy->getTotalFixedET() << endl;
+
+		if ((ES_Total + EG_Total + ET_Total) == 0)
+			outFile << "\t - Healing % is Undefined" << endl;
+		else
+			outFile << "\t - Healing % : " << (earthArmy->getTotalHealedES() + earthArmy->getTotalFixedET()) * 100.0 / (ES_Total + EG_Total + ET_Total) << "%" << endl;
 
 		if (ES_Total == 0)
 			outFile << "\t - Infection % is Undefined";
 		else
-			outFile << "\t - Infection % : " << earthArmy->getTotalinfES() * 100 / ES_Total << "%"<<endl;
-		outFile << "\t - Total Healed Units : " << earthArmy->getTotalHealedES() + earthArmy->getTotalFixedET()<<endl;
-		outFile << "\t - Healed Soldiers : " << earthArmy->getTotalHealedES();
-		outFile << "\t , Fixed Tanks : " << earthArmy->getTotalFixedET();
+			outFile << "\t - Infection % : " << earthArmy->getTotalinfES() * 100.0 / ES_Total << "%"<<endl;
+		
 
 
 		outFile << endl;
@@ -351,22 +358,22 @@ void Game::loadOutputs()
 		if (AS_Total == 0)
 			outFile << "\t - DestructedAS % is Undefined";
 		else
-			outFile << "\t - DestructedAS % : " << killedAS * 100 / AS_Total << "%";
+			outFile << "\t - DestructedAS % : " << killedAS * 100.0 / AS_Total << "%";
 
 		if (AM_Total == 0)
 			outFile << " , DestructedAM % is Undefined";
 		else
-			outFile << " , DestructedAM %: " << killedAM * 100 / AM_Total << "%";
+			outFile << " , DestructedAM %: " << killedAM * 100.0 / AM_Total << "%";
 
 		if (AD_Total == 0)
 			outFile << " , DestructedAD % is Undefined" << endl;
 		else
-			outFile << " , DestructedAD % : " << killedAD * 100 / AD_Total << "%" << endl;
+			outFile << " , DestructedAD % : " << killedAD * 100.0 / AD_Total << "%" << endl;
 
 		if ((AS_Total + AD_Total + AM_Total) == 0)
 			outFile << "\t - DestructedAU % is Undefined" << endl;
 		else
-			outFile << "\t - DestructedAU % : " << (TotalKilledA) * 100 / (AS_Total + AD_Total + AM_Total) << "%" << endl;
+			outFile << "\t - DestructedAU % : " << (TotalKilledA) * 100.0 / (AS_Total + AD_Total + AM_Total) << "%" << endl;
 		
 		if (TotalKilledA == 0)
 			outFile << "\t - Av_Df is Undefined , Av_Dd is Undefined , Av_Db is Undefined" << endl;
@@ -380,7 +387,7 @@ void Game::loadOutputs()
 		if (AtotalDb == 0)
 			outFile << "\t - Df/Db % is Undefined , Dd/Db % is Undefined" << endl;
 		else
-			outFile << "\t - Df/Db % : " << AtotalDf * 100 / AtotalDb << "%" << " , Dd/Db % : " << AtotalDd * 100 / AtotalDb << "%" << endl;
+			outFile << "\t - Df/Db % : " << AtotalDf * 100.0 / AtotalDb << "%" << " , Dd/Db % : " << AtotalDd * 100.0 / AtotalDb << "%" << endl;
 
 	}
 	else

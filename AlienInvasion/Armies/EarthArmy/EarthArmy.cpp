@@ -182,6 +182,10 @@ void EarthArmy::print()
 	EarthGunneries.printlist();
 	cout << HealingList.getCount() << " HU ";
 	HealingList.printlist();
+	cout << UMLsoldiers.getCount() << " Soldiers UML ";
+	UMLsoldiers.printlist();
+	cout << UMLtanks.getCount() << " Tanks UML ";
+	UMLtanks.printlist();
 	cout << "ES inf% " << infES_P()<<endl;
 
 }
