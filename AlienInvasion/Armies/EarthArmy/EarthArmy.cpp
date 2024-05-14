@@ -227,40 +227,6 @@ int EarthArmy::getInfESCount()
 	return InfectedSoldiers;
 }
 
-int EarthArmy::getTotalEDf(int& totalAlivegotAttacked)
-{
-	int Df = 0;
-	int pri = 0;
-	Unit* unit;
-
-	while (EarthSoldiers.dequeue(unit))
-	{
-		if (unit->IsAttacked())
-		{
-			Df += unit->getFirstAttackTime() - unit->getJoinTime();
-			totalAlivegotAttacked++;
-		}
-	}
-	while (EarthGunneries.dequeue(unit, pri))
-	{
-		if (unit->IsAttacked())
-		{
-			Df += unit->getFirstAttackTime() - unit->getJoinTime();
-			totalAlivegotAttacked++;
-		}
-	}
-	while (EarthTanks.pop(unit))
-	{
-		if (unit->IsAttacked())
-		{
-			Df += unit->getFirstAttackTime() - unit->getJoinTime();
-			totalAlivegotAttacked++;
-		}
-	}
-
-	return Df;
-}
-
 void EarthArmy::destroyUML(Game* gameptr)
 {
 	Unit* removeUnit;

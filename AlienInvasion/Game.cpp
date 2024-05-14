@@ -287,10 +287,8 @@ void Game::loadOutputs()
 		int ES_Total = earthArmy->getESCount() + killedES;
 		int EG_Total = earthArmy->getEGCount() + killedEG;
 		int ET_Total = earthArmy->getETCount() + killedET;
+		int TotalKilledE = killedES + killedEG + killedET;
 
-		int ETotalgotAttacked = 0;
-		EtotalDf += earthArmy->getTotalEDf(ETotalgotAttacked);
-		ETotalgotAttacked += killedES + killedEG + killedET;
 
 		outFile << "For Earth Army:" << endl;
 		
@@ -314,19 +312,15 @@ void Game::loadOutputs()
 		if ((ES_Total + EG_Total + ET_Total) == 0)
 			outFile << "\t - DestructedEU % is Undefined" << endl;
 		else
-			outFile << "\t - DestructedEU % : " << (killedES + killedEG + killedET) * 100 / (ES_Total + EG_Total + ET_Total) << "%" << endl;
-		
-		if(ETotalgotAttacked == 0)
-			outFile << "\t - Av_Df is Undefined";
-		else
-			outFile << "\t - Av_Df : " << EtotalDf / ETotalgotAttacked;
-		
-		if ((killedES + killedEG + killedET) == 0)
-			outFile << " , Av_Dd is Undefined , Av_Db is Undefined" << endl;
+			outFile << "\t - DestructedEU % : " << (TotalKilledE) * 100 / (ES_Total + EG_Total + ET_Total) << "%" << endl;
+
+		if (TotalKilledE == 0)
+			outFile << "\t - Av_Df is Undefined , Av_Dd is Undefined , Av_Db is Undefined" << endl;
 		else
 		{
-			outFile << " , Av_Dd : " << EtotalDd / (killedES + killedEG + killedET);
-			outFile << " , Av_Db : " << EtotalDb / (killedES + killedEG + killedET) << endl;
+			outFile << "\t - Av_Df : " << EtotalDf / TotalKilledE;
+			outFile << " , Av_Dd : " << EtotalDd / TotalKilledE;
+			outFile << " , Av_Db : " << EtotalDb / TotalKilledE << endl;
 		}
 		
 		if(EtotalDb == 0)
@@ -348,10 +342,7 @@ void Game::loadOutputs()
 		int AS_Total = alienArmy->getASCount() + killedAS;
 		int AD_Total = alienArmy->getADCount() + killedAD;
 		int AM_Total = alienArmy->getAMCount() + killedAM;
-
-		int ATotalgotAttacked = 0;
-		AtotalDf += earthArmy->getTotalEDf(ATotalgotAttacked);
-		ATotalgotAttacked += killedAS + killedAD + killedAM;
+		int TotalKilledA = killedAS + killedAD + killedAM;
 
 		outFile << "For Alien Army:" << endl;
 
@@ -375,19 +366,15 @@ void Game::loadOutputs()
 		if ((AS_Total + AD_Total + AM_Total) == 0)
 			outFile << "\t - DestructedAU % is Undefined" << endl;
 		else
-			outFile << "\t - DestructedAU % : " << (killedAS + killedAD + killedAM) * 100 / (AS_Total + AD_Total + AM_Total) << "%" << endl;
+			outFile << "\t - DestructedAU % : " << (TotalKilledA) * 100 / (AS_Total + AD_Total + AM_Total) << "%" << endl;
 		
-		if (ATotalgotAttacked == 0)
-			outFile << "\t - Av_Df is Undefined";
-		else
-			outFile << "\t - Av_Df : " << AtotalDf / ATotalgotAttacked;
-
-		if ((killedAS + killedAD + killedAM) == 0)
-			outFile << " , Av_Dd is Undefined , Av_Db is Undefined" << endl;
+		if (TotalKilledA == 0)
+			outFile << "\t - Av_Df is Undefined , Av_Dd is Undefined , Av_Db is Undefined" << endl;
 		else
 		{
-			outFile << " , Av_Dd : " << AtotalDd / (killedAS + killedAD + killedAM);
-			outFile << " , Av_Db : " << AtotalDb / (killedAS + killedAD + killedAM) << endl;
+			outFile << "\t - Av_Df : " << AtotalDf / TotalKilledA;
+			outFile << " , Av_Dd : " << AtotalDd / TotalKilledA;
+			outFile << " , Av_Db : " << AtotalDb / TotalKilledA << endl;
 		}
 		
 		if (AtotalDb == 0)
