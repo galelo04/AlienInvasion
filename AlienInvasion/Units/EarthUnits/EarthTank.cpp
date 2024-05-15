@@ -28,10 +28,7 @@ bool EarthTank::Attack(Game* gameptr)
 			}
 			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
-			else
-				AMtemplist.add(attackedUnit);
+			AMtemplist.add(attackedUnit);
 		}
 		else
 			break;
@@ -57,10 +54,7 @@ bool EarthTank::Attack(Game* gameptr)
 				}
 				double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 				attackedUnit->decrementHealth(damage);
-				if (attackedUnit->getHealth() <= 0)
-					gameptr->addToKilledList(attackedUnit);
-				else
-					AStemplist.enqueue(attackedUnit);
+				AStemplist.enqueue(attackedUnit);
 			}
 			else
 				break;
@@ -81,10 +75,7 @@ bool EarthTank::Attack(Game* gameptr)
 			}
 			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
-			else
-				AMtemplist.add(attackedUnit);
+			AMtemplist.add(attackedUnit);
 		}
 		else
 			break;
@@ -103,10 +94,21 @@ bool EarthTank::Attack(Game* gameptr)
 			AMtemplist.printlist();
 		}
 	}
-	while (AStemplist.dequeue(attackedUnit))
-		gameptr->getAlienArmy()->addUnit(attackedUnit);
+	while (AStemplist.dequeue(attackedUnit)) 
+	{
+		if (attackedUnit->getHealth() <= 0)
+			gameptr->addToKilledList(attackedUnit);
+		else
+			gameptr->getAlienArmy()->addUnit(attackedUnit);
+	}
+		
 	while (AMtemplist.remove(attackedUnit))
-		gameptr->getAlienArmy()->addUnit(attackedUnit);
+	{
+		if (attackedUnit->getHealth() <= 0)
+			gameptr->addToKilledList(attackedUnit);
+		else
+			gameptr->getAlienArmy()->addUnit(attackedUnit);
+	}
 
 	return didAttack;
 }

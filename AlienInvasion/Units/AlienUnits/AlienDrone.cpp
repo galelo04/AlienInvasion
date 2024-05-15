@@ -30,14 +30,7 @@ bool AlienDrone::Attack(Game* gameptr)
 			}
 			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
-			else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
-			{
-				gameptr->getEarthArmy()->addToUML(attackedUnit,gameptr->getCrntTimeStep());
-			}
-			else
-				ETtemplist.push(attackedUnit);
+			ETtemplist.push(attackedUnit);
 			i++;
 		}
 		attackedUnit = gameptr->getEarthArmy()->removeUnit(UnitType::Gunnery);
@@ -51,10 +44,7 @@ bool AlienDrone::Attack(Game* gameptr)
 			}
 			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
-			else
-				EGtemplist.enqueue(attackedUnit, pri);
+			EGtemplist.enqueue(attackedUnit, pri);
 			i++;
 		}
 	}
@@ -72,10 +62,22 @@ bool AlienDrone::Attack(Game* gameptr)
 		}
 	}
 	while (EGtemplist.dequeue(attackedUnit, pri))
-		gameptr->getEarthArmy()->addUnit(attackedUnit);
+	{
+		if (attackedUnit->getHealth() <= 0)
+			gameptr->addToKilledList(attackedUnit);
+		else
+			gameptr->getEarthArmy()->addUnit(attackedUnit);
+	}	
+	
 	while (ETtemplist.pop(attackedUnit))
-		gameptr->getEarthArmy()->addUnit(attackedUnit);
-
+	{
+		if (attackedUnit->getHealth() <= 0)
+			gameptr->addToKilledList(attackedUnit);
+		else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
+			gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
+		else
+			gameptr->getEarthArmy()->addUnit(attackedUnit);
+	}
 
 	return didAttack;
 
