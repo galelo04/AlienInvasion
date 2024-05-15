@@ -12,11 +12,39 @@ bool EarthGunnery::Attack(Game* gameptr)
 	arrayADT<Unit*>AMtemplist;
 	LinkedQueue<Unit*>ADtemplist;
 
-	int attackCapacity = getAttackCapacity();
+	int attackcapacity = getAttackCapacity();
 	Unit* attackedUnit = nullptr;
-	int i = 0;
+	//////////////////////////////////////////////////////////////////////////////
+	int monsters, drones;
+	if (gameptr->getAlienArmy()->getADCount() > gameptr->getAlienArmy()->getAMCount())
+	{
+		if ((attackcapacity / 2) > gameptr->getAlienArmy()->getAMCount())
+		{
+			monsters = gameptr->getAlienArmy()->getAMCount();
+		}
+		else
+		{
+			monsters = attackcapacity / 2;
+		}
+		drones = attackcapacity - monsters;
+	}
+	else
+	{
+		if ((attackcapacity / 2) > gameptr->getAlienArmy()->getADCount())
+		{
+			drones = gameptr->getAlienArmy()->getADCount();
+		}
+		else
+		{
+			drones = attackcapacity / 2;
+		}
+		monsters = attackcapacity - drones;
 
-	while (i < attackCapacity && (gameptr->getAlienArmy()->getADCount() > 0 || gameptr->getAlienArmy()->getAMCount() > 0))
+		if (monsters > gameptr->getAlienArmy()->getAMCount())
+			monsters = gameptr->getAlienArmy()->getAMCount();
+	}
+	////////////////////////////////////////////////////////////////////
+	for (int i = 0; i < monsters; i++)
 	{
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Monster);
 		if (attackedUnit)
@@ -29,13 +57,16 @@ bool EarthGunnery::Attack(Game* gameptr)
 			}
 			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
-			else
+			
 				AMtemplist.add(attackedUnit);
-			i++;
 		}
-	
+	}
+
+
+
+	for (int i = 0; i < drones; i++)
+	{
+
 		attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);
 		if (attackedUnit)
 		{
@@ -47,9 +78,7 @@ bool EarthGunnery::Attack(Game* gameptr)
 			}
 			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
-			else
+			
 				ADtemplist.enqueue(attackedUnit);
 			i++;
 		}
@@ -65,11 +94,8 @@ bool EarthGunnery::Attack(Game* gameptr)
 			}
 			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
-			else
+		
 				ADtemplist.enqueue(attackedUnit);
-			i++;
 		}
 	}
 	
@@ -86,9 +112,19 @@ bool EarthGunnery::Attack(Game* gameptr)
 		}
 	}
 	while (AMtemplist.remove(attackedUnit))
+	{
+		if (attackedUnit->getHealth() <= 0)
+			gameptr->addToKilledList(attackedUnit);
+		else
 		gameptr->getAlienArmy()->addUnit(attackedUnit);
+	}
 	while (ADtemplist.dequeue(attackedUnit))
+	{
+		if (attackedUnit->getHealth() <= 0)
+			gameptr->addToKilledList(attackedUnit);
+		else
 		gameptr->getAlienArmy()->addUnit(attackedUnit);
+	}
 
 
 	return didAttack;
@@ -108,94 +144,3 @@ void EarthGunnery::setPri(int pri)
 
 
 
-
-//
-//int monsters, drones;
-//if (gameptr->getAlienArmy()->getADCount() > gameptr->getAlienArmy()->getAMCount())
-//{
-//	if ((attackcapacity / 2) > gameptr->getAlienArmy()->getAMCount())
-//	{
-//		monsters = gameptr->getAlienArmy()->getAMCount();
-//	}
-//	else
-//	{
-//		monsters = attackcapacity / 2;
-//	}
-//	drones = attackcapacity - monsters;
-//}
-//else
-//{
-//	if ((attackcapacity / 2) > gameptr->getAlienArmy()->getADCount())
-//	{
-//		drones = gameptr->getAlienArmy()->getADCount();
-//	}
-//	else
-//	{
-//		drones = attackcapacity / 2;
-//	}
-//	monsters = attackcapacity - drones;
-//
-//	if (monsters > gameptr->getAlienArmy()->getAMCount())
-//		monsters = gameptr->getAlienArmy()->getAMCount();
-//}
-//////////////////////////////////////////////////////////////////////
-//for (int i = 0; i < monsters; i++)
-//{
-//	attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Monster);
-//	if (attackedUnit)
-//	{
-//		didAttack = true;
-//		if (!attackedUnit->IsAttacked())
-//		{
-//			attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
-//			attackedUnit->makeAttacked(true);
-//		}
-//		double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
-//		attackedUnit->decrementHealth(damage);
-//		if (attackedUnit->getHealth() <= 0)
-//			gameptr->addToKilledList(attackedUnit);
-//		else
-//			AMtemplist.add(attackedUnit);
-//	}
-//}
-//
-//
-//
-//for (int i = 0; i < drones; i++)
-//{
-//
-//	attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);
-//	if (attackedUnit)
-//	{
-//		didAttack = true;
-//		if (!attackedUnit->IsAttacked())
-//		{
-//			attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
-//			attackedUnit->makeAttacked(true);
-//		}
-//		double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
-//		attackedUnit->decrementHealth(damage);
-//		if (attackedUnit->getHealth() <= 0)
-//			gameptr->addToKilledList(attackedUnit);
-//		else
-//			ADtemplist.enqueue(attackedUnit);
-//		i++;
-//	}
-//
-//	attackedUnit = gameptr->getAlienArmy()->removeUnit(UnitType::Drone);
-//	if (attackedUnit)
-//	{
-//		didAttack = true;
-//		if (!attackedUnit->IsAttacked())
-//		{
-//			attackedUnit->setFirstAttackTime(gameptr->getCrntTimeStep());
-//			attackedUnit->makeAttacked(true);
-//		}
-//		double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
-//		attackedUnit->decrementHealth(damage);
-//		if (attackedUnit->getHealth() <= 0)
-//			gameptr->addToKilledList(attackedUnit);
-//		else
-//			ADtemplist.enqueue(attackedUnit);
-//	}
-//}

@@ -28,19 +28,7 @@ bool AlienSoldier::Attack(Game* gameptr)
 			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
 
-			if (attackedUnit->getHealth() <= 0)
-			{
-				gameptr->addToKilledList(attackedUnit);
-				if (attackedUnit->isInfected())
-					gameptr->getEarthArmy()->decrementInfES();
-			}
-			else if (attackedUnit->getHealth() < attackedUnit->getIntialHealth() * .2)
-			{
-				gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
-				if (attackedUnit->isInfected())
-					gameptr->getEarthArmy()->decrementInfES();
-			}
-			else
+			
 				EStemplist.enqueue(attackedUnit);
 			i++;
 		}
@@ -57,12 +45,7 @@ bool AlienSoldier::Attack(Game* gameptr)
 			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
 
-			if (attackedUnit->getHealth() <= 0)
-			{
-				delete attackedUnit;
-			}
-
-			else
+		
 				SUtemplist.enqueue(attackedUnit);
 			i++;
 		}
@@ -80,9 +63,30 @@ bool AlienSoldier::Attack(Game* gameptr)
 		}
 	}
 	while (EStemplist.dequeue(attackedUnit))
+	{
+		if (attackedUnit->getHealth() <= 0)
+		{
+			gameptr->addToKilledList(attackedUnit);
+			if (attackedUnit->isInfected())
+				gameptr->getEarthArmy()->decrementInfES();
+		}
+		else if (attackedUnit->getHealth() < attackedUnit->getIntialHealth() * .2)
+		{
+			gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
+			if (attackedUnit->isInfected());
+		}
+		else
 		gameptr->getEarthArmy()->addUnit(attackedUnit);
+	}
 	while (SUtemplist.dequeue(attackedUnit))
+	{
+		if (attackedUnit->getHealth() <= 0)
+		{
+			delete attackedUnit;
+		}
+		else
 		gameptr->getAllyArmy()->addUnit(attackedUnit);
+	}
 
 	return didAttack;
 }

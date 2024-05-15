@@ -26,9 +26,7 @@ bool SaverUnit::Attack(Game* gameptr)
 			}
 			double damage = ceil((getPower() * getHealth() / 100.0) / sqrt(attackedUnit->getHealth()));
 			attackedUnit->decrementHealth(damage);
-			if (attackedUnit->getHealth() <= 0)
-				gameptr->addToKilledList(attackedUnit);
-			else
+			
 				AStemplist.enqueue(attackedUnit);
 		}
 
@@ -43,7 +41,12 @@ bool SaverUnit::Attack(Game* gameptr)
 
 	}
 	while (AStemplist.dequeue(attackedUnit))
+	{
+		if (attackedUnit->getHealth() <= 0)
+			gameptr->addToKilledList(attackedUnit);
+		else
 		gameptr->getAlienArmy()->addUnit(attackedUnit);
+	}
 
 	return didAttack;
 }
