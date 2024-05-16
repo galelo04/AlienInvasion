@@ -24,7 +24,7 @@ private:
 	EarthArmy * earthArmy;
 	AllyArmy* allyArmy;
 	randGen * generator;
-	priQueue <Unit* > killedlist;
+	LinkedQueue <Unit* > killedlist;
 	Result result;
 	Mode _mode;
 public:

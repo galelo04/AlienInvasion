@@ -81,7 +81,7 @@ bool AlienSoldier::Attack(Game* gameptr)
 	{
 		if (attackedUnit->getHealth() <= 0)
 		{
-			delete attackedUnit;
+			gameptr->addToKilledList(attackedUnit);
 		}
 		else
 		gameptr->getAllyArmy()->addUnit(attackedUnit);

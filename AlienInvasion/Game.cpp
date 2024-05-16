@@ -228,7 +228,7 @@ void Game::addToKilledList(Unit*& unit)
 	if (unit)
 	{
 		unit->setDestructionTime(TimeStep);
-		killedlist.enqueue(unit,-TimeStep);
+		killedlist.enqueue(unit);
 	}
 }
 
@@ -245,9 +245,11 @@ void Game::loadOutputs()
 		int killedAS = 0, killedAD = 0, killedAM = 0;
 		int EtotalDf = 0, EtotalDd = 0, EtotalDb = 0;
 		int AtotalDf = 0, AtotalDd = 0, AtotalDb = 0;
-		
-		while (killedlist.dequeue(unit, pri))
+		int killedlistcount = killedlist.getCount();
+		int i = 0;
+		while (i < killedlistcount)
 		{
+			killedlist.dequeue(unit);
 			UnitType type = unit->getType();
 			if (type != UnitType::HealingUnit) {
 				if (type == UnitType::EarthSoldier || type == UnitType::Tank || type == UnitType::Gunnery)
@@ -301,6 +303,8 @@ void Game::loadOutputs()
 				}
 				outFile << unit->getDestructionTime() << "\t" << unit->getID() << "\t" << unit->getJoinTime() << "\t" << unit->getFirstAttackTime() - unit->getJoinTime() << "\t" << unit->getDestructionTime() - unit->getFirstAttackTime() << "\t" << unit->getDestructionTime() - unit->getJoinTime() << endl;
 			}
+			killedlist.enqueue(unit);
+			i++;
 		}
 
 		outFile << endl;
@@ -496,6 +500,11 @@ void Game::EndGame()
 
 Game::~Game()
 {
+	Unit* unittobedeleted;
+
+	while (killedlist.dequeue(unittobedeleted))
+		delete unittobedeleted;
+
 	delete generator;
 	delete alienArmy;
 	delete earthArmy;

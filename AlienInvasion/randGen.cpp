@@ -20,7 +20,6 @@ randGen::randGen(Game* _gameptr)
 {
     allyLimit = false;
     gameptr = _gameptr;
-    
     earth_limit = false;
     alien_limit = false;
     generateSU = false;
