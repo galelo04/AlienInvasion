@@ -7,7 +7,8 @@ int main()
 	game.instantiateGame();
 	
 	while (game.battle());
-
+	
 
 	game.EndGame();
+	cout << "The game ended after " << game.getCrntTimeStep() << " timesteps\n";
 }

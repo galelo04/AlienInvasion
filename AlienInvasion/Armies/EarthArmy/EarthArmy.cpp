@@ -4,7 +4,7 @@
 
 EarthArmy::EarthArmy()
 {
-	srand((unsigned)time(NULL));
+	
 	InfectedSoldiers = 0;
 	TotalinfES = 0;
 	totalHealedES = 0;
@@ -191,7 +191,7 @@ void EarthArmy::print()
 	UMLsoldiers.printlist();
 	cout << UMLtanks.getCount() << " Tanks UML ";
 	UMLtanks.printlist();
-	cout << "ES inf% " << infES_P()<<endl;
+//	cout << "ES inf% " << infES_P()<<endl;
 
 }
 

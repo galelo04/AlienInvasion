@@ -6,7 +6,7 @@
 AlienMonster::AlienMonster(int jointime, int health, int power, int attackcapacity, int infprob)
 	:Unit(UnitType::Monster, last_Alien_Id++, jointime, health, power, attackcapacity), infection_probability(infprob)
 {
-	srand((unsigned)time(NULL));
+	
 }
 
 bool AlienMonster::Attack(Game* gameptr)

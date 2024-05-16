@@ -13,7 +13,7 @@ private:
 public:
 	arrayADT()
 	{
-		srand((unsigned)time(NULL));
+		
 		count = 0;
 	}
 	bool isEmpty() const
