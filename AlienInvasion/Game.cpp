@@ -339,9 +339,9 @@ void Game::loadOutputs()
 			outFile << "\t - Av_Df is Undefined , Av_Dd is Undefined , Av_Db is Undefined" << endl;
 		else
 		{
-			outFile << "\t - Av_Df : " << EtotalDf / TotalKilledE;
-			outFile << " , Av_Dd : " << EtotalDd / TotalKilledE;
-			outFile << " , Av_Db : " << EtotalDb / TotalKilledE << endl;
+			outFile << "\t - Av_Df : " << EtotalDf * 1.0/ TotalKilledE;
+			outFile << " , Av_Dd : " << EtotalDd * 1.0 / TotalKilledE;
+			outFile << " , Av_Db : " << EtotalDb * 1.0 / TotalKilledE << endl;
 		}
 		
 		if(EtotalDb == 0)
@@ -400,9 +400,9 @@ void Game::loadOutputs()
 			outFile << "\t - Av_Df is Undefined , Av_Dd is Undefined , Av_Db is Undefined" << endl;
 		else
 		{
-			outFile << "\t - Av_Df : " << AtotalDf / TotalKilledA;
-			outFile << " , Av_Dd : " << AtotalDd / TotalKilledA;
-			outFile << " , Av_Db : " << AtotalDb / TotalKilledA << endl;
+			outFile << "\t - Av_Df : " << AtotalDf * 1.0 / TotalKilledA;
+			outFile << " , Av_Dd : " << AtotalDd * 1.0 / TotalKilledA;
+			outFile << " , Av_Db : " << AtotalDb * 1.0 / TotalKilledA << endl;
 		}
 		
 		if (AtotalDb == 0)
