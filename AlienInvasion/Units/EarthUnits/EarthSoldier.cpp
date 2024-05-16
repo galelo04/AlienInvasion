@@ -82,7 +82,6 @@ bool EarthSoldier::Attack(Game* gameptr)
 		else if (attackedUnit->getHealth() < attackedUnit->getIntialHealth() * .2)
 		{
 			gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
-			if (attackedUnit->isInfected());
 		}
 		else
 		gameptr->getEarthArmy()->addUnit(attackedUnit);

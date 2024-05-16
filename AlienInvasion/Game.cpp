@@ -41,10 +41,26 @@ void Game::instantiateGame()
 	string filename;
 	SetConsoleTextAttribute(console_color, 7);
 	cin >> filename;
-	loadParams(filename);
+	if (loadParams(filename))
+	{
+		char c;
+		Mode mode;
+		SetConsoleTextAttribute(console_color, 8);
+		cout << "Choose your favourite mode:" << endl;
+		SetConsoleTextAttribute(console_color, 7);
+		cout << " 1)Normal Mode" << endl;
+		cout << " 2)Silent Mode" << endl;
+		cin >> c;
+		if (c == '2')
+			mode = Mode::Silent;
+		else
+			mode = Mode::Normal;
+		cout << "Simulation starts..." << endl;
+		setMode(mode);
+	}
 }
 
-void Game::loadParams(string filename)
+bool Game::loadParams(string filename)
 {
 	ifstream inFile;
 	inFile.open("InputFiles\\"+filename+".txt");
@@ -75,6 +91,8 @@ void Game::loadParams(string filename)
 
 		inFile.close();
 		generator->getparameters(Params , 30);
+		
+		return true;
 	}
 	else
 	{
@@ -84,6 +102,7 @@ void Game::loadParams(string filename)
 		system("cls");
 		cout << "make sure of the name of the file and don't put .txt\n";
 		instantiateGame();
+		return false;
 	}
 }
 
@@ -117,6 +136,8 @@ bool Game::battle()
 		earthAttack=earthArmy->attack(this);
 		alienAttack=alienArmy->attack(this);
 		allyAttack=allyArmy->attack(this);
+
+		earthArmy->infES_P();
 		
 		printKilledlist();
 		SetConsoleTextAttribute(console_color, 9);
@@ -416,6 +437,44 @@ void Game::EndGame()
 	loadOutputs();
 	cout << "Simulation ends, Output file is created" << endl;
 	SetConsoleTextAttribute(console_color, 8);
+	if (result == Result::Win)
+	{
+		SetConsoleTextAttribute(console_color, 10);
+		cout << " _____           _   _          _                         \n";
+		cout << "| ____|__ _ _ __| |_| |__      / \\   _ __ _ __ ___  _   _ \n";
+		cout << "|  _| / _` | '__| __| '_ \\    / _ \\ | '__| '_ ` _ \\| | | |\n";
+		cout << "| |__| (_| | |  | |_| | | |  / ___ \\| |  | | | | | | |_| |\n";
+		cout << "|_____\\__,_|_|   \\__|_| |_| /_/   \\_\\_|  |_| |_| |_|\\__, |\n";
+		cout << "\\ \\      / (_)_ __  ___                             |___/ \n";
+		cout << " \\ \\ /\\ / /| | '_ \\/ __|                                   \n";
+		cout << "  \\ V  V / | | | | \\__ \\                                    \n";
+		cout << "   \\_/\\_/  |_|_| |_|___/                                     \n";
+	}
+	else if(result==Result::Loss)
+	{
+		SetConsoleTextAttribute(console_color, 11);
+		cout << "    _    _ _                 _                          \n";
+		cout << "   / \\  | (_) ___ _ __      / \\   _ __ _ __ ___  _   _\n";
+		cout << "  / _ \\ | | |/ _ \\ '_  \\   / _ \\ | '__| '_ ` _ \\| | | |\n";
+		cout << " / ___ \\| | |  __/ | | |  / ___ \\| |  | | | | | | |_| |\n";
+		cout << "/_/   \\_\\_|_|\\___|_| |_| /_/   \\_\\_|  |_| |_| |_|\\__, |\n";
+		cout << "\\ \\      / (_)_ __  ___                          |___/ \n";
+		cout << " \\ \\ /\\ / /| | '_ \\/ __|                                   \n";
+		cout << "  \\ V  V / | | | | \\__ \\                                    \n";
+		cout << "   \\_/\\_/  |_|_| |_|___/                                     \n";
+
+	}
+	else
+	{
+		SetConsoleTextAttribute(console_color, 12);
+
+		cout << "   ____                                 \n";
+		cout << "  |  _ \\ _ __ __ ___      ___ __ \n";
+		cout << "  | | | | '__/ _` \\ \\ /\\ / / '_ \\ \n";
+		cout << "  | |_| | | | (_| |\\ V  V /| | | |\n";
+		cout << "  |____/|_|  \\__,_| \\_/\\_/ |_| |_|\n";
+
+	}
 
 }
 

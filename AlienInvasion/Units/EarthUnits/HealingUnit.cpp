@@ -21,6 +21,8 @@ bool HealingUnit::Attack(Game* gameptr)
 			if (gameptr->getCrntTimeStep() - healedUnit->getUMLJoiningTime() > 10)
 			{
 				gameptr->addToKilledList(healedUnit);
+				if (healedUnit->isInfected())
+					gameptr->getEarthArmy()->decrementInfES();
 			}
 			else
 			{

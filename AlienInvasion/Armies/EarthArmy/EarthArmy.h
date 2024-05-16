@@ -20,6 +20,7 @@ private:
 	int TotalinfES;
 	int totalHealedES;
 	int totalFixedET;
+	int inf_P;
 public:
 	EarthArmy();
 	virtual void addUnit(Unit* unit);

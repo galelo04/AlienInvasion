@@ -9,6 +9,7 @@ EarthArmy::EarthArmy()
 	TotalinfES = 0;
 	totalHealedES = 0;
 	totalFixedET = 0;
+	inf_P = 0;
 }
 
 void EarthArmy::addUnit(Unit* unit)
@@ -145,23 +146,26 @@ void EarthArmy::infectionSpread()
 		if (A <= 2)
 		{
 			int size = getESCount();
-			int index = 1 + (rand() % size);
-			int i = 0;
-			while(EarthSoldiers.dequeue(removed))
+			if (size > 0)
 			{
-				if (i == index)
+				int index = 1 + (rand() % size);
+				int i = 0;
+				while (EarthSoldiers.dequeue(removed))
 				{
-					if (!removed->isInfected())
+					if (i == index)
 					{
-						removed->infect(true);
-						incrementInfES();
+						if (!removed->isInfected())
+						{
+							removed->infect(true);
+							incrementInfES();
+						}
 					}
+					templist.enqueue(removed);
+					i++;
 				}
-				templist.enqueue(removed);
-				i++;
+				while (templist.dequeue(removed))
+					EarthSoldiers.enqueue(removed);
 			}
-			while (templist.dequeue(removed))
-				EarthSoldiers.enqueue(removed);
 		}
 	}
 }
@@ -174,6 +178,7 @@ void EarthArmy::print()
 	SetConsoleTextAttribute(console_color, 10);
 	cout << "==============  Earth Army Alive Units =============\n";
 	SetConsoleTextAttribute(console_color, 15);
+	cout << "ES inf%  " << inf_P << endl;
 	cout << EarthSoldiers.getCount() << " ES ";
 	EarthSoldiers.printlist();
 	cout << EarthTanks.getCount() << " ET ";
@@ -286,8 +291,11 @@ void EarthArmy::decrementInfES()
 
 int EarthArmy::infES_P()
 {
-	if (EarthSoldiers.getCount() == 0) return 0;
-	return ((getInfESCount()*100)/EarthSoldiers.getCount());
+	if ((EarthSoldiers.getCount()+UMLsoldiers.getCount()) == 0)
+		inf_P=0;
+	else
+		inf_P= ((getInfESCount()*100)/(EarthSoldiers.getCount()+UMLsoldiers.getCount()));
+	return inf_P;
 
 }
 

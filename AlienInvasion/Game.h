@@ -33,7 +33,7 @@ public:
 	EarthArmy*& getEarthArmy() ;
 	AllyArmy*& getAllyArmy();
 	void instantiateGame();
-	void loadParams(string filename);
+	bool loadParams(string filename);
 	bool battle();
 	Mode getMode() const;
 	void setMode(Mode mode);

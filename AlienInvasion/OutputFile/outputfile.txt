@@ -1,74 +1,21 @@
 Td	ID	Tj	Df	Dd	Db	
-6	2001	2	1	3	4
-7	2002	2	1	4	5
-7	2005	2	1	4	5
-7	2004	2	1	4	5
-7	2003	2	1	4	5
-7	2008	2	1	4	5
-7	2006	2	1	4	5
-7	2007	2	1	4	5
-7	2009	2	1	4	5
-11	2000	2	1	8	9
-11	2010	8	0	3	3
-11	2016	8	0	3	3
-11	2018	8	0	3	3
-11	2017	8	0	3	3
-11	2013	8	0	3	3
-11	2019	8	0	3	3
-11	2014	8	0	3	3
-11	2011	8	0	3	3
-11	2012	8	0	3	3
-11	2015	8	0	3	3
-12	9	3	0	9	9
-13	18	9	0	4	4
-15	22	12	0	3	3
-15	6	3	9	3	12
-16	4	3	9	4	13
-16	20	9	3	4	7
-17	19	9	3	5	8
-18	28	12	0	6	6
-23	2028	12	0	11	11
-23	2027	12	0	11	11
-23	2026	12	0	11	11
-23	2029	12	0	11	11
-23	2025	12	0	11	11
-23	7	3	0	20	20
-23	10	3	0	20	20
-24	2022	12	0	12	12
-24	1	3	0	21	21
-24	13	9	0	15	15
-24	12	9	0	15	15
-25	2023	12	0	13	13
-25	2021	12	0	13	13
-26	2024	12	0	14	14
-29	2032	25	0	4	4
-29	2030	25	0	4	4
-29	2035	25	0	4	4
-29	2031	25	0	4	4
-29	2038	25	0	4	4
-29	2033	25	0	4	4
-29	2036	25	0	4	4
-29	2037	25	0	4	4
-29	2039	25	0	4	4
-29	2020	12	0	17	17
-30	2034	25	0	5	5
 
 Battle result: 	Win
 
 For Earth Army:
-	 - ES_Total : 35 , ET_Total : 72 , EG_Total : 30
-	 - DestructedES % : 8.57143% , DestructedET %: 5.55556% , DestructedEG % : 20%
-	 - DestructedEU % : 9.48905%
-	 - Av_Df : 1 , Av_Dd : 9 , Av_Db : 11
-	 - Df/Db % : 15.6863% , Dd/Db % : 84.3137%
-	 - Total Healed Units : 21
-	 - Healed Soldiers : 11	 , Fixed Tanks : 10
-	 - Healing % : 15.3285%
-	 - Infection % : 14.2857%
+	 - ES_Total : 4 , ET_Total : 0 , EG_Total : 1
+	 - DestructedES % : 0% , DestructedET % is Undefined , DestructedEG % : 0%
+	 - DestructedEU % : 0%
+	 - Av_Df is Undefined , Av_Dd is Undefined , Av_Db is Undefined
+	 - Df/Db % is Undefined , Dd/Db % is Undefined
+	 - Total Healed Units : 0
+	 - Healed Soldiers : 0	 , Fixed Tanks : 0
+	 - Healing % : 0%
+	 - Infection % : 0%
 
 For Alien Army:
-	 - AS_Total : 3 , AM_Total : 34 , AD_Total : 3
-	 - DestructedAS % : 100% , DestructedAM %: 100% , DestructedAD % : 100%
-	 - DestructedAU % : 100%
-	 - Av_Df : 0 , Av_Dd : 5 , Av_Db : 6
-	 - Df/Db % : 4.03226% , Dd/Db % : 95.9677%
+	 - AS_Total : 0 , AM_Total : 0 , AD_Total : 0
+	 - DestructedAS % is Undefined , DestructedAM % is Undefined , DestructedAD % is Undefined
+	 - DestructedAU % is Undefined
+	 - Av_Df is Undefined , Av_Dd is Undefined , Av_Db is Undefined
+	 - Df/Db % is Undefined , Dd/Db % is Undefined

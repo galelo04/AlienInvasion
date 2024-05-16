@@ -107,7 +107,6 @@ bool AlienMonster::Attack(Game* gameptr)
 		else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
 		{
 			gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
-			if (attackedUnit->isInfected());
 		}
 		else
 		gameptr->getEarthArmy()->addUnit(attackedUnit);
@@ -116,7 +115,12 @@ bool AlienMonster::Attack(Game* gameptr)
 	{
 
 		if (attackedUnit->getHealth() <= 0)
+		{
 			gameptr->addToKilledList(attackedUnit);
+			if (attackedUnit->isInfected())
+				gameptr->getEarthArmy()->decrementInfES();
+				
+		}
 		else if (attackedUnit->getHealth() < .2 * attackedUnit->getIntialHealth())
 		{
 			gameptr->getEarthArmy()->addToUML(attackedUnit, gameptr->getCrntTimeStep());
