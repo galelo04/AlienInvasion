@@ -35,7 +35,7 @@ bool HealingUnit::Attack(Game* gameptr)
 				didHeal = true;
 				double improvement = ceil(this->getPower() * (this->getHealth() / 100.0)) / sqrt(healedUnit->getHealth());
 				if (healedUnit->isInfected())
-					healedUnit->heal(improvement/2.0);
+					healedUnit->heal(ceil(improvement/2.0));
 				else
 					healedUnit->heal(improvement);
 

@@ -50,11 +50,22 @@ void Game::instantiateGame()
 		SetConsoleTextAttribute(console_color, 7);
 		cout << " 1)Normal Mode" << endl;
 		cout << " 2)Silent Mode" << endl;
+
 		cin >> c;
+		while (c!='2'&&c!='1')
+		{
+			SetConsoleTextAttribute(console_color, 12);
+			cout << "Please Choose Only Mode\"1\" or Mode\"2\"\n";
+			SetConsoleTextAttribute(console_color, 7);
+			cin >> c;
+		
+		}
 		if (c == '2')
 			mode = Mode::Silent;
+
 		else
 			mode = Mode::Normal;
+		system("cls");
 		cout << "Simulation starts..." << endl;
 		setMode(mode);
 	}
