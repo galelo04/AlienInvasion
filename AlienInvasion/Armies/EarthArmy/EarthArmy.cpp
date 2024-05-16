@@ -176,7 +176,7 @@ void EarthArmy::print()
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	SetConsoleTextAttribute(console_color, 10);
-	cout << "==============  Earth Army Alive Units =============\n";
+	cout << "==============  Earth Army Alive Units =======================\n";
 	SetConsoleTextAttribute(console_color, 15);
 	cout << "ES inf%  " << inf_P << endl;
 	cout << EarthSoldiers.getCount() << " ES ";

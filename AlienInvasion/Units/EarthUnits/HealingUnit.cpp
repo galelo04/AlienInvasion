@@ -23,6 +23,7 @@ bool HealingUnit::Attack(Game* gameptr)
 				gameptr->addToKilledList(healedUnit);
 				if (healedUnit->isInfected())
 					gameptr->getEarthArmy()->decrementInfES();
+				i--; //  units that took more than 10 time steps shouldn't be included in the HU capacity
 			}
 			else
 			{

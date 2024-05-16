@@ -204,7 +204,7 @@ void Game::printKilledlist()
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console_color, 6);
 	SetConsoleTextAttribute(console_color, 12);
-	cout << "==============  Killed/Destructed Units =============\n";
+	cout << "==============  Killed/Destructed Units ======================\n";
 	SetConsoleTextAttribute(console_color, 15);
 	cout << killedlist.getCount() << " Units ";
 	killedlist.printlist();
@@ -440,39 +440,44 @@ void Game::EndGame()
 	if (result == Result::Win)
 	{
 		SetConsoleTextAttribute(console_color, 10);
-		cout << " _____           _   _          _                         \n";
-		cout << "| ____|__ _ _ __| |_| |__      / \\   _ __ _ __ ___  _   _ \n";
-		cout << "|  _| / _` | '__| __| '_ \\    / _ \\ | '__| '_ ` _ \\| | | |\n";
-		cout << "| |__| (_| | |  | |_| | | |  / ___ \\| |  | | | | | | |_| |\n";
-		cout << "|_____\\__,_|_|   \\__|_| |_| /_/   \\_\\_|  |_| |_| |_|\\__, |\n";
-		cout << "\\ \\      / (_)_ __  ___                             |___/ \n";
-		cout << " \\ \\ /\\ / /| | '_ \\/ __|                                   \n";
-		cout << "  \\ V  V / | | | | \\__ \\                                    \n";
-		cout << "   \\_/\\_/  |_|_| |_|___/                                     \n";
+		cout << "\n\n\n\n\n\n\n";
+		cout << "			 _____           _   _          _                         \n";
+		cout << "			| ____|__ _ _ __| |_| |__      / \\   _ __ _ __ ___  _   _ \n";
+		cout << "			|  _| / _` | '__| __| '_ \\    / _ \\ | '__| '_ ` _ \\| | | |\n";
+		cout << "			| |__| (_| | |  | |_| | | |  / ___ \\| |  | | | | | | |_| |\n";
+		cout << "			|_____\\__,_|_|   \\__|_| |_| /_/   \\_\\_|  |_| |_| |_|\\__, |\n";
+		cout << "			\\ \\      / (_)_ __  ___                             |___/ \n";
+		cout << "			 \\ \\ /\\ / /| | '_ \\/ __|                                   \n";
+		cout << "			  \\ V  V / | | | | \\__ \\                                    \n";
+		cout << "			   \\_/\\_/  |_|_| |_|___/                                     \n";
+		cout << "\n\n\n\n\n\n\n";
 	}
 	else if(result==Result::Loss)
 	{
 		SetConsoleTextAttribute(console_color, 11);
-		cout << "    _    _ _                 _                          \n";
-		cout << "   / \\  | (_) ___ _ __      / \\   _ __ _ __ ___  _   _\n";
-		cout << "  / _ \\ | | |/ _ \\ '_  \\   / _ \\ | '__| '_ ` _ \\| | | |\n";
-		cout << " / ___ \\| | |  __/ | | |  / ___ \\| |  | | | | | | |_| |\n";
-		cout << "/_/   \\_\\_|_|\\___|_| |_| /_/   \\_\\_|  |_| |_| |_|\\__, |\n";
-		cout << "\\ \\      / (_)_ __  ___                          |___/ \n";
-		cout << " \\ \\ /\\ / /| | '_ \\/ __|                                   \n";
-		cout << "  \\ V  V / | | | | \\__ \\                                    \n";
-		cout << "   \\_/\\_/  |_|_| |_|___/                                     \n";
+		cout << "\n\n\n\n\n\n\n";
+		cout << "			    _    _ _                 _                          \n";
+		cout << "			   / \\  | (_) ___ _ __      / \\   _ __ _ __ ___  _   _\n";
+		cout << "			  / _ \\ | | |/ _ \\ '_  \\   / _ \\ | '__| '_ ` _ \\| | | |\n";
+		cout << "			 / ___ \\| | |  __/ | | |  / ___ \\| |  | | | | | | |_| |\n";
+		cout << "			/_/   \\_\\_|_|\\___|_| |_| /_/   \\_\\_|  |_| |_| |_|\\__, |\n";
+		cout << "			\\ \\      / (_)_ __  ___                          |___/ \n";
+		cout << "			 \\ \\ /\\ / /| | '_ \\/ __|                                   \n";
+		cout << "			  \\ V  V / | | | | \\__ \\                                    \n";
+		cout << "			   \\_/\\_/  |_|_| |_|___/                                     \n";
+		cout << "\n\n\n\n\n\n\n";
 
 	}
 	else
 	{
 		SetConsoleTextAttribute(console_color, 12);
-
-		cout << "   ____                                 \n";
-		cout << "  |  _ \\ _ __ __ ___      ___ __ \n";
-		cout << "  | | | | '__/ _` \\ \\ /\\ / / '_ \\ \n";
-		cout << "  | |_| | | | (_| |\\ V  V /| | | |\n";
-		cout << "  |____/|_|  \\__,_| \\_/\\_/ |_| |_|\n";
+		cout << "\n\n\n\n\n\n\n";
+		cout << "           ____                                 \n";
+		cout << "          |  _ \\ _ __ __ ___      ___ __ \n";
+		cout << "          | | | | '__/ _` \\ \\ /\\ / / '_ \\ \n";
+		cout << "          | |_| | | | (_| |\\ V  V /| | | |\n";
+		cout << "          |____/|_|  \\__,_| \\_/\\_/ |_| |_|\n";
+		cout << "\n\n\n\n\n\n\n";
 
 	}
 

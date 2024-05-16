@@ -129,7 +129,7 @@ void AlienArmy::print()
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(console_color, 11);
 
-	cout << "==============  Alien Army Alive Units =============\n";
+	cout << "==============  Alien Army Alive Units =======================\n";
 	SetConsoleTextAttribute(console_color, 15);
 	cout << AlienSoldiers.getCount() << " AS ";
 	AlienSoldiers.printlist();

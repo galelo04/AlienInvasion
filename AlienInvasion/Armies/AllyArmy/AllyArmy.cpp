@@ -39,7 +39,7 @@ void AllyArmy::print()
 	console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	SetConsoleTextAttribute(console_color, 14);
-	cout << "==============  Alive Saver Units   =============\n";
+	cout << "==============  Alive Saver Units   ==========================\n";
 	SetConsoleTextAttribute(console_color, 15);
 	cout << SaverUnits.getCount() << " SU ";
 	SaverUnits.printlist();
