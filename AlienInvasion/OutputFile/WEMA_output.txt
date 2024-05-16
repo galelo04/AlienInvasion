@@ -1,0 +1,54 @@
+Td	ID	Tj	Df	Dd	Db	
+8	4	8	0	0	0
+8	1	8	0	0	0
+18	11	17	0	1	1
+20	12	17	0	3	3
+21	10	17	0	4	4
+23	15	22	0	1	1
+31	18	29	0	2	2
+32	19	29	0	3	3
+36	21	35	0	1	1
+36	23	35	0	1	1
+36	22	35	0	1	1
+37	24	35	0	2	2
+37	25	36	0	1	1
+38	2001	3	5	30	35
+39	28	36	0	3	3
+43	32	40	0	3	3
+46	30	40	0	6	6
+46	3	8	0	38	38
+46	7	11	0	35	35
+46	8	11	0	35	35
+46	31	40	0	6	6
+46	6	11	0	35	35
+46	16	22	0	24	24
+46	2	8	0	38	38
+46	13	22	0	24	24
+46	14	22	0	24	24
+46	20	29	0	17	17
+46	27	36	0	10	10
+46	9	17	0	29	29
+46	17	29	0	17	17
+46	5	11	0	35	35
+46	26	36	0	10	10
+46	29	40	0	6	6
+
+Battle result: 	Loss
+
+For Earth Army:
+	 - ES_Total : 21 , ET_Total : 5 , EG_Total : 6
+	 - DestructedES % : 100% , DestructedET %: 100% , DestructedEG % : 100%
+	 - DestructedEU % : 100%
+	 - Av_Df : 0 , Av_Dd : 12.9688 , Av_Db : 12.9688
+	 - Df/Db % : 0% , Dd/Db % : 100%
+	 - Total Healed Units : 0
+	 - Healed Soldiers : 0	 , Fixed Tanks : 0
+	 - Healing % : 0%
+	 - Infection % : 28.5714%
+
+For Alien Army:
+	 - AS_Total : 20 , AM_Total : 9 , AD_Total : 11
+	 - DestructedAS % : 5% , DestructedAM %: 0% , DestructedAD % : 0%
+	 - DestructedAU % : 2.5%
+	 - Av_Df : 5 , Av_Dd : 30 , Av_Db : 35
+	 - Df/Db % : 14.2857% , Dd/Db % : 85.7143%
