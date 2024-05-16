@@ -50,7 +50,10 @@ bool HealingUnit::Attack(Game* gameptr)
 			if (healedUnit)
 			{
 				if (gameptr->getCrntTimeStep() - healedUnit->getUMLJoiningTime() > 10)
+				{
 					gameptr->addToKilledList(healedUnit);
+					i--;
+				}
 				else
 				{
 					if (!healedUnit->isHealed())
